@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "ios_android",
+    "name": "ios-android",
     "description": "This project is really great.",
-    "slug": "ios_android",
+    "slug": "ios-android",
     "privacy": "public",
     "sdkVersion": "25.0.0",
     "platforms": ["ios", "android"],
