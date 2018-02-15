@@ -1,21 +1,35 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StackNavigator, TabNavigator } from 'react-navigation'
 
-export default class App extends React.Component {
+import MypageScreen from './src/screens/MypageScreen'
+
+import ItemDetailScreen from './src/screens/ItemDetailScreen'
+
+
+const MypageStack = StackNavigator ({
+  ItemDetail: { screen: ItemDetailScreen },
+  Home: { screen: MypageScreen },
+});
+
+const Tab = TabNavigator({
+  Timeline: { screen: MypageStack },
+  Message: { screen: MypageScreen },
+  Camera: { screen: MypageScreen },
+  Shop: { screen: MypageScreen },
+  Mypage: { screen: MypageScreen },
+},{
+  tabBarOptions: {
+    activeTintColor: '#037aff',
+    inactiveTintColor: '#737373',
+  }
+})
+
+class App extends React.Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text>Hello</Text>
-      </View>
-    );
+        <Tab />
+    )
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;

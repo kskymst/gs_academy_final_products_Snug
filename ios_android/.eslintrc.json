@@ -1,8 +1,12 @@
 {
+  "extends": "eslint:recommended",
   "plugins": [
       "react",
       "jsx-a11y",
       "import"
   ],
-  "parser": "babel-eslint"
+  "parser": "babel-eslint",
+  "rules": {
+    "react/jsx-uses-vars": 2
+  }
 }
