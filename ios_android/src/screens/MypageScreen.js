@@ -1,9 +1,15 @@
 import React from 'react'
-import { StyleSheet, View, Text, Image, ImageBackground, TouchableHighlight, ScrollView } from 'react-native'
+import { StyleSheet, View, Text, Image, ImageBackground, TouchableHighlight, ScrollView,StatusBar  } from 'react-native'
 
 import UserLibraryImages from '../components/UserLibraryImages'
  
-class MypageScreen extends React.Component {
+export default class MypageScreen extends React.Component {
+    static navigationOptions = {
+        headerStyle:{
+            height: -50,
+            marginTop: -50,
+        },
+    }
     render() {
         return (
             <View style={styles.container}>
@@ -36,7 +42,7 @@ class MypageScreen extends React.Component {
                     </ImageBackground>
                 </View>
                 <ScrollView showsVerticalScrollIndicator={false}>
-                    <UserLibraryImages tabLabel="want" />
+                    <UserLibraryImages />
                 </ScrollView>
             </View>
         );
@@ -87,5 +93,3 @@ const styles = StyleSheet.create({
         fontSize: 11,
     }
 })
-
-export default MypageScreen;

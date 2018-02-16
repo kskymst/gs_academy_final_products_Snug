@@ -4,6 +4,8 @@ import { StyleSheet, View, Text, Image, TouchableHighlight, ScrollView, ImageBac
 
 import fontAwesome from '../../assets/fonts/fontawesome-webfont.ttf'
 
+import TextInputForm from '../elements/TextInputForm'
+
 class ItemDetailScreen extends React.Component {
     static navigationOptions = {
         headerTitle: '写真',
@@ -13,7 +15,7 @@ class ItemDetailScreen extends React.Component {
         },
         headerStyle:{
             backgroundColor: '#7457A3',
-            height: 30,
+            height: 40,
         },
     };
 
@@ -32,7 +34,7 @@ class ItemDetailScreen extends React.Component {
         return (
             <KeyboardAvoidingView
                 behavior="position"
-                keyboardVerticalOffset={50}    
+                keyboardVerticalOffset={50}
             >
             <ScrollView showsVerticalScrollIndicator={false}>
                <StatusBar
@@ -115,16 +117,7 @@ class ItemDetailScreen extends React.Component {
                             ちょうどこれ入荷しましたよ！
                         </Text>
                     </View>
-                    <View style={styles.commentInputArea}>
-                        <TextInput
-                            value=''
-                            placeholder="コメントを入力"
-                            style={styles.commentInput}    
-                        />
-                        <TouchableHighlight style={styles.submitButton}>
-                            <Text style={styles.submitButtonText}>投稿する</Text>
-                        </TouchableHighlight>
-                    </View>
+                <TextInputForm>投稿する</TextInputForm>
                 </ImageBackground>
             </ScrollView>
                 </KeyboardAvoidingView>
@@ -230,29 +223,6 @@ const styles = StyleSheet.create({
         borderBottomColor: '#333',
         borderBottomWidth: 1,
         marginTop: 12,
-    },
-    commentInputArea: {
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        backgroundColor: '#fff',
-        paddingLeft: 8,
-        paddingBottom: 16,
-        paddingRight: 8,
-    },
-    commentInput: {
-        borderColor: '#999',
-        borderWidth: 1,
-        borderRadius:20,
-        padding:4,
-        width:'75%',
-    },
-    submitButton: {
-        padding:8,
-        backgroundColor: '#44B26B',
-        borderRadius: 8,
-    },
-    submitButtonText: {
-        color: '#fff',
     },
 })
 
