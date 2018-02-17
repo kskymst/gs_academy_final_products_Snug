@@ -110,7 +110,7 @@ export default class MessageScreen extends React.Component {
                         </View>
                     </ScrollView>
                     <View style={styles.inputForm}>
-                        <TextInputForm>{'\uf1d8'}</TextInputForm>
+                        <TextInputForm />
                     </View>
                 </KeyboardAvoidingView>
             </View>

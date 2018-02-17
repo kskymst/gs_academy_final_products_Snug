@@ -1,21 +1,9 @@
 import React from 'React'
-import { Font } from 'expo'
-import { StyleSheet, View, Text, TextInput, TouchableHighlight } from 'react-native'
+import { Icon } from 'react-native-elements'
+import { StyleSheet, View, TextInput, TouchableHighlight } from 'react-native'
 
-import fontAwesome from '../../assets/fonts/fontawesome-webfont.ttf'
 
 export default class TextInputForm extends React.Component {
-    state = {
-        fontLoaded: false,
-      }
-
-    async componentDidMount() {
-        await Font.loadAsync({
-          FontAwesome: fontAwesome,
-        });
-        this.setState({ fontLoaded: true });
-      }
-      
     render() {
         let bgColor = null
 
@@ -30,13 +18,9 @@ export default class TextInputForm extends React.Component {
                 placeholder="メッセージを入力"
                 style={styles.commentInput}    
             />
-            {
-                this.state.fontLoaded ? (
             <TouchableHighlight style={styles.submitButton}>
-                <Text style={styles.submitButtonText}>{this.props.children}</Text>
+                <Icon name="send" size={18} color={'#fff'}/>
             </TouchableHighlight>
-                ) : null
-            } 
         </View>
         );
     }

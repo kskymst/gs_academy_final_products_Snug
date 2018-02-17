@@ -1,8 +1,7 @@
 import React from 'react'
-import { Font } from 'expo'
+import { Icon } from 'react-native-elements'
 import { StyleSheet, View, Text, Image, TouchableHighlight, ScrollView, ImageBackground, StatusBar,TextInput, KeyboardAvoidingView } from 'react-native'
 
-import fontAwesome from '../../assets/fonts/fontawesome-webfont.ttf'
 
 import TextInputForm from '../elements/TextInputForm'
 
@@ -18,17 +17,6 @@ class ItemDetailScreen extends React.Component {
             height: 40,
         },
     };
-
-    state = {
-        fontLoaded: false,
-      }
-
-    async componentDidMount() {
-        await Font.loadAsync({
-          FontAwesome: fontAwesome,
-        });
-        this.setState({ fontLoaded: true });
-      }
 
     render () {
         return (
@@ -59,36 +47,31 @@ class ItemDetailScreen extends React.Component {
                     <View style={styles.ImageArea}>
                         <Image source={require('../../assets/unused01.jpg')} style={styles.itemImage} />
                     </View>
-                    {
-                        this.state.fontLoaded ? (
                     <View style={styles.reviewsArea}>
                         <TouchableHighlight style={styles.niceButton}>
-                            <Text style={styles.niceIcon}>
-                            {'\uf08a'}
+                            <View>
+                                <Icon name="favorite-border" size={22} color={'#B24C4A'}/>
                                 <Text style={styles.niceAmount}>  Want  138</Text>
-                            </Text>
+                            </View>
                         </TouchableHighlight>
                         <TouchableHighlight style={styles.niceButton}>
-                            <Text style={styles.niceIcon}>
-                            {'\uf006'}
+                            <View>
+                                <Icon name="star-border" size={22} color={'#B2B061'}/>
                                 <Text style={styles.niceAmount}>  Favorite  38</Text>
-                            </Text>
+                            </View>
                         </TouchableHighlight>
                         <TouchableHighlight style={styles.niceButton}>
-                            <Text style={styles.niceIcon}>
-                            {'\uf24d'}
+                            <View>
+                                <Icon name="filter-none" size={22} color={'#44B26B'}/>
                                 <Text style={styles.niceAmount}>  Collection 32</Text>
-                            </Text>
+                            </View>
                         </TouchableHighlight>
                     </View>
-                    ) : null
-                    }
                     <View style={styles.tagArea}>
-                            {
-                            this.state.fontLoaded ? (
-                            <Text style={styles.tagIcon}>{'\uf02c'} Tags:</Text>
-                            ) : null
-                            }
+                            <View style={styles.tagIndent}>
+                                <Icon name="label-outline" size={22} color={'#000'}/>
+                                <Text>Tags:</Text>
+                            </View>
                             <View style={styles.tags}>
                                 <Text style={styles.tag}># unused</Text>
                                 <Text style={styles.tag}># street</Text>
@@ -98,11 +81,10 @@ class ItemDetailScreen extends React.Component {
                             </View>
                     </View>
                     <View style={styles.commentArea}>
-                         {
-                            this.state.fontLoaded ? (
-                            <Text style={styles.tagIcon}>{'\uf27b'} comment</Text>
-                            ) : null
-                        }
+                        <View style={styles.commentIndent}>
+                            <Icon name="chat-bubble-outline" size={22} color={'#000'}/>
+                            <Text> Comment</Text>
+                        </View>
                         <Text style={styles.commentContent}>
                         <Text style={styles.commentUserName}>Kosuke Yamashita </Text> 
                             unused 18ss
@@ -117,7 +99,7 @@ class ItemDetailScreen extends React.Component {
                             ちょうどこれ入荷しましたよ！
                         </Text>
                     </View>
-                <TextInputForm>投稿する</TextInputForm>
+                <TextInputForm />
                 </ImageBackground>
             </ScrollView>
                 </KeyboardAvoidingView>
@@ -178,12 +160,8 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         opacity: 0.7,
     },
-    niceIcon: {
-        fontFamily: 'FontAwesome',
-        fontSize:16,
-        color: '#fff',
-    },
     niceAmount: {
+        color:'#fff',
         fontSize: 12,
     },
     tagArea: {
@@ -192,10 +170,9 @@ const styles = StyleSheet.create({
         marginLeft: 14,
         marginBottom:16,
     },
-    tagIcon: {
-        fontFamily: 'FontAwesome',
-        fontSize:16,
-        color: '#000',
+    tagIndent: {
+        flexDirection: 'row',
+        alignItems: 'center',
     },
     tags: {
         flex: 1,
@@ -214,6 +191,9 @@ const styles = StyleSheet.create({
         width: '100%',
         backgroundColor: '#fff',
         padding: 16,
+    },
+    commentIndent: {
+        flexDirection: 'row',
     },
     commentUserName: {
         fontWeight: 'bold',

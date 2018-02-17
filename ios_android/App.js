@@ -1,5 +1,6 @@
 import React from 'react';
 import { StackNavigator, TabNavigator } from 'react-navigation'
+import { Icon } from 'react-native-elements'
 
 import MypageScreen from './src/screens/MypageScreen'
 import ItemDetailScreen from './src/screens/ItemDetailScreen'
@@ -46,11 +47,35 @@ const ShopStack = StackNavigator ({
 });
 
 const Tab = TabNavigator({
-  Shop:     { screen: ShopStack },
-  Timeline: { screen: TimeLineStack },
-  Message:  { screen: MessageStack },
-  Camera:   { screen: MypageScreen },
-  Mypage:   { screen: MypageStack },
+  Timeline: { 
+    screen: TimeLineStack,
+    navigationOptions: {
+      tabBarIcon: ({ tintColor }) => <Icon name="timeline" size={25} color={tintColor} />,
+    }
+   },
+  Shop:{ 
+  screen: ShopStack,
+  navigationOptions: {
+    tabBarIcon: ({ tintColor }) => <Icon name="store-mall-directory" size={25} color={tintColor} />,
+  }
+  },
+  Camera:   { 
+    screen: MypageScreen,
+    navigationOptions: {
+      tabBarIcon: ({ tintColor }) => <Icon name="camera" size={25} color={tintColor} />,
+    }
+   },
+  Message:  { 
+    screen: MessageStack,
+    navigationOptions: {
+      tabBarIcon: ({ tintColor }) => <Icon name="message" size={25} color={tintColor} />,
+    }
+   },
+  Mypage:   { screen: MypageStack,
+    navigationOptions: {
+      tabBarIcon: ({ tintColor }) => <Icon name="person-outline" size={25} color={tintColor} />,
+    }
+  },
 },{
   tabBarOptions: {
     activeTintColor: '#7457A3',

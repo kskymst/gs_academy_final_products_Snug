@@ -1,10 +1,8 @@
 import React from 'react'
-import { Font } from 'expo'
+import { Icon } from 'react-native-elements'
 import { StyleSheet, View, Text, TextInput, ScrollView, TouchableHighlight } from 'react-native'
 
 import UserAccounts from '../components/UserAccounts'
-
-import fontAwesome from '../../assets/fonts/fontawesome-webfont.ttf'
 
 
 export default class MessageBoxScreen extends React.Component {
@@ -19,31 +17,16 @@ export default class MessageBoxScreen extends React.Component {
             height: 50,
         },
     }
-
-    state = {
-        fontLoaded: false,
-      }
-
-    async componentDidMount() {
-        await Font.loadAsync({
-          FontAwesome: fontAwesome,
-        });
-        this.setState({ fontLoaded: true });
-      }
-
     render() {
+
         return(
             <View style={styles.container}>
-                    {
-                        this.state.fontLoaded ? (
                         <View style={styles.searchArea}>
-                        <TextInput value={''} placeholder={'\uf002' + ' 検索'} style={[styles.searchInput, styles.icon]} />
+                        <TextInput defaultValue={''} placeholder={'検索'} style={styles.searchInput} />
                             <TouchableHighlight>
-                                <Text style={[styles.newCreateButton, styles.icon]}>{'\uf044'}</Text>
+                                <Icon name="border-color" size={25} color={'#44B26B'}/>
                             </TouchableHighlight>
                         </View>
-                        ) : null
-                    }
                     <ScrollView  showsVerticalScrollIndicator={false}>
                         <UserAccounts />
                     </ScrollView>
@@ -56,28 +39,19 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
     },
-    icon: {
-        fontFamily: 'FontAwesome',
-        fontWeight:'100',
-    },
     searchArea: {
         flexDirection: 'row',
-        justifyContent: 'center',
+        justifyContent: 'space-around',
         alignItems: 'center',
         margin: 16,
     },
     searchInput: {
         backgroundColor:'#ddd',
-        width: '80%',
+        width: '85%',
         fontSize: 18,
         padding:8,
         paddingLeft: 16,
         paddingRight: 16,
         borderRadius: 30,
-    },
-    newCreateButton: {
-        color:'#44B26B',
-        fontSize: 32,
-        marginLeft: 16,
     },
 });
