@@ -1,13 +1,25 @@
 import React from 'react'
-import { StyleSheet, View, Text, Image, ImageBackground, TouchableHighlight, ScrollView,StatusBar  } from 'react-native'
+import { StyleSheet, View, Text, Image, ImageBackground, TouchableHighlight, ScrollView } from 'react-native'
 
 import UserLibraryImages from '../components/UserLibraryImages'
  
 export default class MypageScreen extends React.Component {
     static navigationOptions = {
-        headerStyle:{
-            height: -50,
-            marginTop: -50,
+        headerTitle: 'Mypage',
+        headerStyle:{ 
+            position: 'absolute',
+            backgroundColor: 'transparent',
+            zIndex: 100,
+            top: 0,
+            left: 0,
+            right: 0,
+            borderBottomWidth: 0,
+        },
+        headerTitleStyle: {
+            color:'transparent',
+        },
+        headerBackTitleStyle: {
+            fontSize: 15,
         },
     }
     render() {
@@ -23,8 +35,9 @@ export default class MypageScreen extends React.Component {
                         source={require('../../assets/sample.jpg')}
                         style={styles.userImage}
                         />
+
                         <Text style={styles.userName}>Kosuke Yamashita</Text>
-                        <Text　style={styles.userDescription}>2017年10月よりプログラミングを始めた豆腐です。</Text>
+                        <Text style={styles.userDescription}>2017年10月よりプログラミングを始めた豆腐です。</Text>
                         <View style={styles.statusButtons}>
                             <TouchableHighlight style={styles.statusButton}>
                                 <Text style={styles.statusButtonText}>want</Text>
@@ -42,7 +55,7 @@ export default class MypageScreen extends React.Component {
                     </ImageBackground>
                 </View>
                 <ScrollView showsVerticalScrollIndicator={false}>
-                    <UserLibraryImages />
+                    <UserLibraryImages navigation={this.props.navigation}/>
                 </ScrollView>
             </View>
         );

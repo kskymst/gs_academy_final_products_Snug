@@ -7,7 +7,7 @@ export default class ShopListScreen extends React.Component {
     render() {
         return(
             <ScrollView style={styles.container}  showsVerticalScrollIndicator={false}>
-                <ShopList />
+                <ShopList navigation={this.props.navigation}/>
             </ScrollView>
         )
     }

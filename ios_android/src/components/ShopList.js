@@ -5,7 +5,7 @@ export default class ShopList extends React.Component {
     render() {
         return(
             <View>
-                <TouchableHighlight style={styles.shopListCard}>
+                <TouchableHighlight style={styles.shopListCard} onPress={() => this.props.navigation.navigate('MypageScreen')} underlayColor="transparent">
                     <View>
                         <Image
                         source={require('../../assets/wism.jpg')}

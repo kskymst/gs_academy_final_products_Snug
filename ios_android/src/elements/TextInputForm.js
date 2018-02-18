@@ -7,7 +7,7 @@ export default class TextInputForm extends React.Component {
     render() {
         let bgColor = null
 
-        if (this.props.children === '投稿する') {
+        if (this.props.style === 'changeBackGround') {
             bgColor = '#fff';
         }
 
@@ -48,7 +48,6 @@ const styles = StyleSheet.create({
         borderRadius: 8,
     },
     submitButtonText: {
-        fontFamily: 'FontAwesome',
         color: '#fff',
     },
 })

@@ -1,21 +1,13 @@
 import React from 'react'
 import { Icon } from 'react-native-elements'
-import { StyleSheet, View, Text, Image, TouchableHighlight, ScrollView, ImageBackground, StatusBar,TextInput, KeyboardAvoidingView } from 'react-native'
+import { StyleSheet, View, Text, Image, TouchableHighlight, ScrollView, ImageBackground, KeyboardAvoidingView } from 'react-native'
 
 
 import TextInputForm from '../elements/TextInputForm'
 
 class ItemDetailScreen extends React.Component {
     static navigationOptions = {
-        headerTitle: '写真',
-        headerTitleStyle :{
-            fontSize: 14,
-            color: '#fff',
-        },
-        headerStyle:{
-            backgroundColor: '#7457A3',
-            height: 40,
-        },
+        headerTitle: 'Photo',
     };
 
     render () {
@@ -25,23 +17,23 @@ class ItemDetailScreen extends React.Component {
                 keyboardVerticalOffset={50}
             >
             <ScrollView showsVerticalScrollIndicator={false}>
-               <StatusBar
-                    backgroundColor="blue"
-                    barStyle="light-content"
-                />
                 <ImageBackground
                 source={require('../../assets/unused01.jpg')}
                 style={styles.container}
                 blurRadius={20}
                 >
                     <View style={styles.userInfoArea}>
-                        <View style={styles.userContent}>
-                            <Image
-                            source={require('../../assets/sample.jpg')}
-                            style={styles.userImage}
-                            />
-                            <Text style={styles.userName}>Kosuke Yamashita</Text>
-                        </View>
+                            <View style={styles.userContent}>
+                                    <TouchableHighlight onPress={() => this.props.navigation.navigate("MypageScreen")}  underlayColor="transparent">
+                                        <Image
+                                        source={require('../../assets/sample.jpg')}
+                                        style={styles.userImage}
+                                        />
+                                    </TouchableHighlight>
+                                <TouchableHighlight onPress={() => this.props.navigation.navigate("MypageScreen")}  underlayColor="transparent">
+                                    <Text style={styles.userName}>Kosuke Yamashita</Text>
+                                </TouchableHighlight>
+                            </View>
                         <Text style={styles.postDate}>2月13日 16:33</Text>
                     </View>
                     <View style={styles.ImageArea}>
@@ -99,7 +91,7 @@ class ItemDetailScreen extends React.Component {
                             ちょうどこれ入荷しましたよ！
                         </Text>
                     </View>
-                <TextInputForm />
+                <TextInputForm style="changeBackGround" />
                 </ImageBackground>
             </ScrollView>
                 </KeyboardAvoidingView>

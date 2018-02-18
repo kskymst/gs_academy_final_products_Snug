@@ -1,22 +1,11 @@
 import React from 'react'
 import { Icon } from 'react-native-elements'
-import { StyleSheet, View, Text, TextInput, ScrollView, TouchableHighlight } from 'react-native'
+import { StyleSheet, View, TextInput, ScrollView, TouchableHighlight } from 'react-native'
 
 import UserAccounts from '../components/UserAccounts'
 
 
 export default class MessageBoxScreen extends React.Component {
-    static navigationOptions = {
-        headerTitle: 'Message',
-        headerTitleStyle :{
-            fontSize: 14,
-            color: '#fff',
-        },
-        headerStyle:{
-            backgroundColor: '#7457A3',
-            height: 50,
-        },
-    }
     render() {
 
         return(
@@ -28,7 +17,7 @@ export default class MessageBoxScreen extends React.Component {
                             </TouchableHighlight>
                         </View>
                     <ScrollView  showsVerticalScrollIndicator={false}>
-                        <UserAccounts />
+                        <UserAccounts navigation={this.props.navigation}/>
                     </ScrollView>
             </View>
         );

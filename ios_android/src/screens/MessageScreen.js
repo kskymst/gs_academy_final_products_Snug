@@ -4,18 +4,9 @@ import { StyleSheet, View, Text, ScrollView, Image,  Dimensions ,KeyboardAvoidin
 import TextInputForm from '../elements/TextInputForm'
 
 
-
 export default class MessageScreen extends React.Component {
     static navigationOptions = {
         headerTitle: 'Kosuke Yamashita',
-        headerTitleStyle :{
-            fontSize: 14,
-            color: '#fff',
-        },
-        headerStyle:{
-            backgroundColor: '#7457A3',
-            height: 50,
-        },
     }
 
     render() {
