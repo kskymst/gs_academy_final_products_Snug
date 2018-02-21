@@ -1,10 +1,10 @@
 import React from 'react'
-import { StyleSheet, View, Text, Image, ImageBackground,StatusBar } from 'react-native'
+import { StyleSheet, View, Image, ImageBackground,StatusBar } from 'react-native'
 import InputForm from '../components/InputForm'
 
 
 
-export default class LoginScreen extends React.Component {
+export default class LoginSignupScreen extends React.Component {
     render() {
         return(
             <View style={styles.container}>

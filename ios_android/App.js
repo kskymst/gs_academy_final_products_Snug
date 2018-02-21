@@ -8,10 +8,9 @@ import MessageBoxScreen from './src/screens/MessageBoxScreen'
 import MessageScreen from './src/screens/MessageScreen'
 import TimeLineScreen from './src/screens/TimeLineScreen'
 import ShopListScreen from './src/screens/ShopListScreen'
-import LoginScreen from './src/screens/LoginScreen'
+import LoginSignupScreen from './src/screens/LoginSignupScreen'
 
 const TimeLineStack = StackNavigator ({
-  Login: { screen: LoginScreen },
   TimeLine: { screen: TimeLineScreen },
   ItemDetail: { screen: ItemDetailScreen },
   MypageScreen: { screen: MypageScreen },
@@ -136,7 +135,7 @@ const Tab = TabNavigator({
 export default class App extends React.Component {
   render() {
     return (
-        <LoginScreen />
+        <Tab />
     )
   }
 }
