@@ -1,0 +1,48 @@
+.login-form-area {
+  background-Color: rgba(255,255,255,0.7);
+  width: 500px;
+  height:420px;
+  border-radius: 16px;
+  text-align: center;
+  margin: auto 0;
+  h2 {
+    font-size: 36px;
+    margin: 32px 0 16px;
+    letter-spacing: 1px;
+  }
+  input {
+    font-size: 20px;
+    width: 220px;
+    padding: 12px;
+    margin: 8px;
+    border-radius: 8px;
+    border: none;
+  }
+  p {
+    font-size: 24px;
+  }
+  button {
+    padding: 12px;
+    border-radius: 8px;
+  }
+  .login-button {
+    background-color: #44B26B;
+    color: white;
+    font-size: 24px;
+    margin: 18px auto;
+    width: 280px;
+  }
+
+  .login-action-icon{
+    margin-right: 12px;
+    font-size: 28px;
+    padding-bottom: 4px;
+  }
+
+  .signup-button{
+    width: 280px;
+    font-size: 20px;
+    color: white;
+    background-color: #8A4FB2;
+  }
+}

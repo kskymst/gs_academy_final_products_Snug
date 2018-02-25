@@ -1,0 +1,70 @@
+.signup-form-area {
+  background-Color: rgba(255,255,255,0.7);
+  width: 500px;
+  height:520px;
+  border-radius: 16px;
+  text-align: center;
+  margin: auto 0;
+  h2 {
+    font-size: 36px;
+    margin: 32px 0 16px;
+    letter-spacing: 1px;
+  }
+  input[type="text"],input[type="password"] {
+    font-size: 20px;
+    width: 220px;
+    padding: 12px;
+    margin: 8px;
+    border-radius: 8px;
+    border: none;
+  }
+  p {
+    font-size: 24px;
+  }
+  button {
+    padding: 12px;
+    border-radius: 8px;
+  }
+
+  select{
+    outline:none;
+    background: white;
+    font-size: inherit;
+    color: inherit;
+    height: 40px;
+    padding: 8px 12px;
+    width:244px;
+    border-radius:3px;
+}
+
+  .select-wrap {
+    margin: 16px;
+
+  }
+
+  .login-action-icon {
+    margin-right: 12px;
+    font-size: 28px;
+    padding-bottom: 4px;
+  }
+
+  .signup-button {
+    width: 280px;
+    font-size: 20px;
+    color: white;
+    background-color: $main-color;
+  }
+
+  .login-button{
+    margin-top: 16px;
+    span {
+      font-size: 18px;
+      margin-right:8px;
+    }
+    button {
+      color: white;
+      background-color: $sub-color;
+      font-size: 14px;
+    }
+  }
+}

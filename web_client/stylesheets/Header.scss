@@ -1,0 +1,21 @@
+.header-wrapper {
+  @include bg-gradient;
+  color: white;
+
+  .header-logos {
+    display: flex;
+    justify-content: center;
+    padding: 10px 0 ;
+
+    img {
+      width: 50px;
+      height: 50px;
+    }
+
+    p {
+      margin-left: 16px; 
+      font-size: 32px;
+      line-height: 45px;
+    }
+  }
+};

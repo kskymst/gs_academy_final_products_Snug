@@ -1,0 +1,24 @@
+.top-main-wrapper {
+  background-image: url(/img/background.png);
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  height: 94vh;
+}
+
+.top-main-title {
+  color: white;
+  width: 50%;
+  text-align: center;
+  padding-right: 40px;
+  margin: auto 0;
+  h1 {
+    letter-spacing: 1px;
+    font-size: 48px;
+    margin-bottom: 40px;
+  }
+  p {
+    font-size: 28px;
+  }
+}

@@ -1,0 +1,30 @@
+$text-color:#3B3B3B;
+$main-color: #8A4FB2;
+$sub-color: #44B26B;
+
+
+@mixin bg-gradient($angle: 45deg, $color: #8A4FB2, $amount: -10%) {
+    background: linear-gradient($angle, $color, adjust-hue($color, $amount)) fixed;
+  }
+
+body {
+    // font-family:-apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI","Noto Sans Japanese","ヒラギノ角ゴ ProN W3", Meiryo, sans-serif;
+    font-family: 'Avenir Next','Arial',sans-serif;
+    color: $text-color;
+}
+
+button:focus {
+    outline: none;
+}
+
+button:hover {
+    background-image: linear-gradient(transparent,rgba(0,0,0,.05) 40%,rgba(0,0,0,.15));
+    cursor: pointer;
+}
+
+input:focus {
+    outline: none;
+    // border: 2px solid #44B26B;
+}
+
+@import "Header","TopPageScreen","LoginForm","SignupForm";
