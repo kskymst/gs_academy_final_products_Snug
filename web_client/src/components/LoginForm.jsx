@@ -1,8 +1,9 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
+
 import MailOutline from 'react-icons/lib/md/mail-outline';
 import VpnKey from 'react-icons/lib/md/vpn-key';
-import Facebook from 'react-icons/lib/fa/facebook-official';
-import Google from 'react-icons/lib/fa/google';
 import Exit from 'react-icons/lib/md/exit-to-app';
 import Signup from 'react-icons/lib/md/portrait';
 
@@ -18,7 +19,9 @@ const LoginForm = () => (
       <input type="password" placeholder="パスワード" />
     </p>
     <button className="login-button"><Exit className="login-action-icon" />Login</button>
-    <button className="signup-button"><Signup className="login-action-icon" />Signup</button>
+    <Link to='/signup'>
+      <button className="signup-button"><Signup className="login-action-icon" />Signup</button>
+    </Link>
   </div>
 );
 

@@ -1,8 +1,9 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 import Human from 'react-icons/lib/md/perm-identity';
 import MailOutline from 'react-icons/lib/md/mail-outline';
 import VpnKey from 'react-icons/lib/md/vpn-key';
-import Exit from 'react-icons/lib/md/exit-to-app';
 import Shop from 'react-icons/lib/md/location-city';
 import Done from 'react-icons/lib/md/done';
 
@@ -63,7 +64,9 @@ class LoginForm extends React.Component {
         <button className="signup-button"><Done className="login-action-icon" />Submit</button>
         <div className="login-button">
           <span>すでにアカウントをお持ちの方は</span>
-          <button>ログイン</button>
+          <Link to='/' >
+            <button>ログイン</button>
+          </Link>
         </div>
       </div>
     );
