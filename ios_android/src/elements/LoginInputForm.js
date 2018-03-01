@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, TextInput, KeyboardAvoidingView } from 'react-native';
+import { StyleSheet, View, Text, TextInput } from 'react-native';
 import firebase from 'firebase';
 import { Button } from 'react-native-elements';
 import { NavigationActions } from 'react-navigation';
@@ -28,7 +28,6 @@ class LoginInputForm extends React.Component {
         this.props.navigation.dispatch(resetAction);
       })
       .catch((error) => {
-        console.log(error.code);
         this.setState({
           email: '',
           password: '',
@@ -39,11 +38,7 @@ class LoginInputForm extends React.Component {
 
   render() {
     return (
-      <KeyboardAvoidingView
-        behavior="position"
-        keyboardVerticalOffset={35}
-        style={styles.container}
-      >
+      <View style={styles.container}>
         <Text style={styles.title}>ようこそSnugへ</Text>
         <View style={styles.inputsOuter}>
           {
@@ -109,7 +104,7 @@ class LoginInputForm extends React.Component {
           buttonStyle={styles.button}
           onPress={this.handleSubmit}
         />
-      </KeyboardAvoidingView>
+      </View>
     );
   }
 }
@@ -131,7 +126,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   input: {
-    width: 280,
+    width: 310,
     fontSize: 18,
     backgroundColor: '#fff',
     borderRadius: 30,
@@ -142,7 +137,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   inputInvalid: {
-    width: 280,
+    width: 310,
     fontSize: 18,
     backgroundColor: '#FFACAC',
     borderRadius: 30,
@@ -153,7 +148,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   button: {
-    width: 280,
+    width: 310,
     borderRadius: 8,
     marginTop: 16,
   },

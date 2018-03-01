@@ -67,7 +67,7 @@ class SignupInputForm extends React.Component {
     return (
       <KeyboardAvoidingView
         behavior="position"
-        keyboardVerticalOffset={0}
+        keyboardVerticalOffset={25}
         style={styles.container}
       >
         <View style={styles.inputsOuter}>
@@ -199,7 +199,6 @@ class SignupInputForm extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     alignItems: 'center',
     paddingTop: 12,
   },
@@ -221,7 +220,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   input: {
-    width: 280,
+    width: 310,
     fontSize: 18,
     backgroundColor: '#fff',
     borderRadius: 30,
@@ -232,7 +231,7 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   inputInvalid: {
-    width: 280,
+    width: 310,
     fontSize: 18,
     backgroundColor: '#FFACAC',
     borderRadius: 30,
@@ -251,7 +250,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   },
   button: {
-    width: 280,
+    width: 310,
     borderRadius: 8,
     marginTop: 16,
   },

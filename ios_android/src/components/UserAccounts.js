@@ -1,7 +1,8 @@
-import React from 'react'
-import { StyleSheet, View, Text, Image, TouchableHighlight } from 'react-native'
+import React from 'react';
+import { StyleSheet, View, Text, Image, TouchableHighlight } from 'react-native';
 
-export default class UserAccounts extends React.Component {
+// eslint-disable-next-line
+class UserAccounts extends React.Component {
     render() {
         return(
             <View style={styles.container}>
@@ -101,3 +102,5 @@ const styles = StyleSheet.create({
         fontSize: 12,
     },
 })
+
+export default UserAccounts;

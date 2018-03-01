@@ -10,6 +10,7 @@ import MessageScreen from './src/screens/MessageScreen';
 import TimeLineScreen from './src/screens/TimeLineScreen';
 import ShopListScreen from './src/screens/ShopListScreen';
 import LoginSignupScreen from './src/screens/LoginSignupScreen';
+import CameraScreen from './src/screens/CameraScreen';
 
 import ENV from './env.json';
 
@@ -26,6 +27,7 @@ const config = {
 firebase.initializeApp(config);
 
 const TimeLineStack = StackNavigator({
+  Camera: { screen: CameraScreen },
   LoginSignup: { screen: LoginSignupScreen },
   TimeLine: { screen: TimeLineScreen },
   ItemDetail: { screen: ItemDetailScreen },
@@ -46,6 +48,10 @@ const TimeLineStack = StackNavigator({
       fontSize: 15,
     },
   },
+});
+
+const CameraStack = StackNavigator({
+  Camera: { screen: CameraScreen },
 });
 
 const ShopStack = StackNavigator({
@@ -122,19 +128,19 @@ const Tab = TabNavigator({
       tabBarIcon: ({ tintColor }) => <Icon name="timeline" size={25} color={tintColor} />,
     },
   },
-  Shop:{ 
+  Shop: {
     screen: ShopStack,
     navigationOptions: {
       tabBarIcon: ({ tintColor }) => <Icon name="store-mall-directory" size={25} color={tintColor} />,
     },
   },
-  Camera:{ 
-    screen: MypageScreen,
+  Camera: {
+    screen: CameraStack,
     navigationOptions: {
       tabBarIcon: ({ tintColor }) => <Icon name="camera" size={25} color={tintColor} />,
     },
   },
-  Message:{ 
+  Message: {
     screen: MessageStack,
     navigationOptions: {
       tabBarIcon: ({ tintColor }) => <Icon name="message" size={25} color={tintColor} />,
