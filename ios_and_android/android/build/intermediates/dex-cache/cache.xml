@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="/Users/ksk/.gradle/caches/modules-2/files-2.1/javax.inject/javax.inject/1/6975da39a7040257bd51d21a231b76c915872d38/javax.inject-1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="6975da39a7040257bd51d21a231b76c915872d38">
+        <dex dex="/Users/ksk/Desktop/gs_final_products/ios_and_android/android/app/build/intermediates/pre-dexed/debug/javax.inject-1_e069b7ebc5887b3f11b4976c5898eda4c500277b.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/ksk/.gradle/caches/modules-2/files-2.1/com.parse.bolts/bolts-tasks/1.4.0/d85884acf6810a3bbbecb587f239005cbc846dc4/bolts-tasks-1.4.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="d85884acf6810a3bbbecb587f239005cbc846dc4">
+        <dex dex="/Users/ksk/Desktop/gs_final_products/ios_and_android/android/app/build/intermediates/pre-dexed/debug/bolts-tasks-1.4.0_e6dbe6ec976b2a93f833fa82bf2e71d71dd5b19f.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/ksk/Desktop/gs_final_products/ios_and_android/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.52.0/jars/libs/infer-annotations-4.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="9809e90be788acdb479b2b44e2112f3295a03068">
+        <dex dex="/Users/ksk/Desktop/gs_final_products/ios_and_android/android/app/build/intermediates/pre-dexed/debug/infer-annotations-4.0_a6617d3b396494b1f1bd45956ce24db3d092fa95.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/ksk/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/23.0.1/support-annotations-23.0.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="1fce89a6428c51467090d7f424e4c9c3dbd55f7e">
+        <dex dex="/Users/ksk/Desktop/gs_final_products/ios_and_android/android/app/build/intermediates/pre-dexed/debug/support-annotations-23.0.1_e49d69f3ee5feb083e67bfa893ec429061f72b13.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/ksk/Desktop/gs_final_products/ios_and_android/android/app/build/intermediates/exploded-aar/Snug/react-native-vector-icons/unspecified/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="279750fed3c920d06351dbf32889c1b48203c7ad">
+        <dex dex="/Users/ksk/Desktop/gs_final_products/ios_and_android/android/app/build/intermediates/pre-dexed/debug/Snug-react-native-vector-icons-unspecified_4f08dc22fb6d4565720091dffc81bd40d41510d6.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/ksk/Desktop/gs_final_products/ios_and_android/android/app/build/intermediates/exploded-aar/Snug/react-native-image-picker/unspecified/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="4bc7e4c88d8a58037f153bc224b47da51ae40f2f">
+        <dex dex="/Users/ksk/Desktop/gs_final_products/ios_and_android/android/app/build/intermediates/pre-dexed/debug/Snug-react-native-image-picker-unspecified_51bcff6961d5adf2b001df1d37326cfd91d10d3f.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/ksk/Desktop/gs_final_products/ios_and_android/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/jars/libs/internal_impl-23.0.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="aa92916125166649d8ad4ba3940c3dd7515596d3">
+        <dex dex="/Users/ksk/Desktop/gs_final_products/ios_and_android/android/app/build/intermediates/pre-dexed/debug/internal_impl-23.0.1_ba5cad357f882d386b57b7e429dcf350ac94a55e.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/ksk/Desktop/gs_final_products/ios_and_android/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="d86429b0f0b3f3cafbeb78dda1b9d89119ccb05d">
+        <dex dex="/Users/ksk/Desktop/gs_final_products/ios_and_android/android/app/build/intermediates/pre-dexed/debug/com.android.support-appcompat-v7-23.0.1_125e39a669a18f20014696cd29974b6667d1cab5.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/ksk/Desktop/gs_final_products/ios_and_android/android/app/build/intermediates/exploded-aar/com.facebook.fresco/fbcore/1.3.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="37345de2ed2772f385eaeec37a9c2ff0fea99ad7">
+        <dex dex="/Users/ksk/Desktop/gs_final_products/ios_and_android/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-fbcore-1.3.0_f174b028abc3e668d16b594d8112f960583977cd.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/ksk/.gradle/caches/modules-2/files-2.1/com.facebook.fbui.textlayoutbuilder/staticlayout-proxy/1.0/f162442a19fff13995fbd51ba414d9ee05579080/staticlayout-proxy-1.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="f162442a19fff13995fbd51ba414d9ee05579080">
+        <dex dex="/Users/ksk/Desktop/gs_final_products/ios_and_android/android/app/build/intermediates/pre-dexed/debug/staticlayout-proxy-1.0_75e31aab07316e3d2c9321f570839f55fc550d8b.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/ksk/.gradle/caches/modules-2/files-2.1/com.google.code.findbugs/jsr305/3.0.0/5871fb60dc68d67da54a663c3fd636a10a532948/jsr305-3.0.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="5871fb60dc68d67da54a663c3fd636a10a532948">
+        <dex dex="/Users/ksk/Desktop/gs_final_products/ios_and_android/android/app/build/intermediates/pre-dexed/debug/jsr305-3.0.0_d449c2966914ac095a5f4d4f6e1115c728a0b7fa.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/ksk/Desktop/gs_final_products/ios_and_android/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="c31e21b53ff2f74664e498248d01453a32e32d48">
+        <dex dex="/Users/ksk/Desktop/gs_final_products/ios_and_android/android/app/build/intermediates/pre-dexed/debug/com.android.support-support-v4-23.0.1_ef1f1bcc05e6fc2ffb212e18374a1f446c35a45e.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/ksk/Desktop/gs_final_products/ios_and_android/android/app/build/intermediates/exploded-aar/com.facebook.fbui.textlayoutbuilder/textlayoutbuilder/1.0.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="f90b593491e4044903f0bbf68dc3fa2790b151b9">
+        <dex dex="/Users/ksk/Desktop/gs_final_products/ios_and_android/android/app/build/intermediates/pre-dexed/debug/com.facebook.fbui.textlayoutbuilder-textlayoutbuilder-1.0.0_bebaa894c3914323956fe575b6c390aab3491a64.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/ksk/Desktop/gs_final_products/ios_and_android/android/app/build/intermediates/exploded-aar/com.facebook.fresco/imagepipeline/1.3.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="48c7f54c2515a2312d3a4481d10c43fbb807f3af">
+        <dex dex="/Users/ksk/Desktop/gs_final_products/ios_and_android/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-imagepipeline-1.3.0_0c89d1d3f9b89231b8acf80fe11ced2f4f3b2251.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/ksk/Desktop/gs_final_products/ios_and_android/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.52.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="af61eb11ffb4296cab0c93218248a3dfcec0a84c">
+        <dex dex="/Users/ksk/Desktop/gs_final_products/ios_and_android/android/app/build/intermediates/pre-dexed/debug/com.facebook.react-react-native-0.52.0_dc1b8f0ef27797c1970f088a8cb844eda4aeb358.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/ksk/Desktop/gs_final_products/ios_and_android/android/app/build/intermediates/exploded-aar/com.facebook.fresco/fresco/1.3.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="fe85b87215e405f5917d40ae4960488ac9224b74">
+        <dex dex="/Users/ksk/Desktop/gs_final_products/ios_and_android/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-fresco-1.3.0_ad761de18658b8d1ea63b0bcf47594c4064ac12c.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/ksk/Desktop/gs_final_products/ios_and_android/android/app/build/intermediates/exploded-aar/com.facebook.fresco/imagepipeline-okhttp3/1.3.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="c03c08c9934b23c8c09c803345ec51a74119127b">
+        <dex dex="/Users/ksk/Desktop/gs_final_products/ios_and_android/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-imagepipeline-okhttp3-1.3.0_98f1af2eaeb96cacae15348eb2fd7675692b8657.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/ksk/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp-urlconnection/3.6.0/3f9b16b774f2c36cfd86dd2053d0b3059531dacc/okhttp-urlconnection-3.6.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="3f9b16b774f2c36cfd86dd2053d0b3059531dacc">
+        <dex dex="/Users/ksk/Desktop/gs_final_products/ios_and_android/android/app/build/intermediates/pre-dexed/debug/okhttp-urlconnection-3.6.0_b1029f8afe6611a937fcd6f4a8f83734dfc9e715.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/ksk/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio/1.13.0/a9283170b7305c8d92d25aff02a6ab7e45d06cbe/okio-1.13.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="a9283170b7305c8d92d25aff02a6ab7e45d06cbe">
+        <dex dex="/Users/ksk/Desktop/gs_final_products/ios_and_android/android/app/build/intermediates/pre-dexed/debug/okio-1.13.0_7d76b25940e7dd0f52278a9ac8618c97da1a1d65.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/ksk/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp/3.6.0/69edde9fc4b01c9fd51d25b83428837478c27254/okhttp-3.6.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="69edde9fc4b01c9fd51d25b83428837478c27254">
+        <dex dex="/Users/ksk/Desktop/gs_final_products/ios_and_android/android/app/build/intermediates/pre-dexed/debug/okhttp-3.6.0_c8faa1f943ade1d3b38bb00268ada32c0c3d8430.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/ksk/Desktop/gs_final_products/ios_and_android/android/app/build/intermediates/exploded-aar/com.facebook.fresco/imagepipeline-base/1.3.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="72128af126ddd7d6252da9357fe560d3abcdfb0c">
+        <dex dex="/Users/ksk/Desktop/gs_final_products/ios_and_android/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-imagepipeline-base-1.3.0_792ea6b3cd9f23cfa09cc0e3f387e9a0e4b15159.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/ksk/Desktop/gs_final_products/ios_and_android/android/app/build/intermediates/exploded-aar/com.facebook.soloader/soloader/0.1.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="8f615bca00639150c9eb6175d4b5471193f70794">
+        <dex dex="/Users/ksk/Desktop/gs_final_products/ios_and_android/android/app/build/intermediates/pre-dexed/debug/com.facebook.soloader-soloader-0.1.0_666a17ca8edb1b3ac0004d6ce93ce0f8165d61ed.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/ksk/Desktop/gs_final_products/ios_and_android/android/app/build/intermediates/exploded-aar/com.facebook.fresco/drawee/1.3.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="c65a2e39d54023bac3aef64a2f0cff89289c7ff6">
+        <dex dex="/Users/ksk/Desktop/gs_final_products/ios_and_android/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-drawee-1.3.0_67a02226af55fea87a8b43bdc220f37b4db4d309.jar" />
+    </item>
+
+</items>

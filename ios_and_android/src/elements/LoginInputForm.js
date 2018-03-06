@@ -103,8 +103,8 @@ class LoginInputForm extends React.Component {
         <Button
           icon={
             <Icon
-              name='exit-to-app'
-              color='white'
+              name="exit-to-app"
+              color="white"
             />
           }
           loading={this.state.loadingIcon}

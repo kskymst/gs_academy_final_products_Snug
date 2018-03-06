@@ -42,6 +42,7 @@ class SignupInputForm extends React.Component {
           userName: this.state.userName,
           gender: this.state.gender,
           type: 'customer',
+          datetime: new Date(),
         })
           .then((docref) => {
             const resetAction = NavigationActions.reset({
