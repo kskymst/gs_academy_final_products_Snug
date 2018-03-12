@@ -1,16 +1,39 @@
 import React from 'react';
-import { StyleSheet, View, Text, Image, ImageBackground, TouchableHighlight, ScrollView } from 'react-native';
+import { StyleSheet, View, Text, Image, ImageBackground, ScrollView } from 'react-native';
+import { ButtonGroup, Icon } from 'react-native-elements';
+import SideMenu from 'react-native-side-menu';
+import firebase from 'firebase';
 
-import UserLibraryImages from '../components/UserLibraryImages'
+import UserLibraryImages from '../components/UserLibraryImages';
+import Sidebar from '../components/Sidebar';
+
+const Dimensions = require('Dimensions');
+
+const { width } = Dimensions.get('window');
+
+
 
 // eslint-disable-next-line
-export default class MypageScreen extends React.Component {
-  static navigationOptions = {
+class MypageScreen extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      allDataList: [],
+      dataList: [],
+      userData: [],
+      selectedIndex: 0,
+      sideMenuOpen: false,
+    };
+    this.updateIndex = this.updateIndex.bind(this);
+    this.filterDataList = this.filterDataList.bind(this);
+  }
+
+  static navigationOptions = ({ navigation }) => ({
     headerTitle: 'Mypage',
     headerStyle: {
       position: 'absolute',
       backgroundColor: 'transparent',
-      zIndex: 100,
+      zIndex: 10,
       top: 0,
       left: 0,
       right: 0,
@@ -22,43 +45,116 @@ export default class MypageScreen extends React.Component {
     headerBackTitleStyle: {
       fontSize: 15,
     },
-  }
-  render() {
-    return (
-      <View style={styles.container}>
-        <View>
-          <ImageBackground
-            source={require('../../assets/skate.jpg')}
-            style={styles.main}
-            blurRadius={1}
-          >
-            <Image
-              source={require('../../assets/sample.jpg')}
-              style={styles.userImage}
-            />
+    headerRight: ( <Icon name="settings" iconStyle={{ marginRight: 10 }} color='#fff' onPress={() => navigation.state.params.openSideMenu()} underlayColor="transparent" /> ),
+  });
 
-            <Text style={styles.userName}>Kosuke Yamashita</Text>
-            <Text style={styles.userDescription}>2017年10月よりプログラミングを始めた豆腐です。</Text>
-            <View style={styles.statusButtons}>
-              <TouchableHighlight style={styles.statusButton}>
-                <Text style={styles.statusButtonText}>want</Text>
-              </TouchableHighlight>
-              <TouchableHighlight style={styles.statusButton}>
-                <Text style={styles.statusButtonText}>Favorite</Text>
-              </TouchableHighlight>
-              <TouchableHighlight style={styles.statusButton}>
-                <Text style={styles.statusButtonText}>Collection</Text>
-              </TouchableHighlight>
-              <TouchableHighlight style={styles.statusButton}>
-                <Text style={styles.statusButtonText}>Follow</Text>
-              </TouchableHighlight>
-            </View>
-          </ImageBackground>
-        </View>
-        <ScrollView showsVerticalScrollIndicator={false}>
-          <UserLibraryImages navigation={this.props.navigation}/>
+  componentWillMount() {
+    this.props.navigation.setParams({ openSideMenu: this.openSideMenu.bind(this) });
+    const { currentUser } = firebase.auth();
+    const db = firebase.firestore();
+    db.collection('users').doc(currentUser.uid)
+      .onSnapshot((querySnapshot)=> {
+        this.setState({ userData: querySnapshot.data() });
+      });
+    db.collection('collections')
+      .where('user', '==', currentUser.uid)
+      .onSnapshot((querySnapshot) => {
+        const allDataList = [];
+        const dataList = [];
+        querySnapshot.forEach((doc) => {
+          allDataList.push({ ...doc.data(), key: doc.id });
+        });
+        for (let i = 0, len = allDataList.length; len > i; i += 1) {
+          if (allDataList[i].want) {
+            dataList.push(allDataList[i]);
+          }
+        }
+        this.setState({
+          allDataList,
+          dataList,
+          sideMenuOpen: false,
+        });
+      });
+  }
+
+  openSideMenu() {
+    this.setState({ sideMenuOpen: !this.state.sideMenuOpen })
+  }
+
+  filterDataList(selectStatus, selectedIndex) {
+    const allDataList = this.state.allDataList;
+    const dataList = [];
+    for (let i = 0, len = allDataList.length; len > i; i += 1) {
+      if (allDataList[i][selectStatus]) {
+        dataList.push(allDataList[i]);
+      }
+    }
+    this.setState({ dataList, selectedIndex });
+  }
+
+  updateIndex(selectedIndex) {
+    if (selectedIndex === 0) {
+      this.filterDataList('want', selectedIndex);
+    } else if (selectedIndex === 1) {
+      this.filterDataList('favorite', selectedIndex);
+    } else {
+      this.filterDataList('clothete', selectedIndex);
+    }
+  }
+
+  render() {
+    const buttons = ['Want', 'Favorite', 'Clothete'];
+    const { selectedIndex } = this.state;
+    const menu = <Sidebar　userData={this.state.userData} navigation={this.props} />;
+    const imageBackground = this.state.userData.backgroundImage === '' ?
+      require('../../assets/backgroundSample.jpg') :
+      { uri: this.state.userData.backgroundImage };
+    return (
+      <SideMenu
+        menu={menu}
+        isOpen={this.state.sideMenuOpen}
+        edgeHitWidth={100}
+      >
+        <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
+          <View>
+            <ImageBackground
+              source={imageBackground}
+              style={styles.main}
+              blurRadius={1} 
+            >
+              {this.state.userData.userImage === '' ?
+                <Image
+                  source={require('../../assets/sample.png')}
+                  style={styles.userImage}
+                /> :
+                <Image
+                  source={{ uri: this.state.userData.userImage }}
+                  style={styles.userImage}
+                />
+              }
+
+              <Text style={styles.userName}>{this.state.userData.userName}</Text>
+              <Text style={styles.userDescription}>{this.state.userData.userText}</Text>
+              <View style={styles.statusButtonArea}>
+                <ButtonGroup
+                  onPress={this.updateIndex}
+                  selectedIndex={selectedIndex}
+                  buttons={buttons}
+                  buttonStyle={styles.statusButton}
+                  textStyle={styles.statusButtonText}                
+                  selectedButtonStyle={styles.selectStatusButtons}
+                  containerStyle={styles.statusButtons}
+                  selectedTextStyle={{ color: '#333' }}
+                  underlayColor="transparent"
+                />
+              </View>
+            </ImageBackground>
+          </View>
+          <View>
+            <UserLibraryImages navigation={this.props.navigation} dataList={this.state.dataList} />
+          </View>
         </ScrollView>
-      </View>
+      </SideMenu>
     );
   }
 }
@@ -66,11 +162,16 @@ export default class MypageScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#EFEFF4',
   },
   main: {
     alignItems: 'center',
     paddingTop: 40,
     paddingBottom: 10,
+  },
+  settingIcon: {
+    fontSize: 25,
+    color: '#fff',
   },
   userImage: {
     width: 100,
@@ -91,19 +192,23 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 12,
   },
-  statusButtons: {
+  statusButtonArea: {
     flexDirection: 'row',
-  },
-  statusButton: {
-    backgroundColor: '#A9A9A9',
-    opacity: 0.5,
-    height: 28,
-    width: '22%',
-    alignItems: 'center',
-    justifyContent: 'center',
     marginTop: 20,
   },
+  statusButtons: {
+    backgroundColor: 'rgba(200,200,200,0.8)',
+    height: 32,
+    width: width / 1.05,
+    borderWidth: 0,
+  },
+  selectStatusButtons: {
+    backgroundColor: 'rgba(255,255,255,1)',
+  },
   statusButtonText: {
-    fontSize: 11,
+    color: '#333',
+    fontWeight: 'bold',
   },
 });
+
+export default MypageScreen;

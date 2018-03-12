@@ -4,6 +4,9 @@ import firebase from 'firebase';
 import { NavigationActions } from 'react-navigation';
 import { Button, CheckBox, Icon } from 'react-native-elements';
 
+const Dimensions = require('Dimensions');
+
+const { width } = Dimensions.get('window');
 
 class SignupInputForm extends React.Component {
   constructor(props) {
@@ -20,7 +23,7 @@ class SignupInputForm extends React.Component {
   }
 
   handleSubmit() {
-    this.setState({ loadingIcon: true })
+    this.setState({ loadingIcon: true });
     if (this.state.userName.length === 0 && this.state.userName.length <= 20) {
       this.setState({
         userName: '',
@@ -38,10 +41,13 @@ class SignupInputForm extends React.Component {
     firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
       .then((user) => {
         const db = firebase.firestore();
-        db.collection(`users/${user.uid}/info`).add({
+        db.collection('users').doc(user.uid).set({
           userName: this.state.userName,
           gender: this.state.gender,
           type: 'customer',
+          userText: '',
+          userImage: '',
+          backgroundImage: '',
           datetime: new Date(),
         })
           .then((docref) => {
@@ -229,7 +235,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   input: {
-    width: 310,
+    width: width / 1.1,
     fontSize: 18,
     backgroundColor: '#fff',
     borderRadius: 30,
@@ -240,7 +246,7 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   inputInvalid: {
-    width: 310,
+    width: width / 1.1,
     fontSize: 18,
     backgroundColor: '#FFACAC',
     borderRadius: 30,
@@ -255,11 +261,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   checkBox: {
-    width: 120,
+    width: width / 2.6,
     borderRadius: 8,
   },
   button: {
-    width: 310,
+    width: width / 1.1,
     height: 50,
     borderRadius: 8,
     marginTop: 16,

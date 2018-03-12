@@ -4,6 +4,9 @@ import firebase from 'firebase';
 import { Button, Icon } from 'react-native-elements';
 import { NavigationActions } from 'react-navigation';
 
+const Dimensions = require('Dimensions');
+
+const { width } = Dimensions.get('window');
 
 // eslint-disable-next-line
 class LoginInputForm extends React.Component {
@@ -134,7 +137,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   input: {
-    width: 310,
+    width: width / 1.1,
     fontSize: 18,
     backgroundColor: '#fff',
     borderRadius: 30,
@@ -145,7 +148,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   inputInvalid: {
-    width: 310,
+    width: width / 1.1,
     fontSize: 18,
     backgroundColor: '#FFACAC',
     borderRadius: 30,
@@ -156,7 +159,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   button: {
-    width: 310,
+    width: width / 1.1,
     height: 50,
     borderRadius: 8,
     marginTop: 16,

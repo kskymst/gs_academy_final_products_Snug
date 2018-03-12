@@ -1,19 +1,23 @@
 import React from 'react';
 import { StyleSheet, View, Image, TouchableHighlight } from 'react-native';
 
+const Dimensions = require('Dimensions');
+
+const { width } = Dimensions.get('window');
+
 // eslint-disable-next-line
 export default class UserLibraryImages extends React.Component {
   render() {
+    const dataList = this.props.dataList.map((data) => {
+      return (
+        <TouchableHighlight style={styles.imageOuter} key={data.key} onPress={() => this.props.navigation.navigate('ItemDetail', { data })} underlayColor="transparent">
+          <Image source={{ uri: data.imageUrl }} style={styles.userImage} />
+        </TouchableHighlight>
+      );
+    });
     return (
       <View style={styles.container}>
-        <TouchableHighlight onPress={() => this.props.navigation.navigate('ItemDetail')} underlayColor="transparent">
-          <Image source={require('../../assets/unused01.jpg')} style={styles.userImage} />
-        </TouchableHighlight>
-        <Image source={require('../../assets/unused01.jpg')} style={styles.userImage} />
-        <Image source={require('../../assets/unused01.jpg')} style={styles.userImage} />
-        <Image source={require('../../assets/unused01.jpg')} style={styles.userImage} />
-        <Image source={require('../../assets/unused01.jpg')} style={styles.userImage} />
-        <Image source={require('../../assets/unused01.jpg')} style={styles.userImage} />
+        { dataList }
       </View>
     );
   }
@@ -24,11 +28,16 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     flexWrap: 'wrap',
-    justifyContent: 'space-around',
+    width: '100%',
+  },
+  imageOuter: {
+    width: '50%',
   },
   userImage: {
-    height: 200,
-    width: 150,
-    marginTop: 8,
+    height: width / 2.01,
+    width: width / 2.01,
+    marginBottom: 1,
+    marginLeft: 0.5,
+    marginRight: 0.5,
   },
 });

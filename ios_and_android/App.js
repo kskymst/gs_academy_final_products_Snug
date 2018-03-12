@@ -11,6 +11,7 @@ import TimeLineScreen from './src/screens/TimeLineScreen';
 import ShopListScreen from './src/screens/ShopListScreen';
 import LoginSignupScreen from './src/screens/LoginSignupScreen';
 import CameraScreen from './src/screens/CameraScreen';
+import SettingAccountScreen from './src/screens/SettingAccountScreen';
 
 import ENV from './env.json';
 
@@ -117,6 +118,7 @@ const MessageStack = StackNavigator({
 const MypageStack = StackNavigator({
   MypageScreen: { screen: MypageScreen },
   ItemDetail: { screen: ItemDetailScreen },
+  SettingAccount: { screen: SettingAccountScreen },
 }, {
   navigationOptions: {
     headerTitle: 'Mypage',

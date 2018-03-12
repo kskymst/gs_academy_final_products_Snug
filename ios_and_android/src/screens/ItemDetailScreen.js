@@ -4,13 +4,37 @@ import { StyleSheet, View, Text, Image, TouchableHighlight, ScrollView, ImageBac
 
 import TextInputForm from '../elements/TextInputForm';
 
+const Dimensions = require('Dimensions');
+
+const { width } = Dimensions.get('window');
+
 // eslint-disable-next-line
 class ItemDetailScreen extends React.Component {
-  static navigationOptions = {
-      headerTitle: 'Photo',
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      userName: '',
+      createdOn: '',
+      imageUrl: '',
+      tags: [],
+    }
+  }
+  // static navigationOptions = {
+  //     headerTitle: 'Photo',
+  // };
+
+  // componentWillMount() {
+  //   console.log(data.userName);
+  // }
 
   render() {
+    const { data } = this.props.navigation.state.params;
+
+    const tags = data.tags.map((tagName) => {
+      return (
+        <Text key={tagName} style={styles.tag}>{tagName}</Text>
+      )
+    })
     return (
       <KeyboardAvoidingView
         behavior="position"
@@ -18,7 +42,7 @@ class ItemDetailScreen extends React.Component {
       >
         <ScrollView showsVerticalScrollIndicator={false}>
           <ImageBackground
-            source={require('../../assets/unused01.jpg')}
+            source={{ uri: data.imageUrl }}
             style={styles.container}
             blurRadius={20}
           >
@@ -31,13 +55,13 @@ class ItemDetailScreen extends React.Component {
                   />
                 </TouchableHighlight>
                 <TouchableHighlight onPress={() => this.props.navigation.navigate("MypageScreen")}  underlayColor="transparent">
-                  <Text style={styles.userName}>Kosuke Yamashita</Text>
+                  <Text style={styles.userName}>{data.userName}</Text>
                 </TouchableHighlight>
               </View>
-              <Text style={styles.postDate}>2月13日 16:33</Text>
+              <Text style={styles.postDate}>{data.createdOn}</Text>
             </View>
             <View style={styles.ImageArea}>
-              <Image source={require('../../assets/unused01.jpg')} style={styles.itemImage} />
+              <Image source={{ uri: data.imageUrl }} style={styles.itemImage} />
             </View>
             <View style={styles.reviewsArea}>
               <TouchableHighlight style={styles.niceButton}>
@@ -65,11 +89,7 @@ class ItemDetailScreen extends React.Component {
                 <Text>Tags:</Text>
               </View>
               <View style={styles.tags}>
-                <Text style={styles.tag}># unused</Text>
-                <Text style={styles.tag}># street</Text>
-                <Text style={styles.tag}># 18ss</Text>
-                <Text style={styles.tag}># 18ss</Text>
-                <Text style={styles.tag}># 18ss</Text>
+                { tags }
               </View>
             </View>
             <View style={styles.commentArea}>
@@ -78,13 +98,8 @@ class ItemDetailScreen extends React.Component {
                 <Text> Comment</Text>
               </View>
               <Text style={styles.commentContent}>
-                <Text style={styles.commentUserName}>Kosuke Yamashita </Text>
-                  unused 18ss
-                  めっちゃいいよめっちゃいいよめっちゃいいよ
-                  めっちゃいいよめっちゃいいよめっちゃいいよ
-                  めっちゃいいよめっちゃいいよめっちゃいいよ
-                  めっちゃいいよめっちゃいいよめっちゃいいよ
-                  めっちゃいいよめっちゃいいよめっちゃいいよ
+                <Text style={styles.commentUserName}>{data.userName}</Text>
+                {data.text}
               </Text>
               <Text style={styles.commentContent}>
                 <Text style={styles.commentUserName}>松田滉太 </Text>
@@ -129,8 +144,8 @@ const styles = StyleSheet.create({
     fontSize: 10,
   },
   ImageArea: {
-    width: '100%',
-    height: 400,
+    width,
+    height: width * 1.33,
     backgroundColor: '#fff',
     alignItems: 'center',
   },

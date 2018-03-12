@@ -1,13 +1,10 @@
 import React from 'react';
-import { StyleSheet, View, Text, TextInput, Image, ScrollView, TouchableHighlight } from 'react-native';
+import { StyleSheet, View, Text, TextInput, Image, ScrollView, TouchableHighlight, Platform } from 'react-native';
 import { Button, CheckBox, Icon } from 'react-native-elements';
 import ImagePicker from 'react-native-image-picker';
+import RNFetchBlob from 'react-native-fetch-blob';
 import firebase from 'firebase';
-
-const UUID = require('uuid-v4');
-const atob = require('base-64').decode;
-
-window.atob = atob;
+import UUID from 'uuid-v4';
 
 const dateString = (date) => {
   if (date == null) { return ''; }
@@ -15,6 +12,41 @@ const dateString = (date) => {
   const subStr = str.replace('T', ' ');
   return subStr.split('.')[0];
 };
+
+
+const uploadImage = (uri, imageName, mime = 'image/jpg') => {
+  const Blob = RNFetchBlob.polyfill.Blob;
+  const fs = RNFetchBlob.fs;
+  const tempWindowXMLHttpRequest = window.XMLHttpRequest;
+  window.XMLHttpRequest = RNFetchBlob.polyfill.XMLHttpRequest;
+  window.Blob = Blob;
+  return new Promise((resolve, reject) => {
+    const uploadUri = Platform.OS === 'ios' ? uri.replace('file://', '') : uri;
+    let uploadBlob = null;
+    const imageRef = firebase.storage().ref('images').child(imageName);
+    fs.readFile(uploadUri, 'base64')
+      .then((data) => {
+        return Blob.build(data, { type: `${mime};BASE64` });
+      })
+      .then((blob) => {
+        uploadBlob = blob;
+        console.log('success');
+        return imageRef.put(blob, { contentType: mime });
+      })
+      .then(() => {
+        uploadBlob.close();
+        window.XMLHttpRequest = tempWindowXMLHttpRequest;
+        return imageRef.getDownloadURL();
+      })
+      .then((url) => {
+        resolve(url);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};
+
 
 class CameraScreen extends React.Component {
   constructor() {
@@ -28,11 +60,31 @@ class CameraScreen extends React.Component {
       want: false,
       favorite: false,
       clothete: false,
+      userName: '',
+      gender: '',
       loading: false,
     };
     this.pickImageHandler = this.pickImageHandler.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentWillMount() {
+    const { currentUser } = firebase.auth();
+    const db = firebase.firestore();
+    db.collection(`users/${currentUser.uid}/info`)
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          this.setState({
+            userName: doc.data().userName,
+            gender: doc.data().gender,
+          });
+        });
+      })
+      .catch(() => {
+        this.props.navigation.navigate('LoginSignup');
+      });
   }
 
   pickImageHandler() {
@@ -42,7 +94,7 @@ class CameraScreen extends React.Component {
         takePhotoButtonTitle: '写真を撮る',
         chooseFromLibraryButtonTitle: 'カメラロールから選択',
         cancelButtonTitle: 'キャンセル',
-        quality: 0.3,
+        quality: 0.1,
       },
       (res) => {
         if (res.didCancel) {
@@ -65,18 +117,12 @@ class CameraScreen extends React.Component {
 
   handleSubmit() {
     this.setState({ loading: true });
-    const storageRef = firebase.storage().ref();
     const uuid = UUID();
-    const metadata = {
-      contentType: 'image/jpeg',
-    };
-    const ref = storageRef.child(`images/${uuid}.jpg`);
-    ref.putString(this.state.pickedImaged.data, 'base64', metadata)
-      .then((snapshot) => {
-        console.log('写真はok');
-        this.setState({ imageUrl: snapshot.downloadURL });
+    const base64Promise = uploadImage(this.state.pickedImaged.uri, uuid);
+    base64Promise
+      .then((imageUrl) => {
+        this.setState({ imageUrl });
         const { currentUser } = firebase.auth();
-        // console.log(currentUser);
         const db = firebase.firestore();
         const timestamp = dateString(new Date());
         db.collection('collections').add({
@@ -87,10 +133,11 @@ class CameraScreen extends React.Component {
           want: this.state.want,
           favorite: this.state.favorite,
           clothete: this.state.clothete,
+          userName: this.state.userName,
+          gender: this.state.gender,
           createdOn: timestamp,
         })
           .then(() => {
-            console.log('success');
             this.setState({
               pickedImaged: require('../../assets/addButton.png'),
               text: '',
@@ -104,8 +151,8 @@ class CameraScreen extends React.Component {
             });
             this.props.navigation.navigate('Timeline');
           })
-          .catch(() => {
-            console.log('failed');
+          .catch((err) => {
+            console.log(err);
           });
       })
       .catch((err) => {
@@ -216,6 +263,7 @@ const styles = StyleSheet.create({
     width: 93.98,
     height: 125,
     backgroundColor: '#999',
+    marginLeft: -1,
   },
   tagArea: {
     flexDirection: 'row',
@@ -260,7 +308,8 @@ const styles = StyleSheet.create({
   },
   submitButton: {
     width: 310,
-    marginTop: 40,
+    height: 36,
+    marginTop: 20,
     backgroundColor: '#44B26B',
   },
 });

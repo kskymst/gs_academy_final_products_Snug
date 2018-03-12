@@ -1,18 +1,43 @@
-import React from 'react'
-import { ScrollView, StatusBar } from 'react-native'
+import React from 'react';
+import { ScrollView, StatusBar } from 'react-native';
+import firebase from 'firebase';
 
-import UserLibraryImages from '../components/UserLibraryImages'
+import UserLibraryImages from '../components/UserLibraryImages';
 
-export default class TimeLineScreen extends React.Component {
-    render() {
-        return(
-            <ScrollView showsVerticalScrollIndicator={false}>
-                <StatusBar
-                    backgroundColor="blue"
-                    barStyle="light-content"
-                />
-                <UserLibraryImages navigation={this.props.navigation}/>
-            </ScrollView>
-        )
-    }
+class TimeLineScreen extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      dataList: [],
+    };
+  }
+
+  componentWillMount() {
+    const { currentUser } = firebase.auth();
+    const db = firebase.firestore();
+    db.collection('collections').orderBy('createdOn', 'desc')
+      .onSnapshot((querySnapshot) => {
+        const dataList = [];
+        querySnapshot.forEach((doc) => {
+          dataList.push({ ...doc.data(), key: doc.id });
+        });
+        this.setState({ dataList });
+      });
+  }
+
+  render() {
+    return (
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+      >
+        <StatusBar
+          backgroundColor="blue"
+          barStyle="light-content"
+        />
+        <UserLibraryImages dataList={this.state.dataList} navigation={this.props.navigation}/>
+      </ScrollView>
+    );
+  }
 }
+
+export default TimeLineScreen;
