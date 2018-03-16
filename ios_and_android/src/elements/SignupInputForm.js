@@ -8,6 +8,10 @@ const Dimensions = require('Dimensions');
 
 const { width } = Dimensions.get('window');
 
+const userImage = 'https://firebasestorage.googleapis.com/v0/b/snug-45a34.appspot.com/o/asset%2FuserImage.png?alt=media&token=9a26dd92-9024-442c-b38d-3b5dabf8e720';
+const backgroundImage = 'https://firebasestorage.googleapis.com/v0/b/snug-45a34.appspot.com/o/asset%2FuserBackground.jpg?alt=media&token=d1406517-62b0-45a5-b2c0-00e060d306d3';
+
+
 class SignupInputForm extends React.Component {
   constructor(props) {
     super(props);
@@ -46,8 +50,8 @@ class SignupInputForm extends React.Component {
           gender: this.state.gender,
           type: 'customer',
           userText: '',
-          userImage: '',
-          backgroundImage: '',
+          userImage,
+          backgroundImage,
           datetime: new Date(),
         })
           .then((docref) => {

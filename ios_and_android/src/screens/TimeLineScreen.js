@@ -15,7 +15,7 @@ class TimeLineScreen extends React.Component {
   componentWillMount() {
     const { currentUser } = firebase.auth();
     const db = firebase.firestore();
-    db.collection('collections').orderBy('createdOn', 'desc')
+    db.collection('collections').orderBy('createdOnNumber', 'desc')
       .onSnapshot((querySnapshot) => {
         const dataList = [];
         querySnapshot.forEach((doc) => {

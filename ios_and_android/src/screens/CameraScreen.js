@@ -6,14 +6,6 @@ import RNFetchBlob from 'react-native-fetch-blob';
 import firebase from 'firebase';
 import UUID from 'uuid-v4';
 
-const dateString = (date) => {
-  if (date == null) { return ''; }
-  const str = date.toISOString();
-  const subStr = str.replace('T', ' ');
-  return subStr.split('.')[0];
-};
-
-
 const uploadImage = (uri, imageName, mime = 'image/jpg') => {
   const Blob = RNFetchBlob.polyfill.Blob;
   const fs = RNFetchBlob.fs;
@@ -30,7 +22,6 @@ const uploadImage = (uri, imageName, mime = 'image/jpg') => {
       })
       .then((blob) => {
         uploadBlob = blob;
-        console.log('success');
         return imageRef.put(blob, { contentType: mime });
       })
       .then(() => {
@@ -72,14 +63,12 @@ class CameraScreen extends React.Component {
   componentWillMount() {
     const { currentUser } = firebase.auth();
     const db = firebase.firestore();
-    db.collection(`users/${currentUser.uid}/info`)
+    db.collection('users').doc(currentUser.uid)
       .get()
       .then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          this.setState({
-            userName: doc.data().userName,
-            gender: doc.data().gender,
-          });
+        this.setState({
+          userName: querySnapshot.data().userName,
+          gender: querySnapshot.data().gender,
         });
       })
       .catch(() => {
@@ -124,32 +113,47 @@ class CameraScreen extends React.Component {
         this.setState({ imageUrl });
         const { currentUser } = firebase.auth();
         const db = firebase.firestore();
-        const timestamp = dateString(new Date());
-        db.collection('collections').add({
+        const d = new Date();
+        const second = (`0${d.getSeconds()}`).slice(-2);
+        const timestamp = `${d.getFullYear()}年${d.getMonth() + 1}月${d.getDay()}日 ${d.getHours()}時${d.getMinutes()}分${second}秒`
+        const wantQuantity = this.state.want ? 1 : 0;
+        const favoriteQuantity = this.state.favorite ? 1 : 0;
+        const clotheteQuantity = this.state.clothete ? 1 : 0;
+        db.collection('collections').doc(uuid).set({
           user: currentUser.uid,
           text: this.state.text,
           imageUrl: this.state.imageUrl,
           tags: this.state.tags,
-          want: this.state.want,
-          favorite: this.state.favorite,
-          clothete: this.state.clothete,
           userName: this.state.userName,
           gender: this.state.gender,
+          wantQuantity,
+          favoriteQuantity,
+          clotheteQuantity,
           createdOn: timestamp,
+          createdOnNumber: d,
         })
           .then(() => {
-            this.setState({
-              pickedImaged: require('../../assets/addButton.png'),
-              text: '',
-              tags: [],
-              tag: '',
-              imageUrl: '',
-              want: false,
-              favorite: false,
-              clothete: false,
-              loading: false,
-            });
-            this.props.navigation.navigate('Timeline');
+            db.collection(`users/${currentUser.uid}/status`).doc(uuid)
+              .set({
+                want: this.state.want,
+                favorite: this.state.favorite,
+                clothete: this.state.clothete,
+                createdOnNumber: d,
+              })
+              .then(() => {
+                this.setState({
+                  pickedImaged: require('../../assets/addButton.png'),
+                  text: '',
+                  tags: [],
+                  tag: '',
+                  imageUrl: '',
+                  want: false,
+                  favorite: false,
+                  clothete: false,
+                  loading: false,
+                });
+                this.props.navigation.navigate('Timeline');
+              });
           })
           .catch((err) => {
             console.log(err);

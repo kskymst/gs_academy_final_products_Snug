@@ -7,7 +7,17 @@ const { width } = Dimensions.get('window');
 
 // eslint-disable-next-line
 export default class UserLibraryImages extends React.Component {
+  shouldComponentUpdate(nextProps, nextState) {
+    if (this.props.dataList !== nextProps.dataList || nextState !== null) {
+      return true;
+    }
+    console.log('block!');
+    return false;
+  }
+
+
   render() {
+    console.log('userLibraryImages', this.props.dataList);
     const dataList = this.props.dataList.map((data) => {
       return (
         <TouchableHighlight style={styles.imageOuter} key={data.key} onPress={() => this.props.navigation.navigate('ItemDetail', { data })} underlayColor="transparent">

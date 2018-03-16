@@ -1,8 +1,10 @@
 import React from 'react';
 import { Icon } from 'react-native-elements';
 import { StyleSheet, View, Text, Image, TouchableHighlight, ScrollView, ImageBackground, KeyboardAvoidingView } from 'react-native';
+import firebase from 'firebase';
 
-import TextInputForm from '../elements/TextInputForm';
+import ItemComment from '../components/ItemComment';
+import LikeButtons from '../components/LikeButtons';
 
 const Dimensions = require('Dimensions');
 
@@ -13,100 +15,71 @@ class ItemDetailScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userName: '',
-      createdOn: '',
-      imageUrl: '',
-      tags: [],
-    }
+      userImage: 'https://firebasestorage.googleapis.com/v0/b/snug-45a34.appspot.com/o/asset%2FuserImage.png?alt=media&token=9a26dd92-9024-442c-b38d-3b5dabf8e720',
+    };
   }
-  // static navigationOptions = {
-  //     headerTitle: 'Photo',
-  // };
 
-  // componentWillMount() {
-  //   console.log(data.userName);
-  // }
+  componentWillMount() {
+    const { data } = this.props.navigation.state.params;
+    const db = firebase.firestore();
+    if (data.user === undefined) {
+      data.user = '';
+    }
+    db.collection('users').doc(data.user)
+      .get()
+      .then((doc) => {
+        this.setState({ userImage: doc.data().userImage });
+      });
+  }
 
   render() {
     const { data } = this.props.navigation.state.params;
-
+    const timestamp = data.createdOn.slice(0, -3);
     const tags = data.tags.map((tagName) => {
       return (
         <Text key={tagName} style={styles.tag}>{tagName}</Text>
-      )
-    })
+      );
+    });
     return (
       <KeyboardAvoidingView
         behavior="position"
-        keyboardVerticalOffset={50}
+        keyboardVerticalOffset={60}
+        style={styles.container}
       >
         <ScrollView showsVerticalScrollIndicator={false}>
           <ImageBackground
             source={{ uri: data.imageUrl }}
-            style={styles.container}
             blurRadius={20}
+            style={{ flex: 1 }}
           >
             <View style={styles.userInfoArea}>
               <View style={styles.userContent}>
-                <TouchableHighlight onPress={() => this.props.navigation.navigate("MypageScreen")}  underlayColor="transparent">
+                <TouchableHighlight onPress={() => this.props.navigation.navigate('MypageScreen', { user: data.user })} underlayColor="transparent">
                   <Image
-                    source={require('../../assets/sample.jpg')}
+                    source={{ uri: this.state.userImage }}
                     style={styles.userImage}
                   />
                 </TouchableHighlight>
-                <TouchableHighlight onPress={() => this.props.navigation.navigate("MypageScreen")}  underlayColor="transparent">
+                <TouchableHighlight onPress={() => this.props.navigation.navigate('MypageScreen', { user: data.user })} underlayColor="transparent">
                   <Text style={styles.userName}>{data.userName}</Text>
                 </TouchableHighlight>
               </View>
-              <Text style={styles.postDate}>{data.createdOn}</Text>
+              <Text style={styles.postDate}>{timestamp}</Text>
             </View>
             <View style={styles.ImageArea}>
               <Image source={{ uri: data.imageUrl }} style={styles.itemImage} />
             </View>
-            <View style={styles.reviewsArea}>
-              <TouchableHighlight style={styles.niceButton}>
-                <View>
-                  <Icon name="favorite-border" size={22} color={'#B24C4A'}/>
-                  <Text style={styles.niceAmount}>  Want  138</Text>
-                </View>
-              </TouchableHighlight>
-              <TouchableHighlight style={styles.niceButton}>
-                <View>
-                  <Icon name="star-border" size={22} color={'#B2B061'}/>
-                  <Text style={styles.niceAmount}>  Favorite  38</Text>
-                </View>
-              </TouchableHighlight>
-              <TouchableHighlight style={styles.niceButton}>
-                <View>
-                  <Icon name="filter-none" size={22} color={'#44B26B'}/>
-                  <Text style={styles.niceAmount}>  Collection 32</Text>
-                </View>
-              </TouchableHighlight>
-            </View>
+            <LikeButtons data={data} />
             <View style={styles.tagArea}>
               <View style={styles.tagIndent}>
-                <Icon name="label-outline" size={22} color={'#000'}/>
+                <Icon name="label-outline" size={22} color="#000" />
                 <Text>Tags:</Text>
               </View>
               <View style={styles.tags}>
                 { tags }
               </View>
             </View>
-            <View style={styles.commentArea}>
-              <View style={styles.commentIndent}>
-                <Icon name="chat-bubble-outline" size={22} color={'#000'}/>
-                <Text> Comment</Text>
-              </View>
-              <Text style={styles.commentContent}>
-                <Text style={styles.commentUserName}>{data.userName}</Text>
-                {data.text}
-              </Text>
-              <Text style={styles.commentContent}>
-                <Text style={styles.commentUserName}>松田滉太 </Text>
-                  ちょうどこれ入荷しましたよ！
-              </Text>
-            </View>
-            <TextInputForm style="changeBackGround" />
+            <ItemComment data={data} navigation={this.props.navigation} />
           </ImageBackground>
         </ScrollView>
       </KeyboardAvoidingView>
@@ -117,6 +90,7 @@ class ItemDetailScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#fff',
   },
   userInfoArea: {
     flexDirection: 'row',
@@ -138,7 +112,7 @@ const styles = StyleSheet.create({
   userName: {
     fontSize: 12,
     fontWeight: 'bold',
-    marginLeft: 24,
+    marginLeft: 8,
   },
   postDate: {
     fontSize: 10,
@@ -152,24 +126,6 @@ const styles = StyleSheet.create({
   itemImage: {
     width: '100%',
     height: '100%',
-  },
-  reviewsArea: {
-    flexDirection: 'row',
-    margin: 10,
-    justifyContent: 'space-around',
-  },
-  niceButton: {
-    width: '32%',
-    height: 40,
-    backgroundColor: '#333',
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: 5,
-    opacity: 0.7,
-  },
-  niceAmount: {
-    color: '#fff',
-    fontSize: 12,
   },
   tagArea: {
     flexDirection: 'row',
@@ -193,23 +149,6 @@ const styles = StyleSheet.create({
     padding: 3,
     marginLeft: 8,
     marginBottom: 4,
-  },
-  commentArea: {
-    width: '100%',
-    backgroundColor: '#fff',
-    padding: 16,
-  },
-  commentIndent: {
-    flexDirection: 'row',
-  },
-  commentUserName: {
-    fontWeight: 'bold',
-    marginBottom: 4,
-  },
-  commentContent: {
-    borderBottomColor: '#333',
-    borderBottomWidth: 1,
-    marginTop: 12,
   },
 });
 

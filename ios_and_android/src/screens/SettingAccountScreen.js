@@ -53,12 +53,14 @@ class SettingAccountScreen extends React.Component {
       userText: '',
       userImage: '',
       backgroundImage: '',
-      userImageUrl: '',
-      backgroundImageUrl: '',
       loading: false,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+
+  static navigationOptions = {
+      headerTitle: 'ユーザー設定',
+  };
 
   componentWillMount() {
     const { userData } = this.props.navigation.state.params;
@@ -104,21 +106,21 @@ class SettingAccountScreen extends React.Component {
     const uuid = UUID();
     const uploadedUserImage = uploadImage(this.state.userImage, uuid);
     uploadedUserImage
-      .then((userImageUrl) => {
-        this.setState({ userImageUrl });
+      .then((userImage) => {
+        this.setState({ userImage });
         const uuid2 = UUID();
         const uploadedBackgroundImage = uploadImage(this.state.backgroundImage, uuid2);
         uploadedBackgroundImage
-          .then((backgroundImageUrl) => {
-            this.setState({ backgroundImageUrl });
+          .then((backgroundImage) => {
+            this.setState({ backgroundImage });
             const { currentUser } = firebase.auth();
             const db = firebase.firestore();
             db.collection('users').doc(currentUser.uid)
               .update({
                 userName: this.state.userName,
                 userText: this.state.userText,
-                userImage: this.state.userImageUrl,
-                backgroundImage: this.state.backgroundImageUrl,
+                userImage: this.state.userImage,
+                backgroundImage: this.state.backgroundImage,
               })
               .then(() => {
                 this.setState({
@@ -150,10 +152,7 @@ class SettingAccountScreen extends React.Component {
           <View style={styles.imageArea}>
             <View style={styles.imageAreaInner}>
               <TouchableHighlight onPress={() => this.pickImageHandler('userImage')} underlayColor="transparent">
-                { this.state.userImage === '' ?
-                  <Image source={require('../../assets/sample.png')} style={styles.userImage} /> :
-                  <Image source={{ uri: this.state.userImage }} style={styles.userImage} />
-                }
+                <Image source={{ uri: this.state.userImage }} style={styles.userImage} />
               </TouchableHighlight>
               <TouchableHighlight onPress={() => this.pickImageHandler('userImage')} underlayColor="transparent">
                 <Text style={styles.imageAreaText}>メインイメージを変更</Text>
@@ -161,10 +160,7 @@ class SettingAccountScreen extends React.Component {
             </View>
             <View style={styles.imageAreaInner}>
               <TouchableHighlight onPress={() => this.pickImageHandler('backgroundImage')} underlayColor="transparent">
-                { this.state.backgroundImage === '' ?
-                  <Image source={require('../../assets/backgroundSample.jpg')} style={styles.backgroundImage} /> :
-                  <Image source={{ uri: this.state.backgroundImage }} style={styles.backgroundImage} />
-                }
+                <Image source={{ uri: this.state.backgroundImage }} style={styles.backgroundImage} />
               </TouchableHighlight>
               <TouchableHighlight onPress={() => this.pickImageHandler('backgroundImage')} underlayColor="transparent">
                 <Text style={styles.imageAreaText}>バックグラウンドを変更</Text>

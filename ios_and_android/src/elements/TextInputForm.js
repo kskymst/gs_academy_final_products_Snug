@@ -2,24 +2,35 @@ import React from 'react';
 import { Icon } from 'react-native-elements';
 import { StyleSheet, View, TextInput, TouchableHighlight } from 'react-native';
 
+const Dimensions = require('Dimensions');
+
+const { width } = Dimensions.get('window');
+
 // eslint-disable-next-line
 class TextInputForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      text: '',
+    };
+  }
+
   render() {
-    let bgColor = null;
-
-    if (this.props.style === 'changeBackGround') {
-      bgColor = '#fff';
-    }
-
     return (
-      <View style={[styles.commentInputArea,{ backgroundColor: bgColor }]}>
+      <View style={styles.commentInputArea}>
         <TextInput
-          defaultValue=""
+          value={this.state.text}
+          multiline
           placeholder="メッセージを入力"
           style={styles.commentInput}
+          onChangeText={text => this.setState({ text })}
         />
-        <TouchableHighlight style={styles.submitButton}>
-          <Icon name="send" size={18} color={'#fff'} />
+        <TouchableHighlight
+          style={styles.submitButton}
+          underlayColor="transparent"
+          onPress={this.props.handleSubmit}
+        >
+          <Icon name="send" size={20} color="#fff" />
         </TouchableHighlight>
       </View>
     );
@@ -39,13 +50,16 @@ const styles = StyleSheet.create({
     borderColor: '#999',
     borderWidth: 1,
     borderRadius: 20,
-    padding: 4,
-    width: '75%',
+    paddingTop: 5,
+    paddingBottom: 5,
+    paddingLeft: 8,
+    paddingRight: 8,
+    width: width / 1.3,
   },
   submitButton: {
     padding: 8,
     backgroundColor: '#44B26B',
-    borderRadius: 8,
+    borderRadius: 60,
   },
   submitButtonText: {
     color: '#fff',

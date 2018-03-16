@@ -5,9 +5,9 @@ import TextInputForm from '../elements/TextInputForm'
 
 
 export default class MessageScreen extends React.Component {
-    static navigationOptions = {
-        headerTitle: 'Kosuke Yamashita',
-    }
+    // static navigationOptions = {
+    //     headerTitle: 'Kosuke Yamashita',
+    // }
 
     render() {
         return(

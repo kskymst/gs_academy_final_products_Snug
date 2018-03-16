@@ -11,8 +11,6 @@ const Dimensions = require('Dimensions');
 
 const { width } = Dimensions.get('window');
 
-
-
 // eslint-disable-next-line
 class MypageScreen extends React.Component {
   constructor(props) {
@@ -23,6 +21,7 @@ class MypageScreen extends React.Component {
       userData: [],
       selectedIndex: 0,
       sideMenuOpen: false,
+      test: '',
     };
     this.updateIndex = this.updateIndex.bind(this);
     this.filterDataList = this.filterDataList.bind(this);
@@ -51,29 +50,41 @@ class MypageScreen extends React.Component {
   componentWillMount() {
     this.props.navigation.setParams({ openSideMenu: this.openSideMenu.bind(this) });
     const { currentUser } = firebase.auth();
+    const userId = this.props.navigation.state.params ? this.props.navigation.state.params.user : currentUser.uid;
     const db = firebase.firestore();
-    db.collection('users').doc(currentUser.uid)
-      .onSnapshot((querySnapshot)=> {
-        this.setState({ userData: querySnapshot.data() });
+    db.collection('users').doc(userId).get()  // 上部ユーザを詳細データ
+      .then((querySnapshot)=> {
+        this.setState({ userData: querySnapshot.data(), test: 'd1前user部' });
       });
-    db.collection('collections')
-      .where('user', '==', currentUser.uid)
-      .onSnapshot((querySnapshot) => {
-        const allDataList = [];
-        const dataList = [];
+    const allDataList = [];
+    const dataList = [];
+    const d1 = [];
+    const d2 = [];
+    db.collection(`users/${userId}/status`).orderBy('createdOnNumber', 'desc')
+      .get()
+      .then((querySnapshot) => { // ①自分がwantなどをしている画像データを抽出
         querySnapshot.forEach((doc) => {
-          allDataList.push({ ...doc.data(), key: doc.id });
+          d1.push({ ...doc.data(), key: doc.id });
         });
-        for (let i = 0, len = allDataList.length; len > i; i += 1) {
-          if (allDataList[i].want) {
-            dataList.push(allDataList[i]);
-          }
+        for (let i = 0; d1.length > i; i += 1) {
+          db.collection('collections').doc(d1[i].key)　// ②コレクションを回して詳細取得
+            .get()
+            .then((doc) => {
+              d2.push({ ...doc.data() }); // 各詳細画像データ
+              allDataList[i] = Object.assign(d1[i], d2[i]);
+              if (allDataList[i].want) {
+                dataList.push(allDataList[i]);
+              }
+              if (allDataList.length === d1.length) {
+                this.setState({
+                  allDataList,
+                  dataList,
+                  sideMenuOpen: false,
+                  test:'d2最後'
+                });
+              }
+            });
         }
-        this.setState({
-          allDataList,
-          dataList,
-          sideMenuOpen: false,
-        });
       });
   }
 
@@ -89,7 +100,9 @@ class MypageScreen extends React.Component {
         dataList.push(allDataList[i]);
       }
     }
-    this.setState({ dataList, selectedIndex });
+    this.setState({ dataList, selectedIndex,
+      test: 'filter内'
+     });
   }
 
   updateIndex(selectedIndex) {
@@ -103,12 +116,10 @@ class MypageScreen extends React.Component {
   }
 
   render() {
+    console.log(this.state.test);
     const buttons = ['Want', 'Favorite', 'Clothete'];
     const { selectedIndex } = this.state;
     const menu = <Sidebar　userData={this.state.userData} navigation={this.props} />;
-    const imageBackground = this.state.userData.backgroundImage === '' ?
-      require('../../assets/backgroundSample.jpg') :
-      { uri: this.state.userData.backgroundImage };
     return (
       <SideMenu
         menu={menu}
@@ -118,21 +129,14 @@ class MypageScreen extends React.Component {
         <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
           <View>
             <ImageBackground
-              source={imageBackground}
+              source={{ uri: this.state.userData.backgroundImage }}
               style={styles.main}
               blurRadius={1} 
             >
-              {this.state.userData.userImage === '' ?
-                <Image
-                  source={require('../../assets/sample.png')}
-                  style={styles.userImage}
-                /> :
-                <Image
-                  source={{ uri: this.state.userData.userImage }}
-                  style={styles.userImage}
-                />
-              }
-
+              <Image
+                source={{ uri: this.state.userData.userImage }}
+                style={styles.userImage}
+              />
               <Text style={styles.userName}>{this.state.userData.userName}</Text>
               <Text style={styles.userDescription}>{this.state.userData.userText}</Text>
               <View style={styles.statusButtonArea}>
