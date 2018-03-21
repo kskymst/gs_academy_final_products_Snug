@@ -1,5 +1,6 @@
 import React from 'react';
 
+// eslint-disable-next-line
 class Header extends React.Component {
   render() {
     return (

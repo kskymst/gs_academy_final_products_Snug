@@ -1,0 +1,23 @@
+.sidebar-wrapper {
+  background-color: 'transparent';
+  width: '100%';
+}
+
+.sidebar-content {
+  height: 100vh;
+;
+  margin: -30px 0 0 20px;
+}
+
+.toggle-button {
+  margin: -90px 0 0 40px;
+}
+
+.toggle-button:hover {
+  cursor: pointer;
+}
+
+.hamburger-icon {
+  font-size: 26px;
+  color: '#fff';
+}

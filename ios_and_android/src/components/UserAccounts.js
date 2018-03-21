@@ -6,7 +6,7 @@ class UserAccounts extends React.Component {
     render() {
         return(
             <View style={styles.container}>
-                <TouchableHighlight onPress={() => this.props.navigation.navigate('Message')} underlayColor="transparent" >
+                <TouchableHighlight onPress={() => this.props.navigation.navigate('MessageRoom')} underlayColor="transparent" >
                     <View style={styles.userArea}>
                         <Image
                         source={require('../../assets/sample.jpg')}

@@ -24,12 +24,12 @@
         "source": "/Users/ksk/Desktop/gs_final_products/ios_and_android/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/drawable-xxhdpi/abc_tab_indicator_mtrl_alpha.9.png"
     },
     {
-        "merged": "/Users/ksk/Desktop/gs_final_products/ios_and_android/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi/abc_btn_radio_to_on_mtrl_000.png",
-        "source": "/Users/ksk/Desktop/gs_final_products/ios_and_android/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/drawable-xxhdpi/abc_btn_radio_to_on_mtrl_000.png"
-    },
-    {
         "merged": "/Users/ksk/Desktop/gs_final_products/ios_and_android/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi/abc_textfield_search_activated_mtrl_alpha.9.png",
         "source": "/Users/ksk/Desktop/gs_final_products/ios_and_android/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/drawable-xxhdpi/abc_textfield_search_activated_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "/Users/ksk/Desktop/gs_final_products/ios_and_android/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi/abc_btn_radio_to_on_mtrl_000.png",
+        "source": "/Users/ksk/Desktop/gs_final_products/ios_and_android/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/drawable-xxhdpi/abc_btn_radio_to_on_mtrl_000.png"
     },
     {
         "merged": "/Users/ksk/Desktop/gs_final_products/ios_and_android/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi/abc_textfield_search_default_mtrl_alpha.9.png",

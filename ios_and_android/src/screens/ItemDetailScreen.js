@@ -1,12 +1,10 @@
 import React from 'react';
 import { Icon } from 'react-native-elements';
-import { StyleSheet, View, Text, Image, TouchableHighlight, ScrollView, ImageBackground, KeyboardAvoidingView } from 'react-native';
+import { StyleSheet, View, Text, Image, TouchableHighlight, ScrollView, ImageBackground, KeyboardAvoidingView, Dimensions } from 'react-native';
 import firebase from 'firebase';
 
 import ItemComment from '../components/ItemComment';
 import LikeButtons from '../components/LikeButtons';
-
-const Dimensions = require('Dimensions');
 
 const { width } = Dimensions.get('window');
 

@@ -19,9 +19,9 @@ class MypageScreen extends React.Component {
       allDataList: [],
       dataList: [],
       userData: [],
+      userId: '',
       selectedIndex: 0,
       sideMenuOpen: false,
-      test: '',
     };
     this.updateIndex = this.updateIndex.bind(this);
     this.filterDataList = this.filterDataList.bind(this);
@@ -47,14 +47,17 @@ class MypageScreen extends React.Component {
     headerRight: ( <Icon name="settings" iconStyle={{ marginRight: 10 }} color='#fff' onPress={() => navigation.state.params.openSideMenu()} underlayColor="transparent" /> ),
   });
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.navigation.setParams({ openSideMenu: this.openSideMenu.bind(this) });
     const { currentUser } = firebase.auth();
     const userId = this.props.navigation.state.params ? this.props.navigation.state.params.user : currentUser.uid;
     const db = firebase.firestore();
     db.collection('users').doc(userId).get()  // 上部ユーザを詳細データ
       .then((querySnapshot)=> {
-        this.setState({ userData: querySnapshot.data(), test: 'd1前user部' });
+        this.setState({
+          userData: querySnapshot.data(),
+          userId,
+        });
       });
     const allDataList = [];
     const dataList = [];
@@ -80,7 +83,6 @@ class MypageScreen extends React.Component {
                   allDataList,
                   dataList,
                   sideMenuOpen: false,
-                  test:'d2最後'
                 });
               }
             });
@@ -100,9 +102,7 @@ class MypageScreen extends React.Component {
         dataList.push(allDataList[i]);
       }
     }
-    this.setState({ dataList, selectedIndex,
-      test: 'filter内'
-     });
+    this.setState({ dataList, selectedIndex});
   }
 
   updateIndex(selectedIndex) {
@@ -116,10 +116,9 @@ class MypageScreen extends React.Component {
   }
 
   render() {
-    console.log(this.state.test);
     const buttons = ['Want', 'Favorite', 'Clothete'];
     const { selectedIndex } = this.state;
-    const menu = <Sidebar　userData={this.state.userData} navigation={this.props} />;
+    const menu = <Sidebar　userData={this.state.userData} userId={this.state.userId} navigation={this.props} />;
     return (
       <SideMenu
         menu={menu}

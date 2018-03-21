@@ -27,7 +27,7 @@ class LoginForm extends React.Component {
           <Human style={{ fontSize: 32, margin: -4 }} />
           <input
             type="text"
-            placeholder="ユーザーネーム"
+            placeholder="ショップネーム"
             value={this.state.name}
             onChange={(e) => { this.setState({ name: e.target.value }); }}
           />
@@ -61,7 +61,9 @@ class LoginForm extends React.Component {
             </select>
           </div>
         </div>
-        <button className="signup-button"><Done className="login-action-icon" />Submit</button>
+        <Link to='/main' >
+          <button className="signup-button"><Done className="login-action-icon" />Submit</button>
+        </Link>
         <div className="login-button">
           <span>すでにアカウントをお持ちの方は</span>
           <Link to='/' >

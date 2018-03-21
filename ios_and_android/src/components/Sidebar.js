@@ -4,6 +4,11 @@ import { List, ListItem } from 'react-native-elements';
 
 const list = [
   {
+    title: 'Messageを送る',
+    icon: 'message',
+    onPress: 'MessageRoom',
+  },
+  {
     title: 'Follow',
     icon: 'redo',
     onPress: 'FollowScreen',
@@ -32,7 +37,7 @@ const Sidebar = props => (
           leftIcon={{ name: item.icon }}
           containerStyle={styles.listItem}
           onPress={
-            () => props.navigation.navigation.navigate(item.onPress, { userData: props.userData })
+            () => props.navigation.navigation.navigate(item.onPress, { userData: props.userData, userId: props.userId })
           }
         />
       ))

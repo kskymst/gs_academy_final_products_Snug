@@ -6,7 +6,7 @@ import { Icon } from 'react-native-elements';
 import MypageScreen from './src/screens/MypageScreen';
 import ItemDetailScreen from './src/screens/ItemDetailScreen';
 import MessageBoxScreen from './src/screens/MessageBoxScreen';
-import MessageScreen from './src/screens/MessageScreen';
+import MessageRoomScreen from './src/screens/MessageRoomScreen';
 import TimeLineScreen from './src/screens/TimeLineScreen';
 import ShopListScreen from './src/screens/ShopListScreen';
 import LoginSignupScreen from './src/screens/LoginSignupScreen';
@@ -94,7 +94,7 @@ const ShopStack = StackNavigator({
 
 const MessageStack = StackNavigator({
   MessageBox: { screen: MessageBoxScreen },
-  Message: { screen: MessageScreen },
+  MessageRoom: { screen: MessageRoomScreen },
   MypageScreen: { screen: MypageScreen },
   ItemDetail: { screen: ItemDetailScreen },
 }, {

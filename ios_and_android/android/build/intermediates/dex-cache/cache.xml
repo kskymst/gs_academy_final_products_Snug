@@ -3,6 +3,15 @@
 
     <item
         is-multidex="false"
+        jar="/Users/ksk/Desktop/gs_final_products/ios_and_android/android/app/build/intermediates/exploded-aar/Snug/react-native-fetch-blob/unspecified/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="de31e43a8bbd6962302f47420d45c9778d1ae626">
+        <dex dex="/Users/ksk/Desktop/gs_final_products/ios_and_android/android/app/build/intermediates/pre-dexed/debug/Snug-react-native-fetch-blob-unspecified_c2e10868cb83041f7154e99f9d68502585a7ce78.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="/Users/ksk/.gradle/caches/modules-2/files-2.1/javax.inject/javax.inject/1/6975da39a7040257bd51d21a231b76c915872d38/javax.inject-1.jar"
         jumboMode="false"
         optimize="true"

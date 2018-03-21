@@ -17,6 +17,17 @@ class MessageBoxScreen extends React.Component {
   componentWillMount() {
     const { currentUser } = firebase.auth();
     const db = firebase.firestore();
+    db.collection('messages')
+      .where('postUserId', '==', currentUser.uid)
+      .onSnapshot((querySnapshot) => {
+        const messageData = [];
+        console.log(querySnapshot);
+        db.collection('messages')
+          .where('otherId', '==', currentUser.uid)
+          .onSnapshot((_querySnapshot) => {
+            console.log(_querySnapshot);
+          });
+      });
   }
 
   render() {

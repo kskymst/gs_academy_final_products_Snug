@@ -23,7 +23,7 @@
   },
   "dependencies": {
     "base-64": "^0.1.0",
-    "firebase": "^4.10.1",
+    "firebase": "^4.11.0",
     "prop-types": "^15.6.1",
     "react": "16.2.0",
     "react-native": "0.52.0",

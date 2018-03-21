@@ -1,8 +1,6 @@
 import React from 'react';
 import { Icon } from 'react-native-elements';
-import { StyleSheet, View, TextInput, TouchableHighlight } from 'react-native';
-
-const Dimensions = require('Dimensions');
+import { StyleSheet, View, TextInput, TouchableHighlight, Dimensions } from 'react-native';
 
 const { width } = Dimensions.get('window');
 
