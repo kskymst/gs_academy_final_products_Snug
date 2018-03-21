@@ -47,6 +47,7 @@ class CameraScreen extends React.Component {
       text: '',
       tags: [],
       tag: '',
+      userImage: '',
       imageUrl: '',
       want: false,
       favorite: false,
@@ -67,6 +68,7 @@ class CameraScreen extends React.Component {
       .get()
       .then((querySnapshot) => {
         this.setState({
+          userImage: querySnapshot.data().userImage,
           userName: querySnapshot.data().userName,
           gender: querySnapshot.data().gender,
         });
@@ -120,11 +122,13 @@ class CameraScreen extends React.Component {
         const favoriteQuantity = this.state.favorite ? 1 : 0;
         const clotheteQuantity = this.state.clothete ? 1 : 0;
         db.collection('collections').doc(uuid).set({
+          id: uuid,
           user: currentUser.uid,
           text: this.state.text,
           imageUrl: this.state.imageUrl,
           tags: this.state.tags,
           userName: this.state.userName,
+          userImage: this.state.userImage,
           gender: this.state.gender,
           wantQuantity,
           favoriteQuantity,

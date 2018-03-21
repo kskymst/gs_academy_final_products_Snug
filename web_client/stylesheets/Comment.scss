@@ -1,0 +1,22 @@
+.comment-wrapper {
+  margin-left: 16px;
+
+  .comment-area-title {
+    margin-bottom: 12px;
+  
+    span {
+      font-size: 18px;
+      margin-left: 8px;
+    }
+  }
+  
+  .posted-comment {
+    display: flex;
+    margin-bottom: 8px;
+
+    p:nth-child(1) {
+      font-weight: bold; 
+      margin-right: 12px;
+    }
+  }
+}

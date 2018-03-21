@@ -51,6 +51,7 @@ class ItemComment extends React.Component {
         userId: this.state.uid,
         userName: this.state.userName,
         comment: this.state.text,
+        createdOn: timestamp,
       })
       .then(() => {
         this.setState({ text: '' });
