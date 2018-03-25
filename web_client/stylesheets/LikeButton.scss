@@ -1,12 +1,60 @@
-.like-button-wrapper {
-  text-align: center;
-  margin: 16px 0 24px;
-  
-  button {
-    width: 8vw;
-    margin: 0 8px;
+.resent-post-component-outer {
+
+  .like-button-wrapper {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    width: 25vw;
+    margin: 12px auto 24px;
+    
+    div {
+      width: 10vw;
+      margin: 0 8px;
+      padding-bottom: 4px;
+      border-bottom: 1px solid #ccc;
+    }
+    p {
+      color: #444;
+    }
+    .want-icon-true {
+      color: #FF0070;
+    }
+    .favorite-icon-true {
+      color: yellow;
+    }
+    .clothete-icon-true {
+      color: #44B26B;
+    }
   }
-  .want-icon-true {
-    color: yellow;
+}
+
+.item-detail-component-wrapper {
+
+  .like-button-wrapper {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    width: 30vw;
+    margin: 12px auto 24px;
+    
+    div {
+      width: 10vw;
+      margin: 0 8px;
+      padding-bottom: 4px;
+      border-bottom: 1px solid #ccc;
+    }
+    p {
+      color: #444;
+    }
+    .want-icon-true {
+      color: #FF0070;
+    }
+    .favorite-icon-true {
+      color: yellow;
+    }
+    .clothete-icon-true {
+      color: #44B26B;
+    }
   }
+
 }

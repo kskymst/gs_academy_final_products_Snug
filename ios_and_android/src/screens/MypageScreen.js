@@ -52,7 +52,8 @@ class MypageScreen extends React.Component {
     const { currentUser } = firebase.auth();
     const userId = this.props.navigation.state.params ? this.props.navigation.state.params.user : currentUser.uid;
     const db = firebase.firestore();
-    db.collection('users').doc(userId).get()  // 上部ユーザを詳細データ
+    db.collection('users').doc(userId)
+      .get()  // 上部ユーザを詳細データ
       .then((querySnapshot)=> {
         this.setState({
           userData: querySnapshot.data(),

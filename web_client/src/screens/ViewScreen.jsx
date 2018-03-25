@@ -1,7 +1,10 @@
 import React from 'react';
 import firebase from 'firebase';
+import { Route, Switch } from 'react-router-dom';
 
 import ResentPost from '../components/ResentPost';
+import UserPage from '../components/UserPage';
+
 
 // eslint-disable-next-line
 class ViewScreen extends React.Component {
@@ -27,7 +30,17 @@ class ViewScreen extends React.Component {
   render() {
     return (
       <div className="view-screen-wrapper" >
-        <ResentPost dataList={this.state.dataList} />
+        <Switch>
+          <Route
+            exact
+            path="/main"
+            render={() => <ResentPost dataList={this.state.dataList} />}
+          />
+          <Route
+            path="/main/:id"
+            component={UserPage}
+          />
+        </Switch>
       </div>
     );
   }

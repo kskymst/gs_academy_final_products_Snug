@@ -32,7 +32,7 @@ class App extends React.Component {
           <Switch>
             <Route exact path="/" component={TopPageScreen} />
             <Route exact path="/signup" component={TopPageScreen} />
-            <Route exact path="/main" component={MainScreen} />
+            <Route path="/main" component={MainScreen} />
             <Route component={NoMatch} />
           </Switch>
         </React.Fragment>

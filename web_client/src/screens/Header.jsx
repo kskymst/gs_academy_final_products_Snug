@@ -6,7 +6,7 @@ class Header extends React.Component {
     return (
       <div className="header-wrapper">
         <div className="header-logos">
-          <img src="./img/icon.png" alt="bland-logo" />
+          <img src="/img/icon.png" alt="bland-logo" />
           <p>Snug</p>
         </div>
       </div>

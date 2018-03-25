@@ -2,6 +2,8 @@ import React from 'react';
 import { StackNavigator, TabNavigator } from 'react-navigation';
 import firebase from 'firebase';
 import { Icon } from 'react-native-elements';
+import { DeviceEventEmitter } from 'react-native';
+import Beacons from 'react-native-beacons-manager';
 
 import MypageScreen from './src/screens/MypageScreen';
 import ItemDetailScreen from './src/screens/ItemDetailScreen';
@@ -12,6 +14,7 @@ import ShopListScreen from './src/screens/ShopListScreen';
 import LoginSignupScreen from './src/screens/LoginSignupScreen';
 import CameraScreen from './src/screens/CameraScreen';
 import SettingAccountScreen from './src/screens/SettingAccountScreen';
+
 
 import ENV from './env.json';
 
@@ -28,6 +31,7 @@ const config = {
 firebase.initializeApp(config);
 
 const TimeLineStack = StackNavigator({
+  // BleScreen: { screen: BleScreen },
   LoginSignup: { screen: LoginSignupScreen },
   TimeLine: { screen: TimeLineScreen },
   ItemDetail: { screen: ItemDetailScreen },
@@ -179,6 +183,39 @@ const Tab = TabNavigator({
 // eslint-disable-next-line
 export default class App extends React.Component {
   render() {
+    const region = {
+      identifier: 'NefryBT-snug',
+      // uuid: '97F5B537-E9F3-B229-5F3F-03CD0F0E7326',
+      // uuid: '4FAFC201-1FB5-459E-8fCC-C5C9C331914B',
+      uuid: '00000000-1AE9-1001-B000-001C4D6465E3',
+  };
+  
+  // Request for authorization while the app is open
+  Beacons.requestWhenInUseAuthorization();
+  
+  Beacons.startMonitoringForRegion(region);
+  Beacons.startRangingBeaconsInRegion(region);
+  
+  Beacons.startUpdatingLocation();
+  
+  // Listen for beacon changes
+  const subscription = DeviceEventEmitter.addListener(
+    'beaconsDidRange',
+    (data) => {
+      // data.region - The current region
+      // data.region.identifier
+      // data.region.uuid
+      console.log(data.beacons);
+      // data.beacons - Array of all beacons inside a region
+      //  in the following structure:
+      //    .uuid
+      //    .major - The major version of a beacon
+      //    .minor - The minor version of a beacon
+      //    .rssi - Signal strength: RSSI value (between -100 and 0)
+      //    .proximity - Proximity value, can either be "unknown", "far", "near" or "immediate"
+      //    .accuracy - The accuracy of a beacon
+    }
+  );
     return (
       <Tab />
     );

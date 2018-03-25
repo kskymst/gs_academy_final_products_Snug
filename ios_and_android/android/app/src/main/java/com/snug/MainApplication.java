@@ -3,6 +3,7 @@ package com.snug;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.mackentoch.beaconsandroid.BeaconsAndroidPackage;
 import com.RNFetchBlob.RNFetchBlobPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.facebook.react.ReactNativeHost;
@@ -26,6 +27,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new BeaconsAndroidPackage(),
             new RNFetchBlobPackage(),
           new VectorIconsPackage(),
           new ImagePickerPackage()

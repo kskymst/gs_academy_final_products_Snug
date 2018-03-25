@@ -15,6 +15,7 @@ body {
     font-family: 'Avenir Next','Arial',sans-serif;
     color: $text-color;
     height: 100vh;
+    letter-spacing: 0.5px;
 }
 
 button:focus {
@@ -31,6 +32,14 @@ input:focus {
     // border: 2px solid #44B26B;
 }
 
+a {
+    color: $text-color;
+}
+
+a:hover {
+    color: $text-color;
+}
+
 @import
     "Header",
     "TopPageScreen",
@@ -43,4 +52,7 @@ input:focus {
     "MessageScreen",
     "ResentPost",
     "LikeButton",
-    "Comment";
+    "Comment",
+    "UserPage",
+    "ImageList",
+    "ItemDetail";

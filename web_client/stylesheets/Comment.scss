@@ -1,22 +1,108 @@
-.comment-wrapper {
-  margin-left: 16px;
+.resent-post-component-outer {
 
-  .comment-area-title {
-    margin-bottom: 12px;
+  .comment-wrapper {
+    margin-left: 16px;
   
-    span {
-      font-size: 18px;
-      margin-left: 8px;
+    .comment-area-title {
+      margin-bottom: 12px;
+    
+      span {
+        font-size: 18px;
+        margin-left: 8px;
+      }
+    }
+    
+    .posted-comment {
+      display: flex;
+      margin-bottom: 8px;
+  
+      p:nth-child(1) {
+        font-weight: bold; 
+        margin-right: 12px;
+      }
+    }
+  
+    .comment-input {
+      display: flex;
+      align-items: center;
+      textarea {
+        width: 25vw;
+        resize: none;
+        outline: none;
+        padding: 4px;
+        margin-top: 8px;
+        letter-spacing: 0.5px;
+        border-radius: 6px;
+        border-color: #bbb;
+      }
+      textarea:focus {
+        outline: none;
+      }
+      button {
+        height: 40px;
+        width: 40px;
+        border-radius: 40px;
+        margin-left: 10px;
+        background-color: #44B26B;
+      }
+      .sendIcon {
+        color:white;
+        margin-left: 2px;
+      }
     }
   }
-  
-  .posted-comment {
-    display: flex;
-    margin-bottom: 8px;
+}
 
-    p:nth-child(1) {
-      font-weight: bold; 
-      margin-right: 12px;
+.item-detail-component-wrapper {
+  .comment-wrapper {
+    margin-left: 16px;
+  
+    .comment-area-title {
+      margin-bottom: 12px;
+    
+      span {
+        font-size: 18px;
+        margin-left: 8px;
+      }
+    }
+    
+    .posted-comment {
+      display: flex;
+      margin-bottom: 8px;
+  
+      p:nth-child(1) {
+        font-weight: bold; 
+        margin-right: 12px;
+      }
+    }
+  
+    .comment-input {
+      display: flex;
+      align-items: center;
+      textarea {
+        width: 25vw;
+        resize: none;
+        outline: none;
+        padding: 4px;
+        margin-top: 8px;
+        letter-spacing: 0.5px;
+        border-radius: 6px;
+        border-color: #bbb;
+      }
+      textarea:focus {
+        outline: none;
+      }
+      button {
+        height: 40px;
+        width: 40px;
+        border-radius: 40px;
+        margin-left: 10px;
+        background-color: #44B26B;
+      }
+      .sendIcon {
+        color:white;
+        margin-left: 2px;
+      }
     }
   }
 }

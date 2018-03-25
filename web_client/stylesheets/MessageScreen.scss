@@ -1,6 +1,10 @@
 .message-screen-wapper {
   border: 1px solid black;
   height: 92vh;
-  width: 33.33vw;
+  width: 25vw;
   overflow: scroll;
+}
+
+.message-screen-wapper::-webkit-scrollbar {
+  display:none;
 }
