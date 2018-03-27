@@ -1,5 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, Image, ImageBackground, StatusBar } from 'react-native';
+import firebase from 'firebase';
+
 import InputForm from '../components/InputForm';
 
 // eslint-disable-next-line

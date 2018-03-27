@@ -1,31 +1,54 @@
 import React from 'react';
-import { Icon } from 'react-native-elements';
-import { StyleSheet, View, TextInput, ScrollView, TouchableHighlight } from 'react-native';
+import { StyleSheet, View, TextInput, ScrollView, Dimensions } from 'react-native';
 import firebase from 'firebase';
 
 import UserAccounts from '../components/UserAccounts';
 
+const { width } = Dimensions.get('window');
 
 class MessageBoxScreen extends React.Component {
   constructor() {
     super();
     this.state = {
-      test: '',
+      messageRoom: [],
     };
   }
 
   componentWillMount() {
     const { currentUser } = firebase.auth();
     const db = firebase.firestore();
+    let messageList = [];
     db.collection('messages')
       .where('postUserId', '==', currentUser.uid)
       .onSnapshot((querySnapshot) => {
-        const messageData = [];
-        console.log(querySnapshot);
+        messageList = [];
+        console.log('database run!!');
+        querySnapshot.forEach((doc) => {
+          messageList.push(doc.data());
+        });
         db.collection('messages')
           .where('otherId', '==', currentUser.uid)
-          .onSnapshot((_querySnapshot) => {
-            console.log(_querySnapshot);
+          .get()
+          .then((_querySnapshot) => {
+            _querySnapshot.forEach((_doc) => {
+              messageList.push(_doc.data());
+            });
+            const adjustList = {};
+            const messageRoom = [];
+            messageList.sort((a, b) => (
+              a.createdOn > b.createdOn ? 1 : -1
+            ));
+            for (let i = 0; i < messageList.length; i++) {
+              adjustList[messageList[i]['messageRoom']] = messageList[i];
+            }
+            // eslint-disable-next-line
+            for (let key in adjustList) {
+              messageRoom.push(adjustList[key]);
+            }
+            messageRoom.sort((a, b) => (
+              a.createdOn < b.createdOn ? 1 : -1
+            ));
+            this.setState({ messageRoom });
           });
       });
   }
@@ -33,14 +56,11 @@ class MessageBoxScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.searchArea}>
+        {/* <View style={styles.searchArea}>
           <TextInput defaultValue={''} placeholder={'検索'} style={styles.searchInput} />
-          <TouchableHighlight>
-            <Icon name="border-color" size={25} color={'#44B26B'}/>
-          </TouchableHighlight>
-        </View>
+        </View> */}
         <ScrollView showsVerticalScrollIndicator={false}>
-          <UserAccounts navigation={this.props.navigation}/>
+          <UserAccounts navigation={this.props.navigation} data={this.state.messageRoom} />
         </ScrollView>
       </View>
     );
@@ -50,6 +70,7 @@ class MessageBoxScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingTop: 32,
   },
   searchArea: {
     flexDirection: 'row',
@@ -59,12 +80,12 @@ const styles = StyleSheet.create({
   },
   searchInput: {
     backgroundColor: '#ddd',
-    width: '85%',
+    width: width / 1.1,
     fontSize: 18,
     padding: 8,
     paddingLeft: 16,
     paddingRight: 16,
-    borderRadius: 30,
+    borderRadius: 5,
   },
 });
 

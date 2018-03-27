@@ -25,6 +25,7 @@ class MypageScreen extends React.Component {
     };
     this.updateIndex = this.updateIndex.bind(this);
     this.filterDataList = this.filterDataList.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   static navigationOptions = ({ navigation }) => ({
@@ -91,6 +92,10 @@ class MypageScreen extends React.Component {
       });
   }
 
+  handleSubmit() {
+    this.setState({ sideMenuOpen: false });
+  }
+
   openSideMenu() {
     this.setState({ sideMenuOpen: !this.state.sideMenuOpen })
   }
@@ -119,14 +124,24 @@ class MypageScreen extends React.Component {
   render() {
     const buttons = ['Want', 'Favorite', 'Clothete'];
     const { selectedIndex } = this.state;
-    const menu = <Sidebar　userData={this.state.userData} userId={this.state.userId} navigation={this.props} />;
+    const menu = (
+    <Sidebar
+      userData={this.state.userData}
+      userId={this.state.userId}
+      navigation={this.props}
+      handleSubmit={this.handleSubmit}
+    />
+    );
     return (
       <SideMenu
         menu={menu}
         isOpen={this.state.sideMenuOpen}
         edgeHitWidth={100}
       >
-        <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          style={styles.container}
+        >
           <View>
             <ImageBackground
               source={{ uri: this.state.userData.backgroundImage }}

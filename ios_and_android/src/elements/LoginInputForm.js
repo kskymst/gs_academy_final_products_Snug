@@ -28,7 +28,7 @@ class LoginInputForm extends React.Component {
         const resetAction = NavigationActions.reset({
           index: 0,
           actions: [
-            NavigationActions.navigate({ routeName: 'TimeLine' }),
+            NavigationActions.navigate({ routeName: 'MainContents' }),
           ],
         });
         this.props.navigation.dispatch(resetAction);

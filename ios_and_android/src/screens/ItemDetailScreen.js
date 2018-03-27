@@ -8,7 +8,6 @@ import LikeButtons from '../components/LikeButtons';
 
 const { width } = Dimensions.get('window');
 
-// eslint-disable-next-line
 class ItemDetailScreen extends React.Component {
   constructor(props) {
     super(props);
@@ -32,12 +31,19 @@ class ItemDetailScreen extends React.Component {
 
   render() {
     const { data } = this.props.navigation.state.params;
+    console.log(data);
     const timestamp = data.createdOn.slice(0, -3);
-    const tags = data.tags.map((tagName) => {
-      return (
-        <Text key={tagName} style={styles.tag}>{tagName}</Text>
-      );
-    });
+    const tags = Object.keys(data.tags).map(tagName => (
+      <TouchableHighlight
+        key={tagName}
+        onPress={() => this.props.navigation.navigate('TagSearch', { tagName })}
+      >
+        <View style={styles.tagOuter}>
+          <Icon type="font-awesome" name="tag" size={18} color="#333" />
+          <Text style={styles.tag}>{tagName}</Text>
+        </View>
+      </TouchableHighlight>
+    ));
     return (
       <KeyboardAvoidingView
         behavior="position"
@@ -67,18 +73,18 @@ class ItemDetailScreen extends React.Component {
             <View style={styles.ImageArea}>
               <Image source={{ uri: data.imageUrl }} style={styles.itemImage} />
             </View>
-            <LikeButtons data={data} />
-            <View style={styles.tagArea}>
-              <View style={styles.tagIndent}>
-                <Icon name="label-outline" size={22} color="#000" />
-                <Text>Tags:</Text>
-              </View>
-              <View style={styles.tags}>
-                { tags }
-              </View>
-            </View>
-            <ItemComment data={data} navigation={this.props.navigation} />
           </ImageBackground>
+          <LikeButtons data={data} />
+          <View style={styles.tagArea}>
+            {/* <View style={styles.tagIndent}>
+              <Icon name="label-outline" size={22} color="#000" />
+              <Text style={styles.tagTitle} >Tags:</Text>
+            </View> */}
+            <View style={styles.tags}>
+              { tags }
+            </View>
+          </View>
+          <ItemComment data={data} navigation={this.props.navigation} />
         </ScrollView>
       </KeyboardAvoidingView>
     );
@@ -139,14 +145,17 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     flexWrap: 'wrap',
+    paddingLeft: 12,
+    paddingRight: 12,
+  },
+  tagOuter: {
+    flexDirection: 'row',
+    marginRight: 16,
   },
   tag: {
-    color: '#fff',
-    fontSize: 16,
-    backgroundColor: '#333',
-    padding: 3,
-    marginLeft: 8,
+    fontSize: 20,
     marginBottom: 4,
+    marginLeft: 4,
   },
 });
 

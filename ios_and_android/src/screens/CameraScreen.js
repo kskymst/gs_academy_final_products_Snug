@@ -85,7 +85,7 @@ class CameraScreen extends React.Component {
         takePhotoButtonTitle: '写真を撮る',
         chooseFromLibraryButtonTitle: 'カメラロールから選択',
         cancelButtonTitle: 'キャンセル',
-        quality: 0.1,
+        quality: 0.2,
       },
       (res) => {
         if (res.didCancel) {
@@ -108,6 +108,11 @@ class CameraScreen extends React.Component {
 
   handleSubmit() {
     this.setState({ loading: true });
+    let tags = {};
+    this.state.tags.forEach((data) => {
+      const subObj = { [data]: true };
+      tags = Object.assign(tags, subObj);
+    });
     const uuid = UUID();
     const base64Promise = uploadImage(this.state.pickedImaged.uri, uuid);
     base64Promise
@@ -126,7 +131,7 @@ class CameraScreen extends React.Component {
           user: currentUser.uid,
           text: this.state.text,
           imageUrl: this.state.imageUrl,
-          tags: this.state.tags,
+          tags,
           userName: this.state.userName,
           userImage: this.state.userImage,
           gender: this.state.gender,
@@ -174,7 +179,14 @@ class CameraScreen extends React.Component {
     if (this.state.tags[0] === '') {
       tagText = <Text />;
     } else {
-      tagText = this.state.tags.map(text => <View key={text} style={styles.tag}><Text style={{ color: '#fff' }}># {text}</Text></View>);
+      tagText = this.state.tags.map(text => (
+        <View key={text} style={styles.tag}>
+          <Icon type="font-awesome" name="tag" size={18} color="#333" />
+          <Text style={styles.tagName}>
+            {text}
+          </Text>
+        </View>
+      ));
     }
     return (
       <ScrollView style={styles.container} >
@@ -191,8 +203,7 @@ class CameraScreen extends React.Component {
           </TouchableHighlight>
         </View>
         <View style={styles.tagArea} >
-          <Icon name="label-outline" size={25} />
-          <Text style={styles.titles}>Tags</Text>
+          <Text style={styles.titles}>Tags </Text>
           <TextInput
             style={styles.tagInput}
             placeholder="テキスト+スペースで作成できます"
@@ -278,8 +289,11 @@ const styles = StyleSheet.create({
     marginTop: 12,
     marginLeft: 3,
   },
+
   titles: {
+    fontSize: 16,
     marginTop: 7,
+    marginLeft: 12,
   },
   tagInput: {
     borderWidth: 0.3,
@@ -294,13 +308,18 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     margin: 8,
+    paddingRight: 8,
+    paddingLeft: 8,
   },
   tag: {
-    marginRight: 8,
-    backgroundColor: '#7457A3',
-    padding: 5,
-    borderRadius: 50,
+    flexDirection: 'row',
+    marginRight: 12,
     marginBottom: 8,
+  },
+  tagName: {
+    fontSize: 18,
+    marginLeft: 4,
+    paddingBottom: 3,
   },
   statusAreaTitle: {
     fontSize: 16,

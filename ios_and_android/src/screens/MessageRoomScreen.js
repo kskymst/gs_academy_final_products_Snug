@@ -16,6 +16,7 @@ class MessageRoomScreen extends React.Component {
       myName: '',
       otherName: '',
       myImage: '',
+      otherImage: '',
       text: '',
       messages: [],
     };
@@ -66,6 +67,7 @@ class MessageRoomScreen extends React.Component {
             ));
             this.setState({
               messages,
+              otherImage: userData.userImage,
             });
           });
       });
@@ -74,14 +76,20 @@ class MessageRoomScreen extends React.Component {
   handleSubmit() {
     const time = new Date().toLocaleString();
     const timestamp = time.replace(/\//g, '_');
+    const preUserList = [this.state.myId, this.state.otherId];
+    const userList = preUserList.sort()
+    const messageRoom = `${userList[0]}_${userList[1]}`
     const db = firebase.firestore();
     db.collection('messages').doc(timestamp)
       .set({
         postUserId: this.state.myId,
         postUserName: this.state.myName,
+        postUserImage: this.state.myImage,
         otherName: this.state.otherName,
         otherId: this.state.otherId,
+        otherImage: this.state.otherImage,
         text: this.state.text,
+        messageRoom: messageRoom,
         createdOn: timestamp,
       })
       .then(() => {
