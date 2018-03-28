@@ -1,44 +1,28 @@
 import React from 'react';
-import { StyleSheet, View, Image, TouchableHighlight } from 'react-native';
-
-const Dimensions = require('Dimensions');
+import { StyleSheet, View, Image, TouchableHighlight, Dimensions } from 'react-native';
 
 const { width } = Dimensions.get('window');
 
-// eslint-disable-next-line
-class UserLibraryImages extends React.Component {
-
-  shouldComponentUpdate(nextProps, nextState) {
-    if (this.props.dataList !== nextProps.dataList || nextState !== null) {
-      return true;
-    }
-    return false;
-  }
-
-
-  render() {
-    const dataList = this.props.dataList.map((data) => {
-      return (
-        <TouchableHighlight
-          style={styles.imageOuter}
-          key={data.key}
-          onPress={() => this.props.navigation.navigate('ItemDetail', { data })}
-          underlayColor="transparent"
-        >
-          <Image
-            source={{ uri: data.imageUrl }}
-            style={styles.userImage}
-          />
-        </TouchableHighlight>
-      );
-    });
-    return (
-      <View style={styles.container}>
-        { dataList }
-      </View>
-    );
-  }
-}
+const UserLibraryImages = (props) => {
+  const dataList = props.dataList.map(data => (
+    <TouchableHighlight
+      style={styles.imageOuter}
+      key={data.id}
+      onPress={() => props.navigation.navigate('ItemDetail', { data })}
+      underlayColor="transparent"
+    >
+      <Image
+        source={{ uri: data.imageUrl }}
+        style={styles.userImage}
+      />
+    </TouchableHighlight>
+  ));
+  return (
+    <View style={styles.container}>
+      { dataList }
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {

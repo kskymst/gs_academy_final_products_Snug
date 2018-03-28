@@ -63,32 +63,26 @@ class MypageScreen extends React.Component {
       });
     const allDataList = [];
     const dataList = [];
-    const d1 = [];
-    const d2 = [];
     db.collection(`users/${userId}/status`).orderBy('createdOnNumber', 'desc')
       .get()
-      .then((querySnapshot) => { // ①自分がwantなどをしている画像データを抽出
+      .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
-          d1.push({ ...doc.data(), key: doc.id });
-        });
-        for (let i = 0; d1.length > i; i += 1) {
-          db.collection('collections').doc(d1[i].key)　// ②コレクションを回して詳細取得
+          db.collection('collections').doc(doc.id)
             .get()
-            .then((doc) => {
-              d2.push({ ...doc.data() }); // 各詳細画像データ
-              allDataList[i] = Object.assign(d1[i], d2[i]);
-              if (allDataList[i].want) {
-                dataList.push(allDataList[i]);
+            .then((_querySnapshot) => {
+              const combineData = Object.assign(doc.data(), _querySnapshot.data());
+              allDataList.push(combineData);
+              // console.log('combine', combineData)
+              if (combineData.want) {
+                dataList.push(combineData);
               }
-              if (allDataList.length === d1.length) {
-                this.setState({
-                  allDataList,
-                  dataList,
-                  sideMenuOpen: false,
-                });
-              }
-            });
-        }
+              // console.log('datalist', dataList)
+              this.setState({
+                allDataList,
+                dataList,
+              });
+            })
+        });
       });
   }
 
@@ -97,7 +91,7 @@ class MypageScreen extends React.Component {
   }
 
   openSideMenu() {
-    this.setState({ sideMenuOpen: !this.state.sideMenuOpen })
+      this.setState({ sideMenuOpen: true });
   }
 
   filterDataList(selectStatus, selectedIndex) {
@@ -128,15 +122,16 @@ class MypageScreen extends React.Component {
     <Sidebar
       userData={this.state.userData}
       userId={this.state.userId}
-      navigation={this.props}
+      navigation={this.props.navigation}
       handleSubmit={this.handleSubmit}
+      autoClosing={false}
     />
     );
     return (
       <SideMenu
         menu={menu}
         isOpen={this.state.sideMenuOpen}
-        edgeHitWidth={100}
+        edgeHitWidth={0}
       >
         <ScrollView
           showsVerticalScrollIndicator={false}
@@ -146,7 +141,7 @@ class MypageScreen extends React.Component {
             <ImageBackground
               source={{ uri: this.state.userData.backgroundImage }}
               style={styles.main}
-              blurRadius={1} 
+              blurRadius={1}
             >
               <Image
                 source={{ uri: this.state.userData.userImage }}

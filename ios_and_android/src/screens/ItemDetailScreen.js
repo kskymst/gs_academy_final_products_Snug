@@ -31,11 +31,11 @@ class ItemDetailScreen extends React.Component {
 
   render() {
     const { data } = this.props.navigation.state.params;
-    console.log(data);
     const timestamp = data.createdOn.slice(0, -3);
     const tags = Object.keys(data.tags).map(tagName => (
       <TouchableHighlight
         key={tagName}
+        underlayColor="transparent"
         onPress={() => this.props.navigation.navigate('TagSearch', { tagName })}
       >
         <View style={styles.tagOuter}>

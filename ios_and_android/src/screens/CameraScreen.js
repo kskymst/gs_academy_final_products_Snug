@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, Text, TextInput, Image, ScrollView, TouchableHighlight, Platform } from 'react-native';
 import { Button, CheckBox, Icon } from 'react-native-elements';
+import { NavigationActions } from 'react-navigation';
 import ImagePicker from 'react-native-image-picker';
 import RNFetchBlob from 'react-native-fetch-blob';
 import firebase from 'firebase';
@@ -161,7 +162,14 @@ class CameraScreen extends React.Component {
                   clothete: false,
                   loading: false,
                 });
-                this.props.navigation.navigate('Timeline');
+                const resetAction = NavigationActions.reset({
+                  index: 0,
+                  actions: [
+                    NavigationActions.navigate({ routeName: 'MainContents' }),
+                  ],
+                  key: null,
+                });
+                this.props.navigation.dispatch(resetAction);
               });
           })
           .catch((err) => {

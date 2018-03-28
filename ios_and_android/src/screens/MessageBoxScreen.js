@@ -22,7 +22,6 @@ class MessageBoxScreen extends React.Component {
       .where('postUserId', '==', currentUser.uid)
       .onSnapshot((querySnapshot) => {
         messageList = [];
-        console.log('database run!!');
         querySnapshot.forEach((doc) => {
           messageList.push(doc.data());
         });

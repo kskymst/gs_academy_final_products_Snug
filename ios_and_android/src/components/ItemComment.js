@@ -1,9 +1,7 @@
 import React from 'react';
-import { StyleSheet, View, Text, TextInput, TouchableHighlight } from 'react-native';
+import { StyleSheet, View, Text, TextInput, TouchableHighlight, Dimensions } from 'react-native';
 import { Icon } from 'react-native-elements';
 import firebase from 'firebase';
-
-const Dimensions = require('Dimensions');
 
 const { width } = Dimensions.get('window');
 

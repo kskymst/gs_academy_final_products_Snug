@@ -1,9 +1,7 @@
 import React from 'react';
-import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, Dimensions } from 'react-native';
 import { Icon } from 'react-native-elements';
 import firebase from 'firebase';
-
-const Dimensions = require('Dimensions');
 
 const { width } = Dimensions.get('window');
 
@@ -24,7 +22,7 @@ class LikeButtons extends React.Component {
   componentWillMount() {
     const { currentUser } = firebase.auth();
     const db = firebase.firestore();
-    db.collection(`users/${currentUser.uid}/status`).doc(this.props.data.key)
+    db.collection(`users/${currentUser.uid}/status`).doc(this.props.data.id)
       .onSnapshot((querySnapshot) => {
         if (querySnapshot.data() !== undefined) {
           this.setState({
@@ -63,13 +61,13 @@ class LikeButtons extends React.Component {
     }
     const { currentUser } = firebase.auth();
     const db = firebase.firestore();
-    db.collection(`users/${currentUser.uid}/status`).doc(this.props.data.key).set(inputLikeType)
+    db.collection(`users/${currentUser.uid}/status`).doc(this.props.data.id).set(inputLikeType)
       .then(() => {
         const statusName = `${status}Quantity`;
         let quantity = this.state[statusName];
         // eslint-disable-next-line
         this.state[status] ? quantity += 1 : quantity -= 1 ;
-        db.collection('collections').doc(this.props.data.key).update({
+        db.collection('collections').doc(this.props.data.id).update({
           [statusName]: quantity,
         });
         this.setState({

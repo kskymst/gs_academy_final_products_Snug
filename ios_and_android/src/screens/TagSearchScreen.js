@@ -34,7 +34,6 @@ class TagSearchScreen extends React.Component {
   render() {
     const { tagName } = this.props.navigation.state.params;
     const { dataList } = this.state;
-    console.log(dataList[0]);
     const imageData = this.state.dataList.length !== 0 ?
       dataList[0].imageUrl :
       'https://firebasestorage.googleapis.com/v0/b/snug-45a34.appspot.com/o/asset%2FloadingScreen.png?alt=media&token=f3f91a93-c6b9-4bd4-910d-e18ed5469770'
@@ -70,7 +69,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Avenir Next',
     fontWeight: 'bold',
     textAlign: 'center',
-    textShadowColor: '#ddd',
+    textShadowColor: '#777',
     textShadowOffset: { width: 2, height: 2 },
     textShadowRadius: 10,
   },
@@ -78,7 +77,8 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 16,
     marginTop: 16,
-    textShadowColor: '#aaa',
+    letterSpacing: 3,
+    textShadowColor: '#777',
     textShadowOffset: { width: 1, height: 1 },
     textShadowRadius: 3,
   },

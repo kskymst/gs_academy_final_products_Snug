@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { List, ListItem } from 'react-native-elements';
+import { NavigationActions } from 'react-navigation';
 import firebase from 'firebase';
 
 
@@ -14,12 +15,12 @@ const Sidebar = (props) => {
         onPress: 'MessageRoom',
       },
       {
-        title: 'Follow',
+        title: 'フォロー',
         icon: 'redo',
         onPress: 'FollowScreen',
       },
       {
-        title: 'Follower',
+        title: 'フォロワー',
         icon: 'supervisor-account',
         onPress: 'FollowerScreen',
       },
@@ -27,19 +28,24 @@ const Sidebar = (props) => {
   ) : (
     [
       {
-        title: 'Follow',
+        title: 'フォロー',
         icon: 'redo',
         onPress: 'FollowScreen',
       },
       {
-        title: 'Follower',
+        title: 'フォロワー',
         icon: 'supervisor-account',
         onPress: 'FollowerScreen',
       },
       {
-        title: 'Account Setting',
+        title: 'ユーザー情報変更',
         icon: 'account-circle',
         onPress: 'SettingAccount',
+      },
+      {
+        title: 'ログアウト',
+        icon: 'exit-to-app',
+        onPress: 'logout',
       },
     ]
   );
@@ -56,8 +62,21 @@ const Sidebar = (props) => {
             leftIcon={{ name: item.icon }}
             containerStyle={styles.listItem}
             onPress={() => {
-              props.navigation.navigation.navigate(item.onPress, { userData: props.userData, userId: props.userId });
-              props.handleSubmit();
+              if (item.onPress === 'logout') {
+                firebase.auth().signOut().then(() => {
+                  const resetAction = NavigationActions.reset({
+                    index: 0,
+                    actions: [
+                      NavigationActions.navigate({ routeName: 'LoginSignup' }),
+                    ],
+                    key: null,
+                  });
+                  props.navigation.dispatch(resetAction);
+                });
+              } else {
+                props.navigation.navigate(item.onPress, { userData: props.userData, userId: props.userId });
+                props.handleSubmit();
+              }
             }
             }
           />
