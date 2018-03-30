@@ -1,6 +1,7 @@
 dependencies: \
   /Users/ksk/Desktop/gs_final_products/ios_and_android/ios/Snug/AppDelegate.m \
   /Users/ksk/Desktop/gs_final_products/ios_and_android/ios/Snug/AppDelegate.h \
+  /Users/ksk/Desktop/gs_final_products/ios_and_android/ios/Pods/Firebase/Core/Sources/module.modulemap \
   /Users/ksk/Desktop/gs_final_products/ios_and_android/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTBundleURLProvider.h \
   /Users/ksk/Desktop/gs_final_products/ios_and_android/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTRootView.h \
   /Users/ksk/Desktop/gs_final_products/ios_and_android/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTBridge.h \
@@ -9,4 +10,19 @@ dependencies: \
   /Users/ksk/Desktop/gs_final_products/ios_and_android/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTDefines.h \
   /Users/ksk/Desktop/gs_final_products/ios_and_android/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTBridgeModule.h \
   /Users/ksk/Desktop/gs_final_products/ios_and_android/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTFrameUpdate.h \
-  /Users/ksk/Desktop/gs_final_products/ios_and_android/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTInvalidating.h
+  /Users/ksk/Desktop/gs_final_products/ios_and_android/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTInvalidating.h \
+  /Users/ksk/Desktop/gs_final_products/ios_and_android/ios/../node_modules/react-native-fcm/ios/RNFIRMessaging.h \
+  /Users/ksk/Desktop/gs_final_products/ios_and_android/ios/Pods/FirebaseCore/Frameworks/FirebaseCore.framework/Modules/module.modulemap \
+  /Users/ksk/Desktop/gs_final_products/ios_and_android/ios/Pods/FirebaseCore/Frameworks/FirebaseCore.framework/Headers/FIROptions.h \
+  /Users/ksk/Desktop/gs_final_products/ios_and_android/ios/Pods/FirebaseCore/Frameworks/FirebaseCore.framework/Headers/FIRLoggerLevel.h \
+  /Users/ksk/Desktop/gs_final_products/ios_and_android/ios/Pods/FirebaseCore/Frameworks/FirebaseCore.framework/Headers/FIRConfiguration.h \
+  /Users/ksk/Desktop/gs_final_products/ios_and_android/ios/Pods/FirebaseCore/Frameworks/FirebaseCore.framework/Headers/FIRApp.h \
+  /Users/ksk/Desktop/gs_final_products/ios_and_android/ios/Pods/FirebaseCore/Frameworks/FirebaseCore.framework/Headers/FIRAnalyticsConfiguration.h \
+  /Users/ksk/Desktop/gs_final_products/ios_and_android/ios/Pods/FirebaseCore/Frameworks/FirebaseCore.framework/Headers/FirebaseCore.h \
+  /Users/ksk/Desktop/gs_final_products/ios_and_android/ios/Pods/FirebaseMessaging/Frameworks/FirebaseMessaging.framework/Modules/module.modulemap \
+  /Users/ksk/Desktop/gs_final_products/ios_and_android/ios/Pods/FirebaseMessaging/Frameworks/FirebaseMessaging.framework/Headers/FIRMessaging.h \
+  /Users/ksk/Desktop/gs_final_products/ios_and_android/ios/Pods/FirebaseMessaging/Frameworks/FirebaseMessaging.framework/Headers/FirebaseMessaging.h \
+  /Users/ksk/Desktop/gs_final_products/ios_and_android/ios/Pods/FirebaseInstanceID/Frameworks/FirebaseInstanceID.framework/Modules/module.modulemap \
+  /Users/ksk/Desktop/gs_final_products/ios_and_android/ios/Pods/FirebaseInstanceID/Frameworks/FirebaseInstanceID.framework/Headers/FIRInstanceID.h \
+  /Users/ksk/Desktop/gs_final_products/ios_and_android/ios/Pods/FirebaseInstanceID/Frameworks/FirebaseInstanceID.framework/Headers/FirebaseInstanceID.h \
+  /Users/ksk/Desktop/gs_final_products/ios_and_android/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTEventEmitter.h

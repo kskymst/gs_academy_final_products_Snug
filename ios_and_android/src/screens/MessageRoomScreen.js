@@ -5,7 +5,7 @@ import firebase from 'firebase';
 
 import Messages from '../components/Messages';
 
-const { width } = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
 class MessageRoomScreen extends React.Component {
   constructor(props) {
@@ -103,9 +103,14 @@ class MessageRoomScreen extends React.Component {
       <View style={styles.docs}>
         <KeyboardAvoidingView
           behavior="position"
-          keyboardVerticalOffset={60}
+          keyboardVerticalOffset={40}
         >
-          <ScrollView style={styles.container} >
+          <ScrollView
+            style={styles.container}
+            ref={ref => this.scrollView = ref}
+            onContentSizeChange={(contentWidth, contentHeight)=>{        
+                this.scrollView.scrollToEnd({animated: true});
+            }}>
             <Messages
               messages={this.state.messages}
               userData={userData}
@@ -141,7 +146,7 @@ class MessageRoomScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     marginTop: 12,
-    height: Dimensions.get('window').height - 180,
+    height: height - 180,
   },
   inputForm: {
     padding: 8,

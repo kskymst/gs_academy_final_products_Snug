@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, browserHistory, Redirect } from 'react-router-dom';
+import { Dimmer, Loader } from 'semantic-ui-react';
 import firebase from 'firebase';
 
 import MailOutline from 'react-icons/lib/md/mail-outline';
@@ -13,28 +14,44 @@ class LoginForm extends React.Component {
     this.state = {
       email: '',
       password: '',
+      loading: false,
+      validate: false,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleSubmit() {
+    this.setState({ loading: true });
     const { history } = this.props;
-    // firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
-    //   .then(() => {
+    firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
+      .then(() => {
         history.push('/main');
-      // })
-      // .catch((error) => {
-      //   this.setState({
-      //     email: '',
-      //     password: '',
-      //   });
-      // });
+      })
+      .catch(() => {
+        this.setState({
+          email: '',
+          password: '',
+          loading: false,
+          validate: true,
+        });
+      });
   }
 
   render() {
+    const validate = this.state.validate ? (
+      <p className="validate-message">
+        ※ ログイン情報が正しくありません
+      </p>
+    ) : (
+      ''
+    );
     return (
       <div className="login-form-area">
+        <Dimmer active={this.state.loading}>
+          <Loader size="massive" />
+        </Dimmer>
         <h2>Shop Login</h2>
+        { validate }
         <p>
           <MailOutline className="login-icons" />
           <input

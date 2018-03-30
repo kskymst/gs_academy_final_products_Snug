@@ -1,74 +1,96 @@
 import React from 'react';
 import { StyleSheet, View, Text, Image, TouchableHighlight, Dimensions} from 'react-native';
+import { Card, Button, Icon, Divider } from 'react-native-elements'
+
 
 const { width } = Dimensions.get('window');
 
 // eslint-disable-next-line
 export default class ShopList extends React.Component {
   render() {
+    const shopList = this.props.shopDataList.length !== 0 ? (
+      this.props.shopDataList.map (data => (
+        <Card
+          image={{ uri: data.backgroundImage }}
+          key={data.id}
+          containerStyle={styles.cardContainer}
+          imageStyle={{ height: 200 }}
+        >
+          <View style={styles.cardTitle}>
+            <Image
+              source={{ uri: data.userImage }}
+              style={styles.userImage}
+            />
+            <Text style={styles.cardTitleText}>{data.userName}</Text>
+          </View>
+          <Divider style={styles.divider} />
+          <Text style={styles.cardText}>
+            { data.usertext }
+          </Text>
+          <Button
+            text="投稿を見る"
+            icon={
+              <Icon
+                name="arrow-forward"
+                color="#7457A3"
+                size={20}
+              />
+            }
+            iconRight
+            buttonStyle={styles.button}
+            textStyle={styles.buttonTitle}
+            onPress={() => this.props.navigation.navigate('MypageScreen', { user: data.id })}
+            // onPress={() => console.log(data)}
+          />
+        </Card>
+      ))
+    ) : (
+      <Text />
+    );
+
     return (
       <View>
-        <TouchableHighlight style={styles.shopListCard} onPress={() => this.props.navigation.navigate('MypageScreen')} underlayColor="transparent">
-          <View>
-            <Image
-              source={require('../../assets/wism.jpg')}
-              style={styles.shopImage}
-            />
-            <Text style={styles.shopName}>Wism原宿店</Text>
-            <Text style={styles.visitDate}>Last Visit 3 month ago</Text>
-          </View>
-        </TouchableHighlight>
-        <TouchableHighlight style={styles.shopListCard}>
-          <View>
-            <Image
-              source={require('../../assets/wism.jpg')}
-              style={styles.shopImage}
-            />
-            <Text style={styles.shopName}>Wism原宿店</Text>
-            <Text style={styles.visitDate}>Last Visit 3 month ago</Text>
-          </View>
-        </TouchableHighlight>
-        <TouchableHighlight style={styles.shopListCard}>
-          <View>
-            <Image
-              source={require('../../assets/wism.jpg')}
-              style={styles.shopImage}
-            />
-            <Text style={styles.shopName}>Wism原宿店</Text>
-            <Text style={styles.visitDate}>Last Visit 3 month ago</Text>
-          </View>
-        </TouchableHighlight>
+        { shopList }
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  shopListCard: {
+  userImage: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+  },
+  cardContainer: {
+    margin: 6,
+  },
+  cardTitle: {
+    flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 12,
   },
-  shopImage: {
-    width: width / 1.02,
-    height: 150,
-    borderRadius: 24,
-    position: 'relative',
-  },
-  shopName: {
-    color: '#fff',
-    fontSize: 24,
+  cardTitleText: {
+    fontSize: 16,
     fontWeight: 'bold',
-    position: 'absolute',
-    top: 10,
-    left: 20,
+    marginLeft: 16,
   },
-  visitDate: {
-    color: '#fff',
-    fontSize: 14,
-    position: 'absolute',
-    bottom: 10,
-    right: 20,
-    textShadowColor: '#111',
-    textShadowRadius: 3,
+  divider: {
+    backgroundColor: '#ddd',
+    marginTop: 5,
+    marginBottom: 10,
   },
+  cardText: {
+    marginTop: 5,
+    marginBottom: 20,
+  },
+  button: {
+    width: width / 1.2,
+    backgroundColor: 'transparent',
+    borderWidth: 1,
+    borderColor: '#7457A3',
+  },
+  buttonTitle: {
+    color: '#7457A3',
+    fontSize: 16,
+  }
 });

@@ -1,0 +1,34 @@
+dependencies: \
+  /Users/ksk/Desktop/gs_final_products/ios_and_android/node_modules/react-native-fcm/ios/RNFIRMessaging.m \
+  /Users/ksk/Desktop/gs_final_products/ios_and_android/node_modules/react-native-fcm/ios/RNFIRMessaging.h \
+  ../../../ios/Pods/Firebase/Core/Sources/module.modulemap \
+  ../../../ios/Pods/Headers/Public/FirebaseCore/FirebaseCore/FirebaseCore.h \
+  ../../../ios/Pods/Headers/Public/FirebaseCore/FirebaseCore/FIRAnalyticsConfiguration.h \
+  ../../../ios/Pods/Headers/Public/FirebaseCore/FirebaseCore/FIRApp.h \
+  ../../../ios/Pods/Headers/Public/FirebaseCore/FirebaseCore/FIRConfiguration.h \
+  ../../../ios/Pods/Headers/Public/FirebaseCore/FirebaseCore/FIRLoggerLevel.h \
+  ../../../ios/Pods/Headers/Public/FirebaseCore/FirebaseCore/FIROptions.h \
+  ../../../ios/Pods/Headers/Public/FirebaseMessaging/FirebaseMessaging/FirebaseMessaging.h \
+  ../../../ios/Pods/Headers/Public/FirebaseMessaging/FirebaseMessaging/FIRMessaging.h \
+  ../../../ios/Pods/Headers/Public/FirebaseInstanceID/FirebaseInstanceID/FirebaseInstanceID.h \
+  ../../../ios/Pods/Headers/Public/FirebaseInstanceID/FirebaseInstanceID/FIRInstanceID.h \
+  /Users/ksk/Desktop/gs_final_products/ios_and_android/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTEventEmitter.h \
+  /Users/ksk/Desktop/gs_final_products/ios_and_android/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTBridge.h \
+  /Users/ksk/Desktop/gs_final_products/ios_and_android/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTBridgeDelegate.h \
+  /Users/ksk/Desktop/gs_final_products/ios_and_android/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTJavaScriptLoader.h \
+  /Users/ksk/Desktop/gs_final_products/ios_and_android/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTDefines.h \
+  /Users/ksk/Desktop/gs_final_products/ios_and_android/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTBridgeModule.h \
+  /Users/ksk/Desktop/gs_final_products/ios_and_android/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTFrameUpdate.h \
+  /Users/ksk/Desktop/gs_final_products/ios_and_android/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTInvalidating.h \
+  /Users/ksk/Desktop/gs_final_products/ios_and_android/node_modules/react-native-fcm/ios/../../../ios/Pods/Firebase/Core/Sources/module.modulemap \
+  /Users/ksk/Desktop/gs_final_products/ios_and_android/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTConvert.h \
+  /Users/ksk/Desktop/gs_final_products/ios_and_android/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTAnimationType.h \
+  /Users/ksk/Desktop/gs_final_products/ios_and_android/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTBorderStyle.h \
+  /Users/ksk/Desktop/gs_final_products/ios_and_android/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTLog.h \
+  /Users/ksk/Desktop/gs_final_products/ios_and_android/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTAssert.h \
+  /Users/ksk/Desktop/gs_final_products/ios_and_android/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTUtils.h \
+  /Users/ksk/Desktop/gs_final_products/ios_and_android/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTPointerEvents.h \
+  /Users/ksk/Desktop/gs_final_products/ios_and_android/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTTextDecorationLineType.h \
+  /Users/ksk/Desktop/gs_final_products/ios_and_android/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/Yoga.h \
+  /Users/ksk/Desktop/gs_final_products/ios_and_android/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/YGEnums.h \
+  /Users/ksk/Desktop/gs_final_products/ios_and_android/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/YGMacros.h

@@ -55,6 +55,13 @@
     background-color: $main-color;
   }
 
+  .back-button {
+    width: 280px;
+    font-size: 18px;
+    background-color: #fff;
+    margin-top: 10px;
+  }
+
   .login-button{
     margin-top: 16px;
     span {
@@ -67,4 +74,49 @@
       font-size: 14px;
     }
   }
-}
+    .userImage-area, .background-area{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 16px;
+
+      p {
+        font-size: 18px;
+        font-weight: bold;
+      }
+
+      label {
+        width: 200px;
+        text-align: center;
+      }
+
+      .setting-title {
+        width: 150px;
+      }
+    }
+
+    .signup-userImage {
+      height: 120px;
+      width: 120px;
+      border-radius: 100px;
+      background-size: cover;
+      background-position: center;
+      cursor: pointer;
+      margin: 0 auto;
+    }
+
+    .signup-backgroundImage {
+      height: 120px;
+      width: 200px;
+      background-size: cover;
+      background-position: center;
+      cursor: pointer;
+      margin: 0 auto;
+    }
+
+    .validate-message {
+      color: red;
+      font-size: 18px;
+    }
+  }
+

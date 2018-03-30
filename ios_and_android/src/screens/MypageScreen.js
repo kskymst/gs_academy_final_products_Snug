@@ -54,7 +54,7 @@ class MypageScreen extends React.Component {
     const userId = this.props.navigation.state.params ? this.props.navigation.state.params.user : currentUser.uid;
     const db = firebase.firestore();
     db.collection('users').doc(userId)
-      .get()  // 上部ユーザを詳細データ
+      .get()
       .then((querySnapshot)=> {
         this.setState({
           userData: querySnapshot.data(),
@@ -72,11 +72,9 @@ class MypageScreen extends React.Component {
             .then((_querySnapshot) => {
               const combineData = Object.assign(doc.data(), _querySnapshot.data());
               allDataList.push(combineData);
-              // console.log('combine', combineData)
               if (combineData.want) {
                 dataList.push(combineData);
               }
-              // console.log('datalist', dataList)
               this.setState({
                 allDataList,
                 dataList,
@@ -91,7 +89,7 @@ class MypageScreen extends React.Component {
   }
 
   openSideMenu() {
-      this.setState({ sideMenuOpen: true });
+      this.setState({ sideMenuOpen: !this.state.sideMenuOpen });
   }
 
   filterDataList(selectStatus, selectedIndex) {
@@ -124,7 +122,6 @@ class MypageScreen extends React.Component {
       userId={this.state.userId}
       navigation={this.props.navigation}
       handleSubmit={this.handleSubmit}
-      autoClosing={false}
     />
     );
     return (
@@ -132,6 +129,8 @@ class MypageScreen extends React.Component {
         menu={menu}
         isOpen={this.state.sideMenuOpen}
         edgeHitWidth={0}
+        menuPosition="right"
+        onChange={(e) => this.setState({ sideMenuOpen: e })}
       >
         <ScrollView
           showsVerticalScrollIndicator={false}
@@ -141,8 +140,8 @@ class MypageScreen extends React.Component {
             <ImageBackground
               source={{ uri: this.state.userData.backgroundImage }}
               style={styles.main}
-              blurRadius={1}
             >
+            <View style={styles.overlay} />
               <Image
                 source={{ uri: this.state.userData.userImage }}
                 style={styles.userImage}
@@ -223,6 +222,14 @@ const styles = StyleSheet.create({
     color: '#333',
     fontWeight: 'bold',
   },
+  overlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'rgba(0,0,0,0.15)'
+  }
 });
 
 export default MypageScreen;

@@ -6,7 +6,7 @@
 	<dict>
 		<key>Base.lproj/LaunchScreen.nib</key>
 		<data>
-		DFYCFDsg4WjSV+kXR0CuFigiq8I=
+		7QJ1wDuibm5NnD1HL8K9aI5nrfw=
 		</data>
 		<key>FontAwesome.ttf</key>
 		<data>
@@ -53,9 +53,13 @@
 		<data>
 		Etc/8BPenX54rv1uBx24u4bnqTg=
 		</data>
+		<key>GoogleService-Info.plist</key>
+		<data>
+		jcsHthVg+XQu++qyzjf2tFdAKo0=
+		</data>
 		<key>Info.plist</key>
 		<data>
-		34IoOub/T35D7gQLL6r6yvYwWbE=
+		LMFM3RhKr18OFpMufpzsKdHW2Cs=
 		</data>
 		<key>MaterialCommunityIcons.ttf</key>
 		<data>
@@ -75,7 +79,7 @@
 		</data>
 		<key>PlugIns/SnugTests.xctest.dSYM/Contents/Resources/DWARF/SnugTests</key>
 		<data>
-		MLJNKhkD6JDoG23SEVHRFPnO8fA=
+		kA+kgq+S79CFtn9XA9JbfDk3PBc=
 		</data>
 		<key>PlugIns/SnugTests.xctest/Info.plist</key>
 		<data>
@@ -83,7 +87,7 @@
 		</data>
 		<key>PlugIns/SnugTests.xctest/SnugTests</key>
 		<data>
-		ad8DgCnvvVXkRnAHG0i2VOU1EE4=
+		FX47kWgMD3DWjc/aoSi/7H85Hxs=
 		</data>
 		<key>PlugIns/SnugTests.xctest/_CodeSignature/CodeResources</key>
 		<data>
@@ -96,11 +100,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			DFYCFDsg4WjSV+kXR0CuFigiq8I=
+			7QJ1wDuibm5NnD1HL8K9aI5nrfw=
 			</data>
 			<key>hash2</key>
 			<data>
-			j00DqELc/Sn2AuqK00JP9XKPagfidoBBFozikOvIHlE=
+			1R2QKpeqo/mayao9LvTOVbRXOEQk5p1mhYA/Oqys28U=
 			</data>
 		</dict>
 		<key>FontAwesome.ttf</key>
@@ -215,6 +219,17 @@
 			Jh5i9giCFfo5GhN25CjMKdDJ6Kdlz/p4L95RITR+WeA=
 			</data>
 		</dict>
+		<key>GoogleService-Info.plist</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			jcsHthVg+XQu++qyzjf2tFdAKo0=
+			</data>
+			<key>hash2</key>
+			<data>
+			Ig8+1SR2E8qz9lISu94lFuXE4uPAUCVPhkRtNRXjtu4=
+			</data>
+		</dict>
 		<key>MaterialCommunityIcons.ttf</key>
 		<dict>
 			<key>hash</key>
@@ -252,11 +267,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			MLJNKhkD6JDoG23SEVHRFPnO8fA=
+			kA+kgq+S79CFtn9XA9JbfDk3PBc=
 			</data>
 			<key>hash2</key>
 			<data>
-			zYiMKzVEhiFWwIW37wvQek9aTwevwo0KJB/HLZoleQI=
+			9faP7zPUGy2BgRstnxbZyirav8g0aLsplrp7Y0UxAa8=
 			</data>
 		</dict>
 		<key>PlugIns/SnugTests.xctest/Info.plist</key>
@@ -274,11 +289,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			ad8DgCnvvVXkRnAHG0i2VOU1EE4=
+			FX47kWgMD3DWjc/aoSi/7H85Hxs=
 			</data>
 			<key>hash2</key>
 			<data>
-			yBcmisxr5KUXEjy8wRiLnkzsgmX/ghWKUBYWqm46/Oo=
+			QJr5UTXC8mdguFtlslw7yYlWAJtkuhxPziTsuIa9blY=
 			</data>
 		</dict>
 		<key>PlugIns/SnugTests.xctest/_CodeSignature/CodeResources</key>

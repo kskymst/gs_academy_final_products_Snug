@@ -1,5 +1,7 @@
 import React from 'react';
-import { StyleSheet, View, Text, Image, ScrollView } from 'react-native';
+import { StyleSheet, View, Text, Image, Dimensions } from 'react-native';
+
+const { width } = Dimensions.get('window');
 
 // eslint-disable-next-line
 class Messages extends React.Component {
@@ -26,14 +28,18 @@ class Messages extends React.Component {
                 style={styles.myImage}
               />
               <View
-                style={styles.myText}
+                style={styles.myTextOuter}
               >
-                <Text style={styles.myInnerText}>{message.text}</Text>
-                <Text
-                  style={styles.myPostDate}
+                <View
+                  style={styles.myText}
                 >
-                  {postedDate}
-                </Text>
+                  <Text style={styles.myInnerText}>{message.text}</Text>
+                  <Text
+                    style={styles.myPostDate}
+                  >
+                    {postedDate}
+                  </Text>
+                </View>
               </View>
             </View>
           );
@@ -48,14 +54,18 @@ class Messages extends React.Component {
                 style={styles.otherImage}
               />
               <View
-                style={styles.otherText}
+                style={styles.otherTextOuter}
               >
-                <Text>{message.text}</Text>
-                <Text
-                  style={styles.otherPostDate}
+                <View
+                  style={styles.otherText}
                 >
-                  {postedDate}
-                </Text>
+                  <Text>{message.text}</Text>
+                  <Text
+                    style={styles.otherPostDate}
+                  >
+                    {postedDate}
+                  </Text>
+                </View>
               </View>
             </View>
           );
@@ -72,6 +82,8 @@ class Messages extends React.Component {
 const styles = StyleSheet.create({
   inner: {
     flexGrow: 1,
+    paddingLeft: 8,
+    paddingRight: 8,
   },
   otherMessage: {
     flexDirection: 'row',
@@ -85,15 +97,18 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     marginRight: 8,
   },
+  otherTextOuter: {
+    marginRight: 'auto',
+  },
   otherText: {
-    width: '80%',
+    // maxWidth: '80%',
     backgroundColor: '#fff',
     padding: 8,
-    borderRadius: 12,
+    borderRadius: 8,
   },
   otherPostDate: {
     color: '#aaa',
-    fontSize: 12,
+    fontSize: 10,
     marginLeft: 'auto',
   },
   myImage: {
@@ -108,18 +123,20 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 8,
   },
+  myTextOuter: {
+    marginRight: 'auto',
+  },
   myText: {
-    width: '80%',
     backgroundColor: '#7457A3',
     padding: 8,
-    borderRadius: 12,
+    borderRadius: 8,
   },
   myInnerText: {
     color: '#fff',
   },
   myPostDate: {
     color: '#ccc',
-    fontSize: 12,
+    fontSize: 10,
     marginRight: 'auto',
   },
 });

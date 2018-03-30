@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, TextInput, Image, ScrollView, TouchableHighlight, KeyboardAvoidingView, Platform } from 'react-native';
+import { StyleSheet, View, Text, TextInput, Image, ScrollView, TouchableHighlight, KeyboardAvoidingView, Platform, Dimensions } from 'react-native';
 import PropTypes from 'prop-types';
 import { Button } from 'react-native-elements';
 import ImagePicker from 'react-native-image-picker';
@@ -7,8 +7,6 @@ import RNFetchBlob from 'react-native-fetch-blob';
 import firebase from 'firebase';
 import UUID from 'uuid-v4';
 
-
-const Dimensions = require('Dimensions');
 
 const { width } = Dimensions.get('window');
 

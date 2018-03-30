@@ -2,8 +2,9 @@ import React from 'react';
 import { StackNavigator, TabNavigator } from 'react-navigation';
 import { Icon } from 'react-native-elements';
 import firebase from 'firebase';
-import { DeviceEventEmitter } from 'react-native';
+import { DeviceEventEmitter, WebView } from 'react-native';
 import Beacons from 'react-native-beacons-manager';
+import FCM from 'react-native-fcm';
 
 import LoginSignupScreen from './src/screens/LoginSignupScreen';
 import MypageScreen from './src/screens/MypageScreen';
@@ -29,7 +30,6 @@ const config = {
   messagingSenderId: ENV.FIREBASE_SENDER_ID,
 };
 firebase.initializeApp(config);
-
 
 const TimeLineStack = StackNavigator({
   TimeLine: { screen: TimeLineScreen },
@@ -187,62 +187,69 @@ const MainStack = StackNavigator({
   headerMode: 'none',
 });
 
+const region = {
+  identifier: 'microbit-snug',
+  uuid: 'E20A39F4-73F5-4BC4-A12F-17D1AD07A961',
+};
+
+
 // eslint-disable-next-line
 export default class App extends React.Component {
-
-  componentWillMount() {
-    const region = {
-      identifier: 'microbit-snug',
-      uuid: 'E20A39F4-73F5-4BC4-0000-17D1AD07A961',
-    };
-    // Request for authorization while the app is open
-    Beacons.requestWhenInUseAuthorization();
-    Beacons.shouldDropEmptyRanges(true);
-
-    Beacons.startMonitoringForRegion(region)
-      .then(() => console.log('Beacons monitoring started succesfully'));
-
-    Beacons.startRangingBeaconsInRegion(region)
-      .then(() => console.log('Beacons ranging started succesfully'));
-
-    Beacons.startUpdatingLocation();
+  componentDidMount() {
+    // FCM.requestPermissions(); // for iOS
+    // FCM.getFCMToken().then((token) => {
+    //   console.log('get_token =>', token);
+    //   // FCM.send(token, {
+    //   //   my_custom_data_1: 'my_custom_field_value_1',
+    //   // });
+    //   // store fcm token in your server
+    // });
+    // this.notificationUnsubscribe = FCM.on('notification', (notif) => {
+    //   // there are two parts of notif. notif.notification contains the notification payload, notif.data contains data payload
+    // });
+    // this.refreshUnsubscribe = FCM.on('refreshToken', (token) => {
+    //   console.log('reflesh_token', token);
+    //   // fcm token may not be available on first load, catch it here
+    // });
+ 
+    // FCM.subscribeToTopic('/topics/foo-bar');
+    // FCM.unsubscribeFromTopic('/topics/foo-bar');
   }
-
   componentWillUnmount() {
-    const region = {
-      identifier: 'microbit-snug',
-      uuid: 'E20A39F4-73F5-4BC4-A12F-17D1AD07A961',
-    };
-
-    Beacons.stopMonitoringForRegion(region)
-      .then(() => console.log('Beacons monitoring stopped succesfully'));
-
-    Beacons.stopRangingBeaconsInRegion(region)
-      .then(() => console.log('Beacons ranging stopped succesfully'))
-
-    Beacons.stopUpdatingLocation();
+    // prevent leaking
+    // this.refreshUnsubscribe();
+    // this.notificationUnsubscribe();
   }
-
 
   render() {
     // Listen for beacon changes
-    const subscription = DeviceEventEmitter.addListener(
-      'beaconsDidRange',
-      (data) => {
-        // data.region - The current region
-        // data.region.identifier
-        // data.region.uuid
-        console.log(data.beacons);
-        // data.beacons - Array of all beacons inside a region
-        //  in the following structure:
-        //    .uuid
-        //    .major - The major version of a beacon
-        //    .minor - The minor version of a beacon
-        //    .rssi - Signal strength: RSSI value (between -100 and 0)
-        //    .proximity - Proximity value, can either be "unknown", "far", "near" or "immediate"
-        //    .accuracy - The accuracy of a beacon
-      },
-    );
+    // const subscription = DeviceEventEmitter.addListener(
+    //   'beaconsDidRange',
+    //   (data) => {
+    //     // data.region - The current region
+    //     // data.region.identifier
+    //     // data.region.uuid
+    //     console.log(data.beacons);
+    //     // data.beacons - Array of all beacons inside a region
+    //     //  in the following structure:
+    //     //    .uuid
+    //     //    .major - The major version of a beacon
+    //     //    .minor - The minor version of a beacon
+    //     //    .rssi - Signal strength: RSSI value (between -100 and 0)
+    //     //    .proximity - Proximity value, can either be "unknown", "far", "near" or "immediate"
+    //     //    .accuracy - The accuracy of a beacon
+    //   },
+    // );
+
+    //   DeviceEventEmitter.addListener(
+    //     'regionDidExit',
+    //     ({ identifier, uuid, minor, major }) => {
+    //       // good place for background tasks
+    //       console.log('monitoring - regionDidExit data: ', { identifier, uuid, minor, major });
+     
+    //       const time = moment().format(TIME_FORMAT);
+    //      this.setState({ regionExitDatasource: this.state.rangingDataSource.cloneWithRows([{ identifier, uuid, minor, major, time }]) });
+    //     })
     return (
       <MainStack />
     );

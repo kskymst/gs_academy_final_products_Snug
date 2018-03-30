@@ -206,7 +206,10 @@ class CameraScreen extends React.Component {
             value={this.state.text}
             onChangeText={text => this.setState({ text })}
           />
-          <TouchableHighlight onPress={this.pickImageHandler}>
+          <TouchableHighlight
+            onPress={this.pickImageHandler}
+            underlayColor="transparent"
+          >
             <Image source={this.state.pickedImaged} style={styles.images} />
           </TouchableHighlight>
         </View>

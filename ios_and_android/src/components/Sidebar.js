@@ -13,30 +13,34 @@ const Sidebar = (props) => {
         title: 'Messageを送る',
         icon: 'message',
         onPress: 'MessageRoom',
+      }, {
+        title: 'ログアウト',
+        icon: 'exit-to-app',
+        onPress: 'logout',
       },
-      {
-        title: 'フォロー',
-        icon: 'redo',
-        onPress: 'FollowScreen',
-      },
-      {
-        title: 'フォロワー',
-        icon: 'supervisor-account',
-        onPress: 'FollowerScreen',
-      },
+      // {
+      //   title: 'フォロー',
+      //   icon: 'redo',
+      //   onPress: 'FollowScreen',
+      // },
+      // {
+      //   title: 'フォロワー',
+      //   icon: 'supervisor-account',
+      //   onPress: 'FollowerScreen',
+      // },
     ]
   ) : (
     [
-      {
-        title: 'フォロー',
-        icon: 'redo',
-        onPress: 'FollowScreen',
-      },
-      {
-        title: 'フォロワー',
-        icon: 'supervisor-account',
-        onPress: 'FollowerScreen',
-      },
+      // {
+      //   title: 'フォロー',
+      //   icon: 'redo',
+      //   onPress: 'FollowScreen',
+      // },
+      // {
+      //   title: 'フォロワー',
+      //   icon: 'supervisor-account',
+      //   onPress: 'FollowerScreen',
+      // },
       {
         title: 'ユーザー情報変更',
         icon: 'account-circle',
