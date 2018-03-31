@@ -1,16 +1,24 @@
+// ChatAppFirebaseFunctions/functions/index.js
+
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
-
 admin.initializeApp(functions.config().firebase);
 
-// Create and Deploy Your First Cloud Functions
-// https://firebase.google.com/docs/functions/write-firebase-functions
-
-// exports.helloWorld = functions.https.onRequest((request, response) => {
-//  response.send("Hello from Firebase!");
-// });
-
-exports.myFunctionName = functions.firestore
-  .document('collections').onWrite((event) => {
-    
-  });
+exports.sendNotification = functions.firestore
+  .document('users/{token}/visitor/{timestamp}')
+  .onCreate(event => {
+    const newValue = event.data.data();
+    const payload = {
+      notification: {
+        title: 'Welcome!',
+        body: 'Geek Shop 表参道に入店しました!',
+      },
+  };
+  console.log('test')
+  const token = newValue.userToken;
+  return admin.messaging().sendToDevice(token, payload)
+  .then((response) => {
+    console.log("Successfully sent message:", response);
+    return;
+  })
+});

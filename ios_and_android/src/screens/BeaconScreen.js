@@ -326,3 +326,52 @@
 // //    'BeaconScreen',
 // //    () => BeaconScreen
 // //  );
+
+import React from 'react';
+import { View, TouchableHighlight, Text } from 'react-native';
+import firebase from 'firebase';
+
+class BeaconScreen extends React.Component {
+  constructor() {
+    super();
+    this.handleTest = this.handleTest.bind(this);
+  }
+
+  // eslint-disable-next-line
+  handleTest() {
+    firebase.auth().onAuthStateChanged((user) => {
+      const db = firebase.firestore();
+      const token = 'cbwCZ9-sP10:APA91bGtSoDgbH8TsurVctcZ2o_D5lear4qpCYWR3Remd-mz-3SPu8xTfq5y8bIJHwNVZTQgQJdD0-hc1M5x-RJnp8D1ZAlFvdFmea58r41bckLz9LNedRZ5QRvVOpOaeFSrvI7JX-DC';
+      const time = new Date();
+      const timeStamp = time.toISOString();
+      console.log(timeStamp);
+      db.collection('users/Oh6W5q4oeSdZ3Lt325jAn6Qk7fx1/visitor/').doc(timeStamp).set({
+        userToken: token,
+        userId: user.uid,
+        visitedOn: timeStamp,
+      })
+        .then((querySnapshot) => {
+          console.log('ok')
+        })
+        .catch((err) => {
+          console.log('error')
+        })
+    });
+  }
+
+  render() {
+    return (
+      <View>
+        <TouchableHighlight
+          style={{ width: 100, height: 30 }}
+          onPress={this.handleTest}
+        >
+          <Text>test button</Text>
+        </TouchableHighlight>
+      </View>
+    );
+  }
+}
+
+export default BeaconScreen;
+

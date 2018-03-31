@@ -2,7 +2,7 @@ import React from 'react';
 import { StackNavigator, TabNavigator } from 'react-navigation';
 import { Icon } from 'react-native-elements';
 import firebase from 'firebase';
-import { DeviceEventEmitter, WebView } from 'react-native';
+import { DeviceEventEmitter } from 'react-native';
 import Beacons from 'react-native-beacons-manager';
 import FCM from 'react-native-fcm';
 
@@ -195,25 +195,22 @@ const region = {
 
 // eslint-disable-next-line
 export default class App extends React.Component {
+  constructor() {
+    super();
+    this.beaconMonitoring = this.beaconMonitoring.bind(this);
+    this.triggerPushNotification = this.triggerPushNotification.bind(this);
+  }
   componentDidMount() {
-    // FCM.requestPermissions(); // for iOS
-    // FCM.getFCMToken().then((token) => {
-    //   console.log('get_token =>', token);
-    //   // FCM.send(token, {
-    //   //   my_custom_data_1: 'my_custom_field_value_1',
-    //   // });
-    //   // store fcm token in your server
-    // });
-    // this.notificationUnsubscribe = FCM.on('notification', (notif) => {
-    //   // there are two parts of notif. notif.notification contains the notification payload, notif.data contains data payload
-    // });
-    // this.refreshUnsubscribe = FCM.on('refreshToken', (token) => {
-    //   console.log('reflesh_token', token);
-    //   // fcm token may not be available on first load, catch it here
-    // });
- 
-    // FCM.subscribeToTopic('/topics/foo-bar');
-    // FCM.unsubscribeFromTopic('/topics/foo-bar');
+    FCM.requestPermissions(); // for iOS
+    FCM.getFCMToken()
+      .then((token) => {
+        console.log('get_token =>', token);
+        firebase.auth().onAuthStateChanged((user) => {
+          if (user) {
+            this.beaconMonitoring(token);
+          }
+        });
+      });
   }
   componentWillUnmount() {
     // prevent leaking
@@ -221,35 +218,50 @@ export default class App extends React.Component {
     // this.notificationUnsubscribe();
   }
 
-  render() {
+  beaconMonitoring(token) {
+    Beacons.requestAlwaysAuthorization();
+    Beacons.shouldDropEmptyRanges(true);
+    Beacons.startMonitoringForRegion(region);
+    Beacons.startRangingBeaconsInRegion(region);
+    Beacons.startUpdatingLocation();
     // Listen for beacon changes
-    // const subscription = DeviceEventEmitter.addListener(
-    //   'beaconsDidRange',
-    //   (data) => {
-    //     // data.region - The current region
-    //     // data.region.identifier
-    //     // data.region.uuid
-    //     console.log(data.beacons);
-    //     // data.beacons - Array of all beacons inside a region
-    //     //  in the following structure:
-    //     //    .uuid
-    //     //    .major - The major version of a beacon
-    //     //    .minor - The minor version of a beacon
-    //     //    .rssi - Signal strength: RSSI value (between -100 and 0)
-    //     //    .proximity - Proximity value, can either be "unknown", "far", "near" or "immediate"
-    //     //    .accuracy - The accuracy of a beacon
-    //   },
-    // );
+    const subscription = DeviceEventEmitter.addListener(
+      'beaconsDidRange',
+      (data) => {
+        if (data.beacons.length !== 0 && data.beacons[0].uuid === region.uuid) {
+          Beacons.stopRangingBeaconsInRegion(region);
+          Beacons.stopMonitoringForRegion(region);
+          Beacons.stopUpdatingLocation();
+          console.log('stop');
+          this.triggerPushNotification(region.uuid, token);
+        }
+        console.log('run');
+        console.log('data_uuid', data.beacons[0].uuid);
+        console.log('region.uuid', region.uuid);
+      },
+    );
+  }
 
-    //   DeviceEventEmitter.addListener(
-    //     'regionDidExit',
-    //     ({ identifier, uuid, minor, major }) => {
-    //       // good place for background tasks
-    //       console.log('monitoring - regionDidExit data: ', { identifier, uuid, minor, major });
-     
-    //       const time = moment().format(TIME_FORMAT);
-    //      this.setState({ regionExitDatasource: this.state.rangingDataSource.cloneWithRows([{ identifier, uuid, minor, major, time }]) });
-    //     })
+  // eslint-disable-next-line
+  triggerPushNotification(uuid, token) {
+    const { currentUser } = firebase.auth();
+    const db = firebase.firestore();
+    const time = new Date();
+    const timeStamp = time.toISOString();
+    db.collection('users/Oh6W5q4oeSdZ3Lt325jAn6Qk7fx1/visitor/').doc(timeStamp).set({
+      userToken: token,
+      userId: currentUser.uid,
+      visitedOn: timeStamp,
+    })
+      .then((querySnapshot) => {
+        console.log('プッシュ通知送信！');
+      })
+      .catch((err) => {
+        console.log('ギリギリいけませんでした。。。');
+      })
+  }
+
+  render() {
     return (
       <MainStack />
     );

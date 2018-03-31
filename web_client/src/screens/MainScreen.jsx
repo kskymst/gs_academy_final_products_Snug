@@ -2,7 +2,7 @@ import React from 'react';
 import firebase from 'firebase';
 
 import ViewScreen from './ViewScreen';
-import ComingCustomerScreen from './ComingCustomerScreen';
+import VisitorScreen from './VisitorScreen';
 import MessageScreen from './MessageScreen';
 import SlideSidebar from '../components/SlideSidebar';
 
@@ -19,7 +19,7 @@ class MainScreen extends React.Component {
   render() {
     return (
       <div className="main-screen-wrapper" >
-        <ComingCustomerScreen />
+        <VisitorScreen />
         <ViewScreen />
         <MessageScreen />
       </div>

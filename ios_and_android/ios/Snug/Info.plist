@@ -42,7 +42,11 @@
 	<key>NSCameraUsageDescription</key>
 	<string></string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>WRITE YOUR MESSAGE (OR LEAVE BLANK) TO EXPLAIN USER WHY YOU NEED LOCATION SERVICE</string>
+	<string>有効でない場合、店舗の入店が感知されなくなります。</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>有効でない場合、店舗の入店が感知されなくなります。</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>有効でない場合、店舗の入店が感知されなくなります。</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string></string>
 	<key>UIAppFonts</key>

@@ -23,9 +23,22 @@ class LoginForm extends React.Component {
   handleSubmit() {
     this.setState({ loading: true });
     const { history } = this.props;
+    const db = firebase.firestore();
     firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
-      .then(() => {
-        history.push('/main');
+      .then((user) => {
+        db.collection('users').doc(user.uid)
+          .get()
+          .then((querySnapshot) => {
+            const userData = querySnapshot.data();
+            if (userData.type === 'customer') {
+              this.setState({
+                validate: true,
+                loading: false,
+              });
+            } else {
+              history.push('/main');
+            }
+          });
       })
       .catch(() => {
         this.setState({
