@@ -6,6 +6,7 @@ import { DeviceEventEmitter } from 'react-native';
 import Beacons from 'react-native-beacons-manager';
 import FCM from 'react-native-fcm';
 
+
 import LoginSignupScreen from './src/screens/LoginSignupScreen';
 import MypageScreen from './src/screens/MypageScreen';
 import ItemDetailScreen from './src/screens/ItemDetailScreen';
@@ -248,17 +249,24 @@ export default class App extends React.Component {
     const db = firebase.firestore();
     const time = new Date();
     const timeStamp = time.toISOString();
-    db.collection('users/Oh6W5q4oeSdZ3Lt325jAn6Qk7fx1/visitor/').doc(timeStamp).set({
-      userToken: token,
-      userId: currentUser.uid,
-      visitedOn: timeStamp,
-    })
+    db.collection('users').doc(currentUser.uid)
+      .get()
       .then((querySnapshot) => {
-        console.log('プッシュ通知送信！');
-      })
-      .catch((err) => {
-        console.log('ギリギリいけませんでした。。。');
-      })
+        const { userName, userImage } = querySnapshot.data();
+        db.collection('users/Oh6W5q4oeSdZ3Lt325jAn6Qk7fx1/visitor/').doc(timeStamp).set({
+          userToken: token,
+          userId: currentUser.uid,
+          userName,
+          userImage,
+          visitedOn: time,
+        })
+          .then((_querySnapshot) => {
+            console.log('プッシュ通知送信！');
+          })
+          .catch((err) => {
+            console.log('ギリギリいけませんでした。。。');
+          });
+      });
   }
 
   render() {

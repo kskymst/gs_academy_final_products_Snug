@@ -99,36 +99,54 @@ class SettingAccountScreen extends React.Component {
     );
   }
 
+  updateMyinfo() {
+    const { currentUser } = firebase.auth();
+    const db = firebase.firestore();
+    db.collection('users').doc(currentUser.uid)
+      .update({
+        userName: this.state.userName,
+        userText: this.state.userText,
+        userImage: this.state.userImage,
+        backgroundImage: this.state.backgroundImage,
+      })
+      .then(() => {
+        this.setState({
+          loading: false,
+        });
+        this.props.navigation.goBack();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+
   handleSubmit() {
     this.setState({ loading: true });
     const uuid = UUID();
-    const uploadedUserImage = uploadImage(this.state.userImage, uuid);
-    uploadedUserImage
+    const uuid2 = UUID();
+    if ( this.state.userImage.startsWith('https://') && this.state.backgroundImage.startsWith('https://')) {
+      this.updateMyinfo()
+    } else if (this.state.userImage.startsWith('https://')) {
+      uploadImage(this.state.backgroundImage, uuid)
+      .then((backgroundImage) => {
+        this.setState({ backgroundImage });
+        this.updateMyinfo()
+      });
+    } else if (this.state.backgroundImage.startsWith('https://')) {
+      uploadImage(this.state.userImage, uuid)
       .then((userImage) => {
         this.setState({ userImage });
-        const uuid2 = UUID();
-        const uploadedBackgroundImage = uploadImage(this.state.backgroundImage, uuid2);
-        uploadedBackgroundImage
+        this.updateMyinfo()
+      });
+    } else {
+      uploadImage(this.state.userImage, uuid)
+      .then((userImage) => {
+        this.setState({ userImage });
+        uploadImage(this.state.backgroundImage, uuid2)
           .then((backgroundImage) => {
             this.setState({ backgroundImage });
-            const { currentUser } = firebase.auth();
-            const db = firebase.firestore();
-            db.collection('users').doc(currentUser.uid)
-              .update({
-                userName: this.state.userName,
-                userText: this.state.userText,
-                userImage: this.state.userImage,
-                backgroundImage: this.state.backgroundImage,
-              })
-              .then(() => {
-                this.setState({
-                  loading: false,
-                });
-                this.props.navigation.goBack();
-              })
-              .catch((err) => {
-                console.log(err);
-              });
+            this.updateMyinfo()
           })
           .catch((err) => {
             console.log(err);
@@ -137,6 +155,7 @@ class SettingAccountScreen extends React.Component {
       .catch((err) => {
         console.log(err);
       });
+    }
   }
 
   render() {

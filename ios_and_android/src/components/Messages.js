@@ -6,9 +6,6 @@ const { width } = Dimensions.get('window');
 // eslint-disable-next-line
 class Messages extends React.Component {
   render() {
-    // console.log('myMessage', this.props.myMessages);
-    // console.log('otherMessages', this.props.otherMessages);
-    // console.log('result', postData)
     const messageList = this.props.messages === '' ?
       (
         <View>

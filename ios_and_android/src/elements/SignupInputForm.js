@@ -54,12 +54,13 @@ class SignupInputForm extends React.Component {
           backgroundImage,
           datetime: new Date(),
         })
-          .then((docref) => {
+          .then(() => {
             const resetAction = NavigationActions.reset({
               index: 0,
               actions: [
                 NavigationActions.navigate({ routeName: 'MainContents' }),
               ],
+              key: null,
             });
             this.props.navigation.dispatch(resetAction);
           })

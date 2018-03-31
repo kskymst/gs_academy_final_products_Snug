@@ -1,0 +1,32 @@
+.visitor-card {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  margin-bottom: 8px;
+  background-color: white;
+  border-radius: 6px;
+  .visitor-image {
+    width: 25%;
+    img {
+      width: 60px;
+      height: 60px;
+      border-radius: 100px;
+    }
+  }
+
+  .visitor-info {
+    width: 75%;
+    p:nth-child(1) {
+      font-size: 18px;
+      font-weight: bold;
+    }
+    span {
+      font-size: 14px;
+      font-weight: normal;
+    }
+    p:nth-child(2) {
+      text-align: right;
+      }
+  }
+}
+

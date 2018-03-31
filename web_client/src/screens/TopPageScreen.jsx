@@ -15,14 +15,14 @@ class TopPageScreen extends React.Component {
   }
 
   componentWillMount() {
-    // this.setState({ loading: true });
-    // firebase.auth().onAuthStateChanged((user) => {
-    //   if (user) {
-    //     const { history } = this.props;
-    //     history.push('/main');
-    //   }
-    //   this.setState({ loading: false });
-    // });
+    this.setState({ loading: true });
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        const { history } = this.props;
+        history.push('/main');
+      }
+      this.setState({ loading: false });
+    });
   }
   render() {
     return (

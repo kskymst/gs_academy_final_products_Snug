@@ -19,6 +19,7 @@ class MessageRoomScreen extends React.Component {
       otherImage: '',
       text: '',
       messages: [],
+      contentHeight: 0,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -108,7 +109,7 @@ class MessageRoomScreen extends React.Component {
           <ScrollView
             style={styles.container}
             ref={ref => this.scrollView = ref}
-            onContentSizeChange={(contentWidth, contentHeight)=>{        
+            onContentSizeChange={(contentWidth, contentHeight)=>{
                 this.scrollView.scrollToEnd({animated: true});
             }}>
             <Messages

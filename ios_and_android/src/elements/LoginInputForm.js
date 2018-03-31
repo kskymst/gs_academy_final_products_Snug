@@ -30,6 +30,7 @@ class LoginInputForm extends React.Component {
           actions: [
             NavigationActions.navigate({ routeName: 'MainContents' }),
           ],
+          key: null,
         });
         this.props.navigation.dispatch(resetAction);
       })

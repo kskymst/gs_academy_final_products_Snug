@@ -1,0 +1,12 @@
+.coming-customer-wrapper {
+  border: 1px solid black;
+  height: 92vh;
+  width: 25vw;
+  overflow: scroll;
+  background-color:whitesmoke;
+  padding: 8px;
+}
+
+.coming-customer-wrapper::-webkit-scrollbar {
+  display:none;
+}
