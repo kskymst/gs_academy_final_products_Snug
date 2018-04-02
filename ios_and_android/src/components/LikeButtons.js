@@ -111,7 +111,7 @@ class LikeButtons extends React.Component {
             <Text
               style={[styles.buttonText, this.state.favorite ? styles.checkedText : styles.uncheckedText]} 
             >
-              Favorite  {this.state.favoriteQuantity}
+              Style  {this.state.favoriteQuantity}
             </Text>
           </View>
         </TouchableOpacity>
@@ -130,7 +130,7 @@ class LikeButtons extends React.Component {
             <Text
               style={[styles.buttonText, this.state.clothete ? styles.checkedText : styles.uncheckedText]}
             >
-              Clothete {this.state.clotheteQuantity}
+              Closet {this.state.clotheteQuantity}
             </Text>
           </View>
         </TouchableOpacity>

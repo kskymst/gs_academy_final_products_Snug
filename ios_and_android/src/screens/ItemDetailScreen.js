@@ -135,7 +135,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginTop: 12,
     marginLeft: 14,
-    marginBottom: 16,
   },
   tagIndent: {
     flexDirection: 'row',

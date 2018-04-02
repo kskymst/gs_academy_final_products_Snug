@@ -242,7 +242,7 @@ class CameraScreen extends React.Component {
             containerStyle={styles.checkBox}
           />
           <CheckBox
-            title="Favorite"
+            title="Style"
             checkedIcon="star-o"
             uncheckedIcon="star"
             checked={this.state.favorite}
@@ -251,7 +251,7 @@ class CameraScreen extends React.Component {
             containerStyle={styles.checkBox}
           />
           <CheckBox
-            title="My Clothete"
+            title="My Closet"
             checkedIcon="plus-square-o"
             uncheckedIcon="plus-square"
             checked={this.state.clothete}

@@ -42,6 +42,7 @@
 		605BBB972049D003003BDF17 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 605BBB962049D003003BDF17 /* MaterialIcons.ttf */; };
 		605BBB992049D08F003BDF17 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 605BBB982049D08F003BDF17 /* FontAwesome.ttf */; };
 		605BBB9B2049D0B8003BDF17 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 605BBB9A2049D0B8003BDF17 /* MaterialCommunityIcons.ttf */; };
+		60948DD720725A42009C0BC1 /* Default-Portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = 60948DD620725A42009C0BC1 /* Default-Portrait.png */; };
 		609F7F90206BA8DB00DDF4DC /* libRNFIRMessaging.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 609F7F8C206BA87300DDF4DC /* libRNFIRMessaging.a */; };
 		60FAB5DA206B90C70092B48A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 60FAB5B0206B90C60092B48A /* GoogleService-Info.plist */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
@@ -397,6 +398,7 @@
 		605BBB982049D08F003BDF17 /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		605BBB9A2049D0B8003BDF17 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
 		6086BF4D70A6493BBC3F8855 /* libRNFetchBlob.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNFetchBlob.a; sourceTree = "<group>"; };
+		60948DD620725A42009C0BC1 /* Default-Portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait.png"; sourceTree = "<group>"; };
 		609F7F61206BA87300DDF4DC /* RNFIRMessaging.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNFIRMessaging.xcodeproj; path = "../node_modules/react-native-fcm/ios/RNFIRMessaging.xcodeproj"; sourceTree = "<group>"; };
 		60FAB5B0206B90C60092B48A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		60FAB5DB206B910C0092B48A /* Snug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Snug.entitlements; path = Snug/Snug.entitlements; sourceTree = "<group>"; };
@@ -566,6 +568,7 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				60FAB5B0206B90C60092B48A /* GoogleService-Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
+				60948DD620725A42009C0BC1 /* Default-Portrait.png */,
 				13B07FB71A68108700A75B9A /* main.m */,
 			);
 			name = Snug;
@@ -1292,6 +1295,7 @@
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				605BBB972049D003003BDF17 /* MaterialIcons.ttf in Resources */,
 				605BBB992049D08F003BDF17 /* FontAwesome.ttf in Resources */,
+				60948DD720725A42009C0BC1 /* Default-Portrait.png in Resources */,
 				60FAB5DA206B90C70092B48A /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

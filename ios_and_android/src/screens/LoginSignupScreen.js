@@ -46,9 +46,9 @@ export default class LoginSignupScreen extends React.Component {
       </View>
     ) : (
       <ImageBackground
-        source={require('../../assets/unused01.jpg')}
+        source={require('../../assets/login_background.png')}
         style={styles.container}
-        blurRadius={20}
+        blurRadius={1}
       >
         <StatusBar
           backgroundColor="blue"

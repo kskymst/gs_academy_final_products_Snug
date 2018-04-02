@@ -113,7 +113,7 @@ class MypageScreen extends React.Component {
   }
 
   render() {
-    const buttons = ['Want', 'Favorite', 'Clothete'];
+    const buttons = ['Want', 'Style', 'Closet'];
     const { selectedIndex } = this.state;
     const menu = (
     <Sidebar
