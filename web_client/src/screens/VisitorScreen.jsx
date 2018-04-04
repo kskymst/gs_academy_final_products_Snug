@@ -19,7 +19,8 @@ class VisitorScreen extends React.Component {
       if (user) {
         db.collection(`users/${user.uid}/visitor`)
           .orderBy('visitedOn', 'desc').limit(10)
-          .onSnapshot((querySnapshot) => {
+          .get()
+          .then((querySnapshot) => {
             const allVisitorList = [];
             querySnapshot.forEach((doc) => {
               const data = doc.data();

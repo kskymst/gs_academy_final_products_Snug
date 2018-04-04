@@ -21,8 +21,8 @@ class UserPage extends React.Component {
     this.filterDataList = this.filterDataList.bind(this);
   }
 
-  componentWillMount() {
-    const userId = this.props.match.params.id;
+  componentWillReceiveProps(nextProps) {
+    const userId = nextProps.match.params.id;
     const db = firebase.firestore();
     db.collection('users').doc(userId)
       .get()
@@ -32,7 +32,7 @@ class UserPage extends React.Component {
         });
       })
       .catch(() => {
-        const { history } = this.props;
+        const { history } = nextProps;
         history.push('/404');
       });
     const allDataList = [];
@@ -131,7 +131,13 @@ class UserPage extends React.Component {
         <Route
           exact
           path="/main/:id/:query"
-          render={props => <ItemDetail {...props} />}
+          render={props => (
+            <ItemDetail
+              myId={this.props.myId}
+              myData={this.props.myData}
+              {...props}
+            />
+          )}
         />
       </div>
     );

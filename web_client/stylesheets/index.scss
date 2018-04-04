@@ -6,7 +6,7 @@ $sub-color: #44B26B;
     box-shadow: 0 2px 10px rgba(0,0,0,.2)
 }
 
-@mixin bg-gradient($angle: 45deg, $color: #8A4FB2, $amount: -10%) {
+@mixin bg-gradient($angle: 45deg, $color: #8A4FB2, $amount: -40%) {
     background: linear-gradient($angle, $color, adjust-hue($color, $amount)) fixed;
   }
 

@@ -15,6 +15,7 @@ class ItemDetail extends React.Component {
     };
   }
 
+
   componentWillMount() {
     const db = firebase.firestore();
     db.collection('collections').doc(this.props.match.params.query)
@@ -25,7 +26,7 @@ class ItemDetail extends React.Component {
   }
 
   render() {
-    console.log(this.props.match.params.id)
+    const { myId, myData } = this.props;
     const { itemData } = this.state;
     let timestamp = '';
     if (itemData.createdOn) {
@@ -43,7 +44,7 @@ class ItemDetail extends React.Component {
                 <div className="post-user" >
                   <Link to={`/main/${itemData.user}`}>
                     <div>
-                      <img src={itemData.userImage} alt="bland-logo" />
+                      <img src={itemData.userImage} alt="user_image" />
                     </div>
                   </Link>
                   <Link to={`/main/${itemData.user}`}>
@@ -58,7 +59,12 @@ class ItemDetail extends React.Component {
             </div>
             <div className="item-detail-component-wrapper" >
               <LikeButton data={itemData} />
-              <Comment data={itemData} myComment />
+              <Comment
+                data={itemData}
+                myId={myId}
+                myData={myData}
+                myComment
+              />
             </div>
           </div>
         <Link to={`/main/${this.props.match.params.id}`}>

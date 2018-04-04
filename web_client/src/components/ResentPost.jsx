@@ -7,14 +7,16 @@ import Comment from '../subComponents/Comment';
 
 // eslint-disable-next-line
 class ResentPost extends React.Component {
+
   render() {
+    const { myId, myData } = this.props;
     const posts = this.props.dataList.map((data) => {
       const timestamp = data.createdOn.slice(0, -3);
       return (
         <div className="resent-post-outer" key={data.id}>
           <div className="post-top-content" >
             <Link to={`/main/${data.user}`} className="post-user" >
-              <img src={data.userImage} alt="bland-logo" />
+              <img src={data.userImage} alt="user_image" />
               <h4>{data.userName}</h4>
             </Link>
             <p>{ timestamp }</p>
@@ -27,8 +29,12 @@ class ResentPost extends React.Component {
             />
           </div>
           <div className="resent-post-component-outer" >
-            <LikeButton data={data} />
-            <Comment data={data} />
+            <LikeButton data={data} resentPost />
+            <Comment
+              data={data}
+              myId={myId}
+              myData={myData}
+            />
           </div>
         </div>
       );

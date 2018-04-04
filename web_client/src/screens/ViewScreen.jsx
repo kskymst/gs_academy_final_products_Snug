@@ -1,6 +1,6 @@
 import React from 'react';
 import firebase from 'firebase';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 
 import ResentPost from '../components/ResentPost';
 import UserPage from '../components/UserPage';
@@ -28,19 +28,31 @@ class ViewScreen extends React.Component {
   }
 
   render() {
+    const { myId, myData } = this.props;
     return (
       <div className="view-screen-wrapper" >
-        <Switch>
-          <Route
-            exact
-            path="/main"
-            render={() => <ResentPost dataList={this.state.dataList} />}
-          />
-          <Route
-            path="/main/:id"
-            component={UserPage}
-          />
-        </Switch>
+        <Route
+          exact
+          path="/main"
+          render={() => (
+            <ResentPost
+              dataList={this.state.dataList}
+              myId={myId}
+              myData={myData}
+            />
+          )}
+        />
+        <Route
+          path="/main/:id"
+          render={props => (
+            <UserPage
+              dataList={this.state.dataList}
+              myId={myId}
+              myData={myData}
+              {...props}
+            />
+          )}
+        />
       </div>
     );
   }

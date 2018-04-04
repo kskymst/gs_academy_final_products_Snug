@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import firebase from 'firebase';
 import SendIcon from 'react-icons/lib/md/send';
 
@@ -11,11 +12,12 @@ class Comment extends React.Component {
       text: '',
       commentList: '',
     };
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  componentWillMount() {
+  componentWillReceiveProps(nextProps) {
     const db = firebase.firestore();
-    db.collection(`collections/${this.props.data.id}/comments`)
+    db.collection(`collections/${nextProps.data.id}/comments`)
       .onSnapshot((querySnapshot) => {
         const commentList = [];
         querySnapshot.forEach((doc) => {
@@ -23,6 +25,25 @@ class Comment extends React.Component {
         });
         this.setState({ commentList });
       });
+  }
+
+
+  handleSubmit(itemId) {
+    if (this.state.text !== '') {
+      const db = firebase.firestore();
+      const time = new Date().toLocaleString();
+      const timestamp = time.replace(/\//g, '_');
+      db.collection(`collections/${itemId}/comments`).doc(timestamp)
+        .set({
+          userId: this.props.myId,
+          userName: this.props.myData.userName,
+          comment: this.state.text,
+          createdOn: timestamp,
+        })
+        .then(() => {
+          this.setState({ text: '' });
+        });
+    }
   }
 
   render() {
@@ -39,7 +60,9 @@ class Comment extends React.Component {
     if (comments) {
       comments = this.state.commentList.map(comment => (
         <div className="posted-comment" key={comment.createdOn}>
-          <p>{comment.userName}</p>
+          <Link to={`/main/${comment.userId}`}>
+            <p>{comment.userName}</p>
+          </Link>
           <p>{comment.comment}</p>
         </div>
       ));
@@ -55,8 +78,13 @@ class Comment extends React.Component {
         { myComment }
         { comments }
         <div className="comment-input" >
-          <textarea rows="3" placeholder="コメントする" />
-          <button>
+          <textarea
+            rows="3"
+            placeholder="コメントする"
+            value={this.state.text}
+            onChange={e => this.setState({ text: e.target.value })}
+          />
+          <button onClick={() => this.handleSubmit(this.props.data.id)}>
             <SendIcon className="sendIcon" size="24" />
           </button>
         </div>

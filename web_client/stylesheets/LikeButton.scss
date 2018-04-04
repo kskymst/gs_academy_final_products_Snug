@@ -17,13 +17,19 @@
       color: #444;
     }
     .want-icon-true {
-      color: #FF0070;
+      color: rgb(255, 0, 34);
+      cursor: pointer;
     }
     .favorite-icon-true {
-      color: yellow;
+      color: rgb(204, 238, 14);
+      cursor: pointer;
     }
     .clothete-icon-true {
       color: #44B26B;
+      cursor: pointer;
+    }
+    .icon {
+      cursor: pointer;
     }
   }
 }
@@ -47,13 +53,19 @@
       color: #444;
     }
     .want-icon-true {
-      color: #FF0070;
+      color: rgb(255, 0, 34);
+      cursor: pointer;
     }
     .favorite-icon-true {
-      color: yellow;
+      color: rgb(204, 238, 14);
+      cursor: pointer;
     }
     .clothete-icon-true {
       color: #44B26B;
+      cursor: pointer;
+    }
+    .icon {
+      cursor: pointer;
     }
   }
 
