@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, browserHistory } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, browserHistory } from 'react-router-dom';
 import firebase from 'firebase';
 
 import Header from './screens/Header';
@@ -21,7 +21,6 @@ const config = {
 };
 firebase.initializeApp(config);
 
-
 // eslint-disable-next-line
 class App extends React.Component {
   render() {
@@ -29,10 +28,12 @@ class App extends React.Component {
       <Router history={browserHistory} >
         <React.Fragment>
           <Header />
-          <Route exact path="/" component={TopPageScreen} />
-          <Route exact path="/signup" component={TopPageScreen} />
-          <Route path="/main" component={MainScreen} />
-          <Route component={NoMatch} />
+          <Switch>
+            <Route exact path="/" component={TopPageScreen} />
+            <Route exact path="/signup" component={TopPageScreen} />
+            <Route path="/main" component={MainScreen} />
+            <Route component={NoMatch} />
+          </Switch>
         </React.Fragment>
       </Router>
     );

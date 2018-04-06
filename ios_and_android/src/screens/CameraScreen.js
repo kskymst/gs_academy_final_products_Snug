@@ -123,7 +123,7 @@ class CameraScreen extends React.Component {
         const db = firebase.firestore();
         const d = new Date();
         const second = (`0${d.getSeconds()}`).slice(-2);
-        const timestamp = `${d.getFullYear()}年${d.getMonth() + 1}月${d.getDay()}日 ${d.getHours()}時${d.getMinutes()}分${second}秒`
+        const timestamp = `${d.getFullYear()}年${d.getMonth() + 1}月${d.getDay() + 1}日 ${d.getHours()}時${d.getMinutes()}分${second}秒`
         const wantQuantity = this.state.want ? 1 : 0;
         const favoriteQuantity = this.state.favorite ? 1 : 0;
         const clotheteQuantity = this.state.clothete ? 1 : 0;

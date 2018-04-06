@@ -52,7 +52,9 @@ class Comment extends React.Component {
     if (!this.props.myComment) {
       myComment = (
         <div className="posted-comment">
-          <p>{this.props.data.userName}</p>
+          <Link to={`/main/${this.props.data.user}`}>
+            <p>{this.props.data.userName}</p>
+          </Link>
           <p>{this.props.data.text}</p>
         </div>
       );
@@ -88,7 +90,6 @@ class Comment extends React.Component {
             <SendIcon className="sendIcon" size="24" />
           </button>
         </div>
-
       </div>
     );
   }

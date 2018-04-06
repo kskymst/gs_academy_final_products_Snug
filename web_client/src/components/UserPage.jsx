@@ -19,10 +19,22 @@ class UserPage extends React.Component {
       dataList: [],
     };
     this.filterDataList = this.filterDataList.bind(this);
+    this.loadUserImage = this.loadUserImage.bind(this);
   }
 
+  componentWillMount() {
+    if (this.props.match.params.id) {
+      this.loadUserImage(this.props);
+    }
+  }
+
+
   componentWillReceiveProps(nextProps) {
-    const userId = nextProps.match.params.id;
+    this.loadUserImage(nextProps);
+  }
+
+  loadUserImage(props) {
+    const userId = props.match.params.id;
     const db = firebase.firestore();
     db.collection('users').doc(userId)
       .get()
@@ -32,7 +44,7 @@ class UserPage extends React.Component {
         });
       })
       .catch(() => {
-        const { history } = nextProps;
+        const { history } = props;
         history.push('/404');
       });
     const allDataList = [];
@@ -57,6 +69,7 @@ class UserPage extends React.Component {
         });
       });
   }
+
 
   filterDataList(status) {
     const allDataList = this.state.allDataList;

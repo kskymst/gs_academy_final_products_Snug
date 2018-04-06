@@ -32,6 +32,11 @@ input:focus {
     // border: 2px solid #44B26B;
 }
 
+textarea {
+    resize: none;
+    outline: none;
+}
+
 a {
     color: $text-color;
 }
@@ -56,4 +61,6 @@ a:hover {
     "UserPage",
     "ImageList",
     "ItemDetail",
-    "Visitor";
+    "Visitor",
+    "AddScreen",
+    "TagSearchScreen";

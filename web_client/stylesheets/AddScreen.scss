@@ -1,0 +1,109 @@
+.add-wrapper {
+  width: 45vw;
+  margin: 16px auto 0;
+  padding: 8px 16px;
+  min-height: 88vh;
+  border-radius: 10px;
+  background-color: white;
+
+  h2 {
+    text-align: center;
+    padding: 8px 0 12px;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .text-image {
+    display: flex;
+    justify-content: center;
+    padding-top: 24px;
+    textarea {
+      padding: 8px;
+      font-size: 20px;
+      width: 30vw;
+      height: 14vw;
+      border: 1px solid #aaa;
+      border-radius: 5px;
+    }
+    .image {
+      width: 10vw;
+      height: 14vw;
+      border: 1px solid #aaa;
+      border-radius: 5px;
+      background-size: cover;
+      background-position: center;
+      cursor: pointer;
+    }
+    .photo-area {
+      margin-left: 16px;
+    }
+    p {
+      font-size: 20px;
+    }
+  }
+  .tag-area {
+    display: flex;
+    align-items: center;
+    margin-top: 24px;
+    p {
+      font-size: 20px;
+    }
+    textarea {
+      width: 35vw;
+      font-size: 20px;
+      padding: 8px;
+      margin-left: 1vw;
+    }
+  }
+
+.created-tag-area {
+  display: flex;
+  flex-wrap: wrap;
+  width: 35vw;
+  margin-top: 8px;
+  margin-left: 5vw;
+  .created-tag {
+    display: flex;
+    margin-left: 10px;
+    p {
+      font-size: 20px;
+    }
+  }
+}
+
+
+.status-area {
+  display: flex;
+  text-align: center;
+  align-items: center;
+  margin-top: 32px;
+  .status-title {
+    display: flex;
+    align-items: center;
+    margin-right: 56px;    
+    p {
+      font-size: 20px;
+    }
+  }
+  .icons {
+    margin-right: 4vw;
+    padding: 0 8px;
+    border-bottom: 1px solid #aaa;
+    user-select: none;
+    cursor: pointer;
+    p {
+      font-size: 20px;
+    }
+  }
+ }
+
+ .submit-button-area {
+    text-align: center;
+    margin: 40px 0;
+    .submit-button {
+      font-size: 16px;
+      width: 40vw;
+      letter-spacing: 3px;
+      font-weight: normal;
+    }
+  }
+}

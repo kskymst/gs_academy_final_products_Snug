@@ -2,6 +2,7 @@ import React from 'react';
 import firebase from 'firebase';
 import { Link } from 'react-router-dom';
 
+import Tag from 'react-icons/lib/fa/tag';
 import CloseIcon from 'react-icons/lib/md/close';
 
 import LikeButton from '../subComponents/LikeButton';
@@ -26,8 +27,23 @@ class ItemDetail extends React.Component {
   }
 
   render() {
+    const { params, url} = this.props.match;
+    const backUrl = url.replace(`/${params.query}`, '');
     const { myId, myData } = this.props;
     const { itemData } = this.state;
+    let tags = '';
+    if (itemData.length !== 0) {
+      tags = Object.keys(itemData.tags).map((tag, index) => (
+        <Link
+          to={`/main/tag/${tag}`}
+          key={tag + index}
+          className="tag-link"
+        >
+          <Tag style={{ marginRight: 4, marginBottom: 2 }} />
+          { tag }
+        </Link>
+      ));
+    }
     let timestamp = '';
     if (itemData.createdOn) {
       timestamp = itemData.createdOn.slice(0, -3);
@@ -57,6 +73,9 @@ class ItemDetail extends React.Component {
               <p>{itemData.text}</p>
               <p>{ timestamp }</p>
             </div>
+            <div className="post-tag">
+              { tags }
+            </div>
             <div className="item-detail-component-wrapper" >
               <LikeButton data={itemData} />
               <Comment
@@ -67,9 +86,9 @@ class ItemDetail extends React.Component {
               />
             </div>
           </div>
-        <Link to={`/main/${this.props.match.params.id}`}>
-          <CloseIcon className="close-icon" />
-        </Link>
+          <Link to={backUrl}>
+            <CloseIcon className="close-icon" />
+          </Link>
         </div>
         <div className="mask" />
       </div>

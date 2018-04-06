@@ -1,0 +1,28 @@
+.tag-search-wrapper {
+  width: 36vw;
+  margin: 16px auto 0;
+  min-height: 88vh;
+  border-radius: 10px;
+  background-color: white;
+
+  .tag-search-top {
+    height: 20vw;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background-position: center;
+    background-size: cover;
+    text-align: center;
+    color: white;
+    filter: grayscale(40%);
+    text-shadow: 1px 1px 3px #000;
+    h3 {
+      font-size: 32px;
+      padding-top: 7vw;
+      margin-bottom: 2vw;
+    }
+    p {
+      font-size: 20px;
+      letter-spacing: 4px;
+    }
+  }
+}

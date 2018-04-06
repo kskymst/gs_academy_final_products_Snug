@@ -1,12 +1,13 @@
 import React from 'react';
 import firebase from 'firebase';
-import { Route, Redirect } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 import ResentPost from '../components/ResentPost';
 import UserPage from '../components/UserPage';
+import AddScreen from './AddScreen';
+import SettingScreen from './SettingScreen';
+import TagSearchScreen from './TagSearchScreen';
 
-
-// eslint-disable-next-line
 class ViewScreen extends React.Component {
   constructor() {
     super();
@@ -31,28 +32,62 @@ class ViewScreen extends React.Component {
     const { myId, myData } = this.props;
     return (
       <div className="view-screen-wrapper" >
-        <Route
-          exact
-          path="/main"
-          render={() => (
-            <ResentPost
-              dataList={this.state.dataList}
-              myId={myId}
-              myData={myData}
-            />
-          )}
-        />
-        <Route
-          path="/main/:id"
-          render={props => (
-            <UserPage
-              dataList={this.state.dataList}
-              myId={myId}
-              myData={myData}
-              {...props}
-            />
-          )}
-        />
+        <Switch>
+          <Route
+            exact
+            path="/main"
+            render={() => (
+              <ResentPost
+                dataList={this.state.dataList}
+                myId={myId}
+                myData={myData}
+              />
+            )}
+          />
+          <Route
+            exact
+            path="/main/add"
+            render={props => (
+              <AddScreen
+                myId={myId}
+                myData={myData}
+                {...props}
+              />
+            )}
+          />
+          <Route
+            exact
+            path="/main/setting"
+            render={props => (
+              <SettingScreen
+                myId={myId}
+                myData={myData}
+                {...props}
+              />
+            )}
+          />
+          <Route
+            path="/main/tag/:tagName"
+            render={props => (
+              <TagSearchScreen
+                myId={myId}
+                myData={myData}
+                {...props}
+              />
+            )}
+          />
+          <Route
+            path="/main/:id"
+            render={props => (
+              <UserPage
+                dataList={this.state.dataList}
+                myId={myId}
+                myData={myData}
+                {...props}
+              />
+            )}
+          />
+        </Switch>
       </div>
     );
   }

@@ -47,4 +47,13 @@
       border-radius: 10px;
     }
   }
+  .post-tag {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 16px;
+    .tag-link {
+      font-size: 18px;
+      margin-right: 10px;
+    }
+  }
 }
