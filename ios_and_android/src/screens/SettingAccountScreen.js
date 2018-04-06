@@ -42,7 +42,6 @@ const uploadImage = (uri, imageName, mime = 'image/jpg') => {
   });
 };
 
-// eslint-disable-next-line
 class SettingAccountScreen extends React.Component {
   constructor(props) {
     super(props);

@@ -1,0 +1,91 @@
+.setting-wrapper {
+  width: 45vw;
+  margin: 16px auto 0;
+  padding: 8px 16px;
+  min-height: 88vh;
+  border-radius: 10px;
+  background-color: white;
+
+  h2 {
+    text-align: center;
+  }
+  .divider {
+    border-top: 1px solid #aaa;
+    margin: 8px 0;
+  }
+  .user-images-area {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    background-color: #ddd;
+    border-radius: 4px;
+    padding: 10px 0;
+    label {
+      cursor: pointer;
+    }
+    .user-image {
+      div {
+        width: 10vw;
+        height: 10vw;
+        margin: 0 auto;
+        border-radius: 10vw;
+        background-size: cover;
+        background-position: center;
+      }
+    }
+    .background-image {
+      div {
+        width: 15vw;
+        height: 10vw;
+        margin: 0 auto;
+        background-size: cover;
+        background-position: center;
+      }
+    }
+    p {
+      font-size: 16px;
+      margin-top: 8px;
+    }
+  }
+
+  .shop-name-description-area {
+    font-size: 18px;
+    p {
+      text-align: right;
+      padding-right: 16px;
+    }
+    .shop-name-area {
+      display: flex;
+      margin: 32px 0;
+      div {
+        width: 30%;
+      }
+      input {
+        width: 70%;
+        border: 1px solid #aaa;
+        border-radius: 4px;
+        padding: 4px;
+      }
+    }
+    .shop-description-area {
+      display: flex;
+      align-items: center;
+      div {
+        width: 30%;
+      }
+      textarea {
+        width: 70%;
+        border: 1px solid #aaa;
+        border-radius: 4px;
+        padding: 4px;
+      }
+    }
+  }
+  .submit-button {
+    font-size: 16px;
+    width: 40vw;
+    letter-spacing: 3px;
+    font-weight: normal;
+    margin-top: 48px;
+  }
+}
