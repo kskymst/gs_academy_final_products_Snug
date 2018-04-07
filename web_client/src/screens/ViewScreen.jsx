@@ -83,6 +83,7 @@ class ViewScreen extends React.Component {
                 dataList={this.state.dataList}
                 myId={myId}
                 myData={myData}
+                openMessageBox={this.props.openMessageBox}
                 {...props}
               />
             )}

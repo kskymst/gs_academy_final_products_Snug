@@ -2,4 +2,15 @@
   background-color: white;
   display: flex;
   justify-content: space-between;
-} 
+}
+
+.message {
+  width: 400px;
+  border: 1px solid #aaa;
+  border-radius: 5px;
+  background-color: rgb(245, 245, 245);
+  position: fixed;
+  bottom: 1vw;
+  right: 2vw;
+  z-index: 5;
+}

@@ -4,8 +4,12 @@ import React from 'react';
 class MessageScreen extends React.Component {
   render() {
     return (
-      <div className="message-screen-wapper" >
-        <input type="text" />
+      <div className="message-screen-wapper">
+        <button
+          onClick={() => this.props.openMessageBox('sucsess!')}
+        >
+          test
+        </button>
       </div>
     );
   }

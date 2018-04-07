@@ -1,7 +1,8 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 import firebase from 'firebase';
-import { Button } from 'semantic-ui-react';
+import { Button, Popup } from 'semantic-ui-react';
+import Message from 'react-icons/lib/io/ios-chatbubble-outline';
 
 import ImageList from './ImageList';
 import ItemDetail from '../components/ItemDetail';
@@ -104,12 +105,30 @@ class UserPage extends React.Component {
   }
 
   render() {
+    const userId = this.props.match.params.id;
+    let message = '';
+    if (userId !== this.props.myId) {
+      message = (
+        <Popup
+          trigger={
+            <Message
+              className="message-icon"
+              onClick={() => this.props.openMessageBox(userId)}
+            />
+          }
+          content="メッセージを送信する"
+          position="bottom center"
+          style={{ padding: 8, color: '#555', fontSize: 12 }}
+        />
+      );
+    }
     return (
       <div className="user-page-wrapper" >
         <div
           className="user-page-top"
           style={{ backgroundImage: `url(${this.state.userData.backgroundImage})` }}
         >
+          { message }
           <img src={this.state.userData.userImage} alt="" />
           <h2>{this.state.userData.userName}</h2>
           <p>{this.state.userData.userText}</p>

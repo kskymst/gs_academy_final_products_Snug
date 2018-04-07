@@ -1,0 +1,63 @@
+.message-wrapper {
+  .message-header {
+  @include bg-gradient;
+  @include custom-shadow;
+  height: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  padding: 0 16px;
+  font-size: 16px;
+  
+  p {
+    color: white;
+  }
+
+  .reduction {
+    font-weight: bold;
+    display: inline;
+    margin-right: 10px;
+    user-select: none;
+    cursor: pointer;
+  }
+
+  .close-icon {
+    cursor: pointer;
+  }
+ }
+
+  .input-area {
+    position: absolute;
+    bottom: 0;
+    left:0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 16px 8px 8px;
+    background-color: #ddd;
+
+    textarea {
+      font-size: 16px;
+      width: 87%;
+      padding: 4px;
+      border: 1px solid #aaa;
+      border-radius: 4px;
+    }
+    textarea:focus {
+      height: 65px;
+    }
+    .send-icon{
+      background-color: $sub-color;
+      color: white;
+      padding: 4px 3px 4px 4px;
+      border-radius: 40px;
+      margin-top: auto;
+      cursor: pointer;
+    }
+ }
+}
+
+// .message-wapper::-webkit-scrollbar {
+//   display:none;
+// }

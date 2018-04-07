@@ -1,0 +1,58 @@
+.message-contents-wrapper {
+  padding: 8px;
+  height: 330px;
+  overflow-y: scroll;
+  .user-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 100px;
+    background-size: cover;
+    background-position: center;
+  }
+  .myMessage {
+    margin-bottom: 8px;
+    .myMessage-inner {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      p {
+        color: white;
+        max-width: 80%;
+        @include bg-gradient;
+        margin-right: 10px;
+        padding: 8px;
+        border-radius: 6px;
+      }
+    }
+    p:nth-child(2) {
+      color: #777;
+      font-size: 12px;
+      text-align: right;
+      margin: 4px 50px 0 0;
+    }
+  }
+
+
+  .otherMessage {
+    margin-bottom: 8px;
+    .otherMessage-inner {
+      display: flex;
+      align-items: center;
+      p {
+        color: #555;
+        font-size: 14px;
+        background: white;
+        max-width: 80%;
+        margin-left: 10px;
+        padding: 8px;
+        border-radius: 6px;
+      }
+    }
+  }
+  p:nth-child(2) {
+    color: #777;
+    font-size: 12px;
+    text-align: left;
+    margin: 4px 0 0 54px;
+  }
+}

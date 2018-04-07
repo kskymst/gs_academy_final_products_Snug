@@ -3,15 +3,16 @@ import { Link } from 'react-router-dom';
 import firebase from 'firebase';
 import { Dropdown, Image } from 'semantic-ui-react';
 
-// eslint-disable-next-line
 class Header extends React.Component {
   constructor() {
     super();
     this.state = {
       isloggined: false,
+      userId: '',
       userName: '',
       userImage: '',
     };
+    this.handleLogout = this.handleLogout.bind(this);
   }
 
   componentWillMount() {
@@ -19,15 +20,22 @@ class Header extends React.Component {
       if (user) {
         const db = firebase.firestore();
         db.collection('users').doc(user.uid)
-          .get()
-          .then((querySnapshot) => {
+          .onSnapshot((querySnapshot) => {
             this.setState({
               isloggined: true,
+              userId: user.uid,
               userName: querySnapshot.data().userName,
               userImage: querySnapshot.data().userImage,
             });
           });
       }
+    });
+  }
+
+  handleLogout() {
+    firebase.auth().signOut().then(() => {
+      const { history } = this.props;
+      history.push('/');
     });
   }
 
@@ -77,6 +85,15 @@ class Header extends React.Component {
                   />
                 </Link>
                 <Link
+                  to={`/main/${this.state.userId}`}
+                >
+                  <Dropdown.Item
+                    text="  マイページ"
+                    icon="user"
+                    className="link-text"
+                  />
+                </Link>
+                <Link
                   to="/main/setting"
                 >
                   <Dropdown.Item
@@ -89,6 +106,7 @@ class Header extends React.Component {
                 <Dropdown.Item
                   text="ログアウト"
                   icon="external"
+                  onClick={this.handleLogout}
                 />
               </Dropdown.Menu>
             </Dropdown>

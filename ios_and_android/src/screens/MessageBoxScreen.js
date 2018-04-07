@@ -55,9 +55,6 @@ class MessageBoxScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        {/* <View style={styles.searchArea}>
-          <TextInput defaultValue={''} placeholder={'検索'} style={styles.searchInput} />
-        </View> */}
         <ScrollView showsVerticalScrollIndicator={false}>
           <UserAccounts navigation={this.props.navigation} data={this.state.messageRoom} />
         </ScrollView>

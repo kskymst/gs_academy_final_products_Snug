@@ -7,6 +7,7 @@
 }
 
 .user-page-top {
+  position: relative;
   text-align: center;
   background-size: cover;
   background-position: center;
@@ -16,6 +17,18 @@
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   text-shadow: 1px 1px 3px #000;
+
+  .message-icon {
+    position: absolute;
+    top:3%;
+    right: 3%;
+    color: #444;
+    font-size: 40px;
+    background-color: white;
+    border-radius: 50px;
+    padding: 4px;
+    cursor: pointer;
+  }
 
   img {
     width: 8vw;
