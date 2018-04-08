@@ -8,7 +8,7 @@ class VisitorScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      visitorList: [],
+      visitorLists: [],
     };
   }
 
@@ -42,7 +42,15 @@ class VisitorScreen extends React.Component {
             visitorList.sort((a, b) => (
               a.visitedOn < b.visitedOn ? 1 : -1
             ));
-            this.setState({ visitorList });
+            const visitorLists = [];
+            visitorList.forEach((data) => {
+              db.collection('users/').doc(data.userId)
+                .get()
+                .then((_querySnapshot) => {
+                  visitorLists.push(Object.assign(data, _querySnapshot.data()));
+                  this.setState({ visitorLists });
+                });
+            });
           });
       } else {
         const { history } = this.props;
@@ -54,7 +62,7 @@ class VisitorScreen extends React.Component {
   render() {
     return (
       <div className="coming-customer-wrapper" >
-        <Visitor visitorList={this.state.visitorList} />
+        <Visitor visitorList={this.state.visitorLists} />
       </div>
     );
   }

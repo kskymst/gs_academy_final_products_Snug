@@ -3,6 +3,41 @@
   height: 92vh;
   width: 25vw;
   overflow: scroll;
+  background-color:whitesmoke;
+  padding: 8px;
+
+  .message-person {
+    display: flex;
+    height: 87px;
+    justify-content: space-between;
+    background-color: white;
+    border-radius: 5px;
+    padding: 8px;
+    margin-bottom: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    img {
+      width: 4vw;
+      height: 4vw;
+      border-radius: 100px;
+      margin: auto 8px auto 0;
+    }
+    .message-person-center {
+      width: 50%;
+      p:nth-child(1) {
+        font-weight: bold;
+        margin-bottom: 4px;
+      }
+      p:nth-child(2) {
+        color: #aaa;
+        font-size: 10px;
+      }
+    }
+    .datetime {
+      font-size: 12px;
+      margin-bottom: auto;
+    }
+  }
 }
 
 .message-screen-wapper::-webkit-scrollbar {
