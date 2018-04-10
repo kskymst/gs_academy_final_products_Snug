@@ -137,12 +137,10 @@ class LikeButton extends React.Component {
         <div>
           { this.state.want ?
             <Heart
-              size="36"
               className="want-icon-true"
               onClick={() => this.likeButtonPush('want')}
             /> :
             <HeartOutline
-              size="36"
               className="icon"
               onClick={() => this.likeButtonPush('want')}
             />
@@ -153,34 +151,30 @@ class LikeButton extends React.Component {
         <div>
           { this.state.favorite ?
             <Star
-              size="36"
               className="favorite-icon-true"
               onClick={() => this.likeButtonPush('favorite')}
             /> :
             <StarOutline
-              size="36"
               className="icon"
               onClick={() => this.likeButtonPush('favorite')}
             />
           }
-          <p>Favorite ×{this.state.favoriteQuantity}</p>
+          <p>Style ×{this.state.favoriteQuantity}</p>
         </div>
 
         <div>
           {
             this.state.clothete ?
               <Plus
-                size="36"
                 className="clothete-icon-true"
                 onClick={() => this.likeButtonPush('clothete')}
               /> :
               <PlusOutline
-                size="36"
                 className="icon"
                 onClick={() => this.likeButtonPush('clothete')}
               />
           }
-          <p>Clothete ×{this.state.clotheteQuantity}</p>
+          <p>Closet ×{this.state.clotheteQuantity}</p>
         </div>
       </div>
     );

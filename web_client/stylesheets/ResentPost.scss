@@ -1,5 +1,5 @@
 .resent-post-outer {
-  width: 31vw;
+  width: 40vw;
   min-height: 300px; 
   margin: 16px auto;
   padding: 8px 0 16px;
@@ -23,7 +23,7 @@
       display: flex;
       align-items: center;
       img {
-        width: 50px;  
+        width: 50px;
         height: 50px;
         border-radius: 40px;
       }
@@ -35,7 +35,7 @@
   }
 
   .divider {
-    width: 29vw;
+    width: 38vw;
     border-top: 0.5px solid #ccc;
     margin: 8px auto 16px;
   }
@@ -43,14 +43,14 @@
   .post-main-image {
     text-align: center;
     img {
-      width: 26vw;
+      width: 30vw;
       border-radius: 10px;
     }
   }
   .post-tag {
     display: flex;
     flex-wrap: wrap;
-    margin: 16px;
+    margin: 16px 40px;
     .tag-link {
       font-size: 18px;
       margin-right: 10px;

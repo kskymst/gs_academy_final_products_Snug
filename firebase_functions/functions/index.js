@@ -14,7 +14,6 @@ exports.sendNotification = functions.firestore
         body: 'Geek Shop 表参道に入店しました!',
       },
   };
-  console.log('test')
   const token = newValue.userToken;
   return admin.messaging().sendToDevice(token, payload)
   .then((response) => {

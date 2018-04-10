@@ -9,7 +9,7 @@
     
     div {
       width: 10vw;
-      margin: 0 8px;
+      margin: 0 24px;
       padding-bottom: 4px;
       border-bottom: 1px solid #ccc;
     }
@@ -18,17 +18,21 @@
     }
     .want-icon-true {
       color: rgb(255, 0, 34);
+      font-size: 50px;
       cursor: pointer;
     }
     .favorite-icon-true {
       color: rgb(204, 238, 14);
+      font-size: 50px;
       cursor: pointer;
     }
     .clothete-icon-true {
       color: #44B26B;
+      font-size: 50px;
       cursor: pointer;
     }
     .icon {
+      font-size: 50px;
       cursor: pointer;
     }
   }
@@ -54,17 +58,21 @@
     }
     .want-icon-true {
       color: rgb(255, 0, 34);
+      font-size: 36px;
       cursor: pointer;
     }
     .favorite-icon-true {
       color: rgb(204, 238, 14);
+      font-size: 36px;
       cursor: pointer;
     }
     .clothete-icon-true {
       color: #44B26B;
+      font-size: 36px;
       cursor: pointer;
     }
     .icon {
+      font-size: 36px;
       cursor: pointer;
     }
   }

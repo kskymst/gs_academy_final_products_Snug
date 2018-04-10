@@ -11,11 +11,12 @@ const Dimensions = require('Dimensions');
 
 const { width } = Dimensions.get('window');
 
-// eslint-disable-next-line
+
 class MypageScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      topComponentHeight: 0,
       allDataList: [],
       dataList: [],
       userData: [],
@@ -26,6 +27,7 @@ class MypageScreen extends React.Component {
     this.updateIndex = this.updateIndex.bind(this);
     this.filterDataList = this.filterDataList.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.onLayout = this.onLayout.bind(this);
   }
 
   static navigationOptions = ({ navigation }) => ({
@@ -44,8 +46,23 @@ class MypageScreen extends React.Component {
     },
     headerBackTitleStyle: {
       fontSize: 15,
+      textShadowColor: 'rgba(0, 0, 0, 0.75)',
+      textShadowOffset: {width: 1, height: 1},
+      textShadowRadius: 3,
     },
-    headerRight: ( <Icon name="settings" iconStyle={{ marginRight: 10 }} color='#fff' onPress={() => navigation.state.params.openSideMenu()} underlayColor="transparent" /> ),
+    headerRight: (
+      <Icon
+        name="settings"
+        iconStyle={{ 
+          marginRight: 10,
+          textShadowColor: 'rgba(0, 0, 0, 0.75)',
+          textShadowOffset: {width: 1, height: 1},
+          textShadowRadius: 3,
+        }}
+        color='#fff'
+        onPress={() => navigation.state.params.openSideMenu()}
+        underlayColor="transparent" />
+      ),
   });
 
   componentDidMount() {
@@ -112,6 +129,12 @@ class MypageScreen extends React.Component {
     }
   }
 
+  onLayout = (e) => {
+    this.setState({
+      topComponentHeight: e.nativeEvent.layout.height
+    });
+  }
+
   render() {
     const buttons = ['Want', 'Style', 'Closet'];
     const { selectedIndex } = this.state;
@@ -131,11 +154,12 @@ class MypageScreen extends React.Component {
         menuPosition="right"
         onChange={(e) => this.setState({ sideMenuOpen: e })}
       >
-        <ScrollView
-          showsVerticalScrollIndicator={false}
+        <View
           style={styles.container}
         >
-          <View>
+          <View
+            onLayout={this.onLayout}
+          >
             <ImageBackground
               source={{ uri: this.state.userData.backgroundImage }}
               style={styles.main}
@@ -145,8 +169,16 @@ class MypageScreen extends React.Component {
                 source={{ uri: this.state.userData.userImage }}
                 style={styles.userImage}
               />
-              <Text style={styles.userName}>{this.state.userData.userName}</Text>
-              <Text style={styles.userDescription}>{this.state.userData.userText}</Text>
+              <Text
+                style={styles.userName}
+                numberOfLines={2}
+                ellipsizeMode={'tail'}
+              >{this.state.userData.userName}</Text>
+              <Text
+                style={styles.userDescription}
+                numberOfLines={5}
+                ellipsizeMode={'tail'}
+              >{this.state.userData.userText}</Text>
               <View style={styles.statusButtonArea}>
                 <ButtonGroup
                   onPress={this.updateIndex}
@@ -163,9 +195,13 @@ class MypageScreen extends React.Component {
             </ImageBackground>
           </View>
           <View>
-            <UserLibraryImages navigation={this.props.navigation} dataList={this.state.dataList} />
+            <UserLibraryImages
+              navigation={this.props.navigation}
+              dataList={this.state.dataList}
+              topComponentHeight={this.state.topComponentHeight}
+            />
           </View>
-        </ScrollView>
+        </View>
       </SideMenu>
     );
   }
@@ -180,6 +216,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingTop: 40,
     paddingBottom: 10,
+    maxHeight: 300,
   },
   settingIcon: {
     fontSize: 25,
@@ -199,10 +236,19 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     letterSpacing: 1.5,
     margin: 8,
+    textShadowColor: 'rgba(0, 0, 0, 0.75)',
+    textShadowOffset: {width: 1, height: 1},
+    textShadowRadius: 3,
   },
   userDescription: {
     color: '#fff',
     fontSize: 12,
+    paddingLeft: 10,
+    paddingRight: 10,
+    textAlign: 'center',
+    textShadowColor: 'rgba(0, 0, 0, 0.75)',
+    textShadowOffset: {width: 1, height: 1},
+    textShadowRadius: 3,
   },
   statusButtonArea: {
     flexDirection: 'row',

@@ -51,6 +51,7 @@ class SettingAccountScreen extends React.Component {
       userImage: '',
       backgroundImage: '',
       loading: false,
+      validation: false,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -111,6 +112,7 @@ class SettingAccountScreen extends React.Component {
       .then(() => {
         this.setState({
           loading: false,
+          validation: false,
         });
         this.props.navigation.goBack();
       })
@@ -122,6 +124,13 @@ class SettingAccountScreen extends React.Component {
 
   handleSubmit() {
     this.setState({ loading: true });
+    if (this.state.userName.length > 20) {
+      this.setState({ 
+        loading: false,
+        validation: true,
+      });
+      return;
+    }
     const uuid = UUID();
     const uuid2 = UUID();
     if ( this.state.userImage.startsWith('https://') && this.state.backgroundImage.startsWith('https://')) {
@@ -158,6 +167,14 @@ class SettingAccountScreen extends React.Component {
   }
 
   render() {
+    let validation = <View />;
+    if (this.state.validation) {
+      validation = (
+        <View>
+          <Text style={styles.validationMessage}>ユーザーネームは20文字以内で設定してください</Text>
+        </View>
+      )
+    }
     return (
       <ScrollView style={styles.container} >
         <KeyboardAvoidingView
@@ -165,6 +182,7 @@ class SettingAccountScreen extends React.Component {
           keyboardVerticalOffset={25}
           style={styles.container}
         >
+          { validation }
           <View style={styles.imageArea}>
             <View style={styles.imageAreaInner}>
               <TouchableHighlight onPress={() => this.pickImageHandler('userImage')} underlayColor="transparent">
@@ -279,6 +297,13 @@ const styles = StyleSheet.create({
     height: 36,
     marginTop: 40,
     backgroundColor: '#44B26B',
+  },
+  validationMessage: {
+    color: '#f00',
+    textAlign: 'center',
+    fontWeight: 'bold',
+    marginTop: 10,
+    marginBottom: 10,
   },
 });
 

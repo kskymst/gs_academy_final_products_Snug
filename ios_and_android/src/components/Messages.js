@@ -5,14 +5,17 @@ const { width } = Dimensions.get('window');
 
 // eslint-disable-next-line
 class Messages extends React.Component {
+  shouldComponentUpdate(nextProps) {
+    if (nextProps === this.props) {
+      return false;
+    }
+    return true;
+  }
+
   render() {
-    const messageList = this.props.messages === '' ?
-      (
-        <View>
-          <Text />
-        </View>
-      ) :
-      this.props.messages.map((message) => {
+    let messageList = <Text />;
+    if (this.props.messages !== '' && this.props.myId !== '') {
+      messageList = this.props.messages.map((message) => {
         const postedDate = message.createdOn.slice(5, -3).replace('_', '月').replace(' ', '日 ');
         if (message.postUserId === this.props.myId) {
           return (
@@ -40,34 +43,35 @@ class Messages extends React.Component {
               </View>
             </View>
           );
-        } else {
-          return (
+        }
+        return (
+          <View
+            key={message.createdOn}
+            style={styles.otherMessage}
+          >
+            <Image
+              source={{ uri: this.props.userData.userImage }}
+              style={styles.otherImage}
+            />
             <View
-              key={message.createdOn}
-              style={styles.otherMessage}
+              style={styles.otherTextOuter}
             >
-              <Image
-                source={{ uri: this.props.userData.userImage }}
-                style={styles.otherImage}
-              />
               <View
-                style={styles.otherTextOuter}
+                style={styles.otherText}
               >
-                <View
-                  style={styles.otherText}
+                <Text>{message.text}</Text>
+                <Text
+                  style={styles.otherPostDate}
                 >
-                  <Text>{message.text}</Text>
-                  <Text
-                    style={styles.otherPostDate}
-                  >
-                    {postedDate}
-                  </Text>
-                </View>
+                  {postedDate}
+                </Text>
               </View>
             </View>
-          );
-        }
+          </View>
+        );
       });
+    }
+
     return (
       <View style={styles.inner} >
         {messageList}

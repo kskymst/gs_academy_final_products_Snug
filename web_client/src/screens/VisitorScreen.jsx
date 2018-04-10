@@ -1,5 +1,6 @@
 import React from 'react';
 import firebase from 'firebase';
+import VisitorIcon from 'react-icons/lib/md/speaker-phone';
 
 import Visitor from '../components/Visitor';
 
@@ -12,7 +13,6 @@ class VisitorScreen extends React.Component {
     };
   }
 
-  // componentDidUpdate() {
   componentWillMount() {
     const db = firebase.firestore();
     firebase.auth().onAuthStateChanged((user) => {
@@ -62,7 +62,16 @@ class VisitorScreen extends React.Component {
   render() {
     return (
       <div className="coming-customer-wrapper" >
-        <Visitor visitorList={this.state.visitorLists} />
+        <div className="visitor-inner" >
+          <div className="visitor-title">
+            <VisitorIcon
+              size={32}
+              className="icon"
+            />
+            <p>来店ユーザー</p>
+          </div>
+          <Visitor visitorList={this.state.visitorLists} />
+        </div>
       </div>
     );
   }

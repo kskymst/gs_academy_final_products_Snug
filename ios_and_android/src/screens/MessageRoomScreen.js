@@ -29,7 +29,11 @@ class MessageRoomScreen extends React.Component {
       }
     }
 
-  componentWillMount() { // 下記userIdは自分ではない
+  // componentWillReceiveProps(nextProps) {
+  //   console.log(nextProps)
+  // }
+
+  componentWillMount() {
     const { userId, userData } = this.props.navigation.state.params;
     const { currentUser } = firebase.auth();
     const db = firebase.firestore();
@@ -58,16 +62,18 @@ class MessageRoomScreen extends React.Component {
           .where('postUserId', '==', userId)
           .where('otherId', '==', currentUser.uid)
           .onSnapshot((_querySnapshot) => {
+            const _messages = [];
             if (!_querySnapshot.empty) {
               _querySnapshot.forEach((_doc) => {
-                messages.push(_doc.data());
+                _messages.push(_doc.data());
               });
             }
-            messages.sort((a, b) => (
-              a.createdOn > b.createdOn ? 1 : -1
+            _messages.push(...messages);
+            _messages.sort((a, b) => (
+              a.createdOnNumber > b.createdOnNumber ? 1 : -1
             ));
             this.setState({
-              messages,
+              messages: _messages,
               otherImage: userData.userImage,
             });
           });
@@ -75,8 +81,9 @@ class MessageRoomScreen extends React.Component {
   }
 
   handleSubmit() {
-    const time = new Date().toLocaleString();
-    const timestamp = time.replace(/\//g, '_');
+    const time = new Date();
+    const strTimestamp = String(time.getTime());
+    const timestamp = time.toLocaleString().replace(/\//g, '_');
     const preUserList = [this.state.myId, this.state.otherId];
     const userList = preUserList.sort()
     const messageRoom = `${userList[0]}_${userList[1]}`
@@ -84,14 +91,11 @@ class MessageRoomScreen extends React.Component {
     db.collection('messages').doc(timestamp)
       .set({
         postUserId: this.state.myId,
-        postUserName: this.state.myName,
-        postUserImage: this.state.myImage,
-        otherName: this.state.otherName,
         otherId: this.state.otherId,
-        otherImage: this.state.otherImage,
         text: this.state.text,
         messageRoom: messageRoom,
         createdOn: timestamp,
+        createdOnNumber: strTimestamp,
       })
       .then(() => {
         this.setState({ text: '' });

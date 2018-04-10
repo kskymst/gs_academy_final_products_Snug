@@ -1,10 +1,32 @@
 .coming-customer-wrapper {
-  border-right: 1px solid #777;
   height: 92vh;
   width: 25vw;
   overflow: scroll;
   background-color:whitesmoke;
-  padding: 8px;
+  .visitor-inner{
+    width: 60%;
+    height: 92vh;
+    background-color: rgba(0,0,0,0.7);
+  }
+
+  .visitor-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2vw;
+    color: white;
+    padding-top: 10px;
+    margin-bottom: 16px;
+    border-bottom: 1px solid white;
+    .icon {
+      padding: -2vw;
+    }
+    p {
+      display: inline;
+      margin-top: 8px;
+      padding: 8px;
+    }
+  }
 }
 
 .coming-customer-wrapper::-webkit-scrollbar {

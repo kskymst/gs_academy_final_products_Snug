@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, StatusBar } from 'react-native';
+import { View, StatusBar } from 'react-native';
 import firebase from 'firebase';
 
 import UserLibraryImages from '../components/UserLibraryImages';
@@ -18,7 +18,7 @@ class TimeLineScreen extends React.Component {
       .onSnapshot((querySnapshot) => {
         const dataList = [];
         querySnapshot.forEach((doc) => {
-          dataList.push({ ...doc.data(), key: doc.id });
+          dataList.push({ ...doc.data(), key: doc.id, loaded: false });
         });
         this.setState({ dataList });
       });
@@ -26,15 +26,13 @@ class TimeLineScreen extends React.Component {
 
   render() {
     return (
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-      >
+      <View>
         <StatusBar
           backgroundColor="blue"
           barStyle="light-content"
         />
         <UserLibraryImages dataList={this.state.dataList} navigation={this.props.navigation}/>
-      </ScrollView>
+      </View>
     );
   }
 }

@@ -46,17 +46,19 @@ class Message extends React.Component {
               .where('postUserId', '==', otherId)
               .where('otherId', '==', myId)
               .onSnapshot((_querySnapshot) => {
+                const _messages = [];
                 if (!_querySnapshot.empty) {
                   _querySnapshot.forEach((_doc) => {
-                    messages.push(_doc.data());
+                    _messages.push(_doc.data());
                   });
                 }
-                messages.sort((a, b) => (
-                  a.createdOn > b.createdOn ? 1 : -1
+                _messages.push(...messages);
+                _messages.sort((a, b) => (
+                  a.createdOnNumber > b.createdOnNumber ? 1 : -1
                 ));
                 this.setState({
                   reduction: false,
-                  messages,
+                  messages: _messages,
                   otherData: __querySnapShot.data(),
                 });
               });
@@ -65,8 +67,9 @@ class Message extends React.Component {
   }
 
   handleSubmit() {
-    const time = new Date().toLocaleString();
-    const timestamp = time.replace(/\//g, '_');
+    const time = new Date();
+    const strTimestamp = String(time.getTime());
+    const timestamp = time.toLocaleString().replace(/\//g, '_');
     const preUserList = [this.props.myId, this.props.otherId];
     const userList = preUserList.sort();
     const messageRoom = `${userList[0]}_${userList[1]}`;
@@ -78,6 +81,7 @@ class Message extends React.Component {
         text: this.state.text,
         messageRoom,
         createdOn: timestamp,
+        createdOnNumber: strTimestamp,
       })
       .then(() => {
         this.setState({ text: '' });

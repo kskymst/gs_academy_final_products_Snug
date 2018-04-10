@@ -42,7 +42,7 @@ export default class LoginSignupScreen extends React.Component {
   render() {
     const contents = this.state.login ? (
       <View style={styles.loadingIcon}>
-        <ActivityIndicator size="large" color="#7457A3" />
+        <ActivityIndicator size="large" color="#777" />
       </View>
     ) : (
       <ImageBackground

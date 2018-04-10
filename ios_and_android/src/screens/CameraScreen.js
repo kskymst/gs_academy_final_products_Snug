@@ -56,6 +56,7 @@ class CameraScreen extends React.Component {
       userName: '',
       gender: '',
       loading: false,
+      validation: false,
     };
     this.pickImageHandler = this.pickImageHandler.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -109,6 +110,13 @@ class CameraScreen extends React.Component {
 
   handleSubmit() {
     this.setState({ loading: true });
+    if (this.state.pickedImaged.uri === undefined) {
+      this.setState({
+        loading: false,
+        validation: true,
+      });
+      return;
+    }
     let tags = {};
     this.state.tags.forEach((data) => {
       const subObj = { [data]: true };
@@ -123,7 +131,7 @@ class CameraScreen extends React.Component {
         const db = firebase.firestore();
         const d = new Date();
         const second = (`0${d.getSeconds()}`).slice(-2);
-        const timestamp = `${d.getFullYear()}年${d.getMonth() + 1}月${d.getDay() + 1}日 ${d.getHours()}時${d.getMinutes()}分${second}秒`
+        const timestamp = `${d.getFullYear()}年${d.getMonth() + 1}月${d.getDate()}日 ${d.getHours()}時${d.getMinutes()}分${second}秒`;
         const wantQuantity = this.state.want ? 1 : 0;
         const favoriteQuantity = this.state.favorite ? 1 : 0;
         const clotheteQuantity = this.state.clothete ? 1 : 0;
@@ -161,6 +169,7 @@ class CameraScreen extends React.Component {
                   favorite: false,
                   clothete: false,
                   loading: false,
+                  validation: false,
                 });
                 const resetAction = NavigationActions.reset({
                   index: 0,
@@ -184,6 +193,16 @@ class CameraScreen extends React.Component {
   render() {
     let tagText;
     let tagValidate;
+    let validation = <View />;
+    if (this.state.validation) {
+      validation = (
+        <View>
+          <Text style={styles.validationMessage}>
+            画像は必ず選択してください
+          </Text>
+        </View>
+      );
+    }
     if (this.state.tags[0] === '') {
       tagText = <Text />;
     } else {
@@ -198,6 +217,7 @@ class CameraScreen extends React.Component {
     }
     return (
       <ScrollView style={styles.container} >
+       { validation }
         <View style={styles.topContent} >
           <TextInput
             style={styles.contentInput}
@@ -349,6 +369,13 @@ const styles = StyleSheet.create({
     height: 36,
     marginTop: 20,
     backgroundColor: '#44B26B',
+  },
+  validationMessage: {
+    color: '#f00',
+    fontSize: 18,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginTop: 8,
   },
 });
 

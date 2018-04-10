@@ -29,8 +29,10 @@ class AddScreen extends React.Component {
       favorite: false,
       clothete: false,
       loading: false,
+      validation1: false,
+      validation2: false,
       redirect: false,
-    }
+    };
     this.handleChange = this.handleChange.bind(this);
     this.imageChange = this.imageChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -54,6 +56,20 @@ class AddScreen extends React.Component {
 
   handleSubmit() {
     this.setState({ loading: true });
+    if (this.state.imageFile === '') {
+      this.setState({
+        loading: false,
+        validation1: true,
+      });
+      return;
+    }
+    if (this.state.imageFile.size > 1000000) {
+      this.setState({
+        loading: false,
+        validation2: true,
+      });
+      return;
+    }
     let tags = {};
     this.state.tags.forEach((data) => {
       const subObj = { [data]: true };
@@ -66,7 +82,7 @@ class AddScreen extends React.Component {
         const db = firebase.firestore();
         const d = new Date();
         const second = (`0${d.getSeconds()}`).slice(-2);
-        const timestamp = `${d.getFullYear()}年${d.getMonth() + 1}月${d.getDay() + 1}日 ${d.getHours()}時${d.getMinutes()}分${second}秒`;
+        const timestamp = `${d.getFullYear()}年${d.getMonth() + 1}月${d.getDate()}日 ${d.getHours()}時${d.getMinutes()}分${second}秒`;
         const wantQuantity = this.state.want ? 1 : 0;
         const favoriteQuantity = this.state.favorite ? 1 : 0;
         const clotheteQuantity = this.state.clothete ? 1 : 0;
@@ -95,6 +111,8 @@ class AddScreen extends React.Component {
               })
               .then(() => {
                 this.setState({
+                  validation1: false,
+                  validation2: false,
                   redirect: true,
                 });
               });
@@ -103,8 +121,24 @@ class AddScreen extends React.Component {
   }
 
   render() {
+    console.log(this.state.imageFile.size > 1000000);
     if (this.state.redirect) {
       return <Redirect to="/main" />;
+    }
+    let validation = '';
+    if (this.state.validation1) {
+      validation = (
+        <div className="validation-message">
+          <p>画像を設定してください</p>
+        </div>
+      );
+    }
+    if (this.state.validation2) {
+      validation = (
+        <div className="validation-message">
+          <p>画像ファイルが大き過ぎます</p>
+        </div>
+      );
     }
     let tagText;
     if (this.state.tags[0] === '') {
@@ -125,6 +159,7 @@ class AddScreen extends React.Component {
     return (
       <div className="add-wrapper">
         <h2>新規投稿</h2>
+        { validation }
         <div className="text-image" >
           <div>
             <p>

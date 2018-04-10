@@ -1,41 +1,76 @@
 .message-screen-wapper {
-  border-left: 1px solid #777;
   height: 92vh;
   width: 25vw;
   overflow: scroll;
   background-color:whitesmoke;
   padding: 8px;
 
+  .message-title {
+    display: flex;
+    align-items: center;
+    font-size: 24px;
+    margin: 40px 0 10px;
+    font-weight: bold;
+    p {
+      margin-left: 8px;
+    }
+  }
+
   .message-person {
     display: flex;
-    height: 87px;
     justify-content: space-between;
+    height: 87px;
     background-color: white;
     border-radius: 5px;
-    padding: 8px;
     margin-bottom: 8px;
     overflow: hidden;
     cursor: pointer;
-    img {
-      width: 4vw;
-      height: 4vw;
-      border-radius: 100px;
-      margin: auto 8px auto 0;
+    .user-image {
+      height: 87px;
+      width: 24%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: auto 0;
+      padding: 0 1vw;
+      background-color: rgba(0,0,0,0.7);
+      img {
+        width: 4.5vw;
+        height: 4.5vw;
+        border-radius: 100px;
+      }
     }
     .message-person-center {
-      width: 50%;
+      width: 76%;
+      height: 87px;
+      padding: 8px 16px 0;
+      position: relative;
       p:nth-child(1) {
         font-weight: bold;
-        margin-bottom: 4px;
+        margin-bottom: 8px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
       }
       p:nth-child(2) {
         color: #aaa;
         font-size: 10px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
       }
-    }
-    .datetime {
-      font-size: 12px;
-      margin-bottom: auto;
+      p:nth-child(3) {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        display: inline-block;
+        margin-top: auto;
+        background-color: rgba(0,0,0,0.7);
+        font-size: 11px;
+        color: white;
+        padding: 4px;
+        border-top-left-radius: 4px;
+      }
     }
   }
 }

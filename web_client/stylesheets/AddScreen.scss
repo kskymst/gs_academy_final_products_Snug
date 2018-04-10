@@ -12,10 +12,18 @@
     border-bottom: 1px solid #ddd;
   }
 
+  .validation-message {
+    color: rgb(255, 20, 20);
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 16px;
+  }
+
   .text-image {
     display: flex;
     justify-content: center;
-    padding-top: 24px;
+    padding-top: 8px;
     textarea {
       padding: 8px;
       font-size: 20px;

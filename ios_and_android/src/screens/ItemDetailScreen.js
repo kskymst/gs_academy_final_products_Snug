@@ -12,6 +12,7 @@ class ItemDetailScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      userName: '',
       userImage: 'https://firebasestorage.googleapis.com/v0/b/snug-45a34.appspot.com/o/asset%2FuserImage.png?alt=media&token=9a26dd92-9024-442c-b38d-3b5dabf8e720',
     };
   }
@@ -25,7 +26,10 @@ class ItemDetailScreen extends React.Component {
     db.collection('users').doc(data.user)
       .get()
       .then((doc) => {
-        this.setState({ userImage: doc.data().userImage });
+        this.setState({
+          userImage: doc.data().userImage,
+          userName: doc.data().userName,
+        });
       });
   }
 
@@ -65,7 +69,7 @@ class ItemDetailScreen extends React.Component {
                   />
                 </TouchableHighlight>
                 <TouchableHighlight onPress={() => this.props.navigation.navigate('MypageScreen', { user: data.user })} underlayColor="transparent">
-                  <Text style={styles.userName}>{data.userName}</Text>
+                  <Text style={styles.userName}>{this.state.userName}</Text>
                 </TouchableHighlight>
               </View>
               <Text style={styles.postDate}>{timestamp}</Text>
@@ -76,10 +80,6 @@ class ItemDetailScreen extends React.Component {
           </ImageBackground>
           <LikeButtons data={data} />
           <View style={styles.tagArea}>
-            {/* <View style={styles.tagIndent}>
-              <Icon name="label-outline" size={22} color="#000" />
-              <Text style={styles.tagTitle} >Tags:</Text>
-            </View> */}
             <View style={styles.tags}>
               { tags }
             </View>

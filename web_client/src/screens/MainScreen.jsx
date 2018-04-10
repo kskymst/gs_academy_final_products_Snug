@@ -17,7 +17,7 @@ class MainScreen extends React.Component {
     this.openMessageBox = this.openMessageBox.bind(this);
     this.closeMessageBox = this.closeMessageBox.bind(this);
   }
-  componentWillMount() {
+  componentDidMount() {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         const db = firebase.firestore();

@@ -10,7 +10,7 @@ class MessageBoxScreen extends React.Component {
   constructor() {
     super();
     this.state = {
-      messageRoom: [],
+      messageRooms: [],
     };
   }
 
@@ -47,7 +47,19 @@ class MessageBoxScreen extends React.Component {
             messageRoom.sort((a, b) => (
               a.createdOn < b.createdOn ? 1 : -1
             ));
-            this.setState({ messageRoom });
+            const messageRooms = [];
+            messageRoom.forEach((data) => {
+              let userId = data.postUserId;
+              if (userId === currentUser.uid) {
+                userId = data.otherId;
+              }
+              db.collection('users/').doc(userId)
+                .get()
+                .then((__querySnapshot) => {
+                  messageRooms.push(Object.assign(data, __querySnapshot.data()));
+                  this.setState({ messageRooms });
+                });
+            });
           });
       });
   }
@@ -56,7 +68,7 @@ class MessageBoxScreen extends React.Component {
     return (
       <View style={styles.container}>
         <ScrollView showsVerticalScrollIndicator={false}>
-          <UserAccounts navigation={this.props.navigation} data={this.state.messageRoom} />
+          <UserAccounts navigation={this.props.navigation} data={this.state.messageRooms} />
         </ScrollView>
       </View>
     );

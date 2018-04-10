@@ -22,7 +22,12 @@ class ItemDetail extends React.Component {
     db.collection('collections').doc(this.props.match.params.query)
       .get()
       .then((querySnapshot) => {
-        this.setState({ itemData: querySnapshot.data() });
+        db.collection('/users').doc(querySnapshot.data().user)
+          .get()
+          .then((_querySnapshot) => {
+            const itemData = Object.assign(querySnapshot.data(), _querySnapshot.data());
+            this.setState({ itemData });
+          });
       });
   }
 

@@ -24,16 +24,6 @@ class UserAccounts extends React.Component {
   render() {
     const { currentUser } = firebase.auth();
     const roomData = this.props.data.map((data) => {
-      const userImage = (
-        data.postUserId === currentUser.uid ?
-          data.otherImage :
-          data.postUserImage
-      );
-      const userName = (
-        data.postUserId === currentUser.uid ?
-          data.otherName :
-          data.postUserName
-      );
       const userId = (
         data.postUserId === currentUser.uid ?
           data.otherId :
@@ -48,11 +38,11 @@ class UserAccounts extends React.Component {
         >
           <View style={styles.userArea}>
             <Image
-              source={{ uri: userImage }}
+              source={{ uri: data.userImage }}
               style={styles.userImage}
             />
             <View style={styles.userContents}>
-              <Text style={styles.userName}>{userName}</Text>
+              <Text style={styles.userName}>{data.userName}</Text>
               <Text style={styles.userMessage}>{data.text}</Text>
             </View>
             <Text style={styles.messageDate}>{timestamp}</Text>

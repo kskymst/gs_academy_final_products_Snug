@@ -15,6 +15,7 @@ class LikeButtons extends React.Component {
       wantQuantity: this.props.data.wantQuantity,
       favoriteQuantity: this.props.data.favoriteQuantity,
       clotheteQuantity: this.props.data.clotheteQuantity,
+      loading: false,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -35,45 +36,49 @@ class LikeButtons extends React.Component {
   }
 
   handleSubmit(status) {
-    let inputLikeType = {};
-    const timestamp = new Date();
-    if (status === 'want') {
-      inputLikeType = {
-        want: !this.state.want,
-        favorite: this.state.favorite,
-        clothete: this.state.clothete,
-        createdOnNumber: timestamp,
-      };
-    } else if (status === 'favorite') {
-      inputLikeType = {
-        want: this.state.want,
-        favorite: !this.state.favorite,
-        clothete: this.state.clothete,
-        createdOnNumber: timestamp,
-      };
-    } else if (status === 'clothete') {
-      inputLikeType = {
-        want: this.state.want,
-        favorite: this.state.favorite,
-        clothete: !this.state.clothete,
-        createdOnNumber: timestamp,
-      };
+    if (!this.state.loading) {
+      this.setState({ loading: true });
+      let inputLikeType = {};
+      const timestamp = new Date();
+      if (status === 'want') {
+        inputLikeType = {
+          want: !this.state.want,
+          favorite: this.state.favorite,
+          clothete: this.state.clothete,
+          createdOnNumber: timestamp,
+        };
+      } else if (status === 'favorite') {
+        inputLikeType = {
+          want: this.state.want,
+          favorite: !this.state.favorite,
+          clothete: this.state.clothete,
+          createdOnNumber: timestamp,
+        };
+      } else if (status === 'clothete') {
+        inputLikeType = {
+          want: this.state.want,
+          favorite: this.state.favorite,
+          clothete: !this.state.clothete,
+          createdOnNumber: timestamp,
+        };
+      }
+      const { currentUser } = firebase.auth();
+      const db = firebase.firestore();
+      db.collection(`users/${currentUser.uid}/status`).doc(this.props.data.id).set(inputLikeType)
+        .then(() => {
+          const statusName = `${status}Quantity`;
+          let quantity = this.state[statusName];
+          // eslint-disable-next-line
+          this.state[status] ? quantity += 1 : quantity -= 1 ;
+          db.collection('collections').doc(this.props.data.id).update({
+            [statusName]: quantity,
+          });
+          this.setState({
+            loading: false,
+            [statusName]: quantity,
+          });
+        });
     }
-    const { currentUser } = firebase.auth();
-    const db = firebase.firestore();
-    db.collection(`users/${currentUser.uid}/status`).doc(this.props.data.id).set(inputLikeType)
-      .then(() => {
-        const statusName = `${status}Quantity`;
-        let quantity = this.state[statusName];
-        // eslint-disable-next-line
-        this.state[status] ? quantity += 1 : quantity -= 1 ;
-        db.collection('collections').doc(this.props.data.id).update({
-          [statusName]: quantity,
-        });
-        this.setState({
-          [statusName]: quantity,
-        });
-      });
   }
 
   render() {

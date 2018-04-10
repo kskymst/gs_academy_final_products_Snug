@@ -31,7 +31,9 @@ class UserPage extends React.Component {
 
 
   componentWillReceiveProps(nextProps) {
-    this.loadUserImage(nextProps);
+    if (nextProps.match.params.id !== this.props.match.params.id) {
+      this.loadUserImage(nextProps);
+    }
   }
 
   loadUserImage(props) {
@@ -73,7 +75,7 @@ class UserPage extends React.Component {
 
 
   filterDataList(status) {
-    const allDataList = this.state.allDataList;
+    const { allDataList } = this.state;
     const dataList = [];
     for (let i = 0, len = allDataList.length; len > i; i += 1) {
       if (allDataList[i][status]) {
@@ -145,14 +147,14 @@ class UserPage extends React.Component {
               className="status-button"
               onClick={() => this.filterDataList('favorite')}
             >
-              Favorite
+              Style
             </Button>
             <Button
               active={this.state.clothete}
               className="status-button"
               onClick={() => this.filterDataList('clothete')}
             >
-              Clothete
+              Closet
             </Button>
           </Button.Group>
         </div>
