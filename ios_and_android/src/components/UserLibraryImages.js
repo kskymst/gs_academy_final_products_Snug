@@ -20,6 +20,12 @@ class UserLibraryImages extends React.Component {
     this.renderItem = this.renderItem.bind(this);
   }
 
+  componentWillMount() {
+    if (this.props.dataList.length !== 0) {
+      this.setState({ data: this.props.dataList });
+    }
+  }
+
   componentWillReceiveProps(nextProps) {
     this.setState({ data: nextProps.dataList });
   }

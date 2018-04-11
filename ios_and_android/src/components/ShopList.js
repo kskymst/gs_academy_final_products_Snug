@@ -8,6 +8,7 @@ const { width } = Dimensions.get('window');
 // eslint-disable-next-line
 export default class ShopList extends React.Component {
   render() {
+    console.log(this.props.shopDataList)
     const shopList = this.props.shopDataList.length !== 0 ? (
       this.props.shopDataList.map (data => (
         <Card
@@ -25,7 +26,7 @@ export default class ShopList extends React.Component {
           </View>
           <Divider style={styles.divider} />
           <Text style={styles.cardText}>
-            { data.usertext }
+            { data.userText }
           </Text>
           <Button
             text="投稿を見る"
@@ -81,7 +82,9 @@ const styles = StyleSheet.create({
   },
   cardText: {
     marginTop: 5,
-    marginBottom: 20,
+    marginBottom: 16,
+    paddingLeft: 8,
+    paddingRight: 8,
   },
   button: {
     width: width / 1.2,

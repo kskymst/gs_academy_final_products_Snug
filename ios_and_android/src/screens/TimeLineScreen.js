@@ -16,11 +16,13 @@ class TimeLineScreen extends React.Component {
     const db = firebase.firestore();
     db.collection('collections').orderBy('createdOnNumber', 'desc')
       .onSnapshot((querySnapshot) => {
-        const dataList = [];
-        querySnapshot.forEach((doc) => {
-          dataList.push({ ...doc.data(), key: doc.id, loaded: false });
-        });
-        this.setState({ dataList });
+        if (this.state.dataList.length !== querySnapshot.docs.length ) {
+          const dataList = [];
+          querySnapshot.forEach((doc) => {
+            dataList.push({ ...doc.data(), key: doc.id, loaded: false });
+          });
+          this.setState({ dataList });
+        }
       });
   }
 

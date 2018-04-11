@@ -1,16 +1,21 @@
 import React from 'react';
-import { StyleSheet, View, Text, Image, ImageBackground, ScrollView } from 'react-native';
+import { StyleSheet, View, Text, Image, ImageBackground } from 'react-native';
 import { ButtonGroup, Icon } from 'react-native-elements';
 import SideMenu from 'react-native-side-menu';
 import firebase from 'firebase';
 
+import ShopStaff from '../components/ShopStaff';
 import UserLibraryImages from '../components/UserLibraryImages';
 import Sidebar from '../components/Sidebar';
 
 const Dimensions = require('Dimensions');
 
-const { width } = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
+const userImagePadding = 25;
+if (height === 812) {
+  userImagePadding = 40
+}
 
 class MypageScreen extends React.Component {
   constructor(props) {
@@ -21,6 +26,8 @@ class MypageScreen extends React.Component {
       dataList: [],
       userData: [],
       userId: '',
+      shop: false,
+      shopStaff: [],
       selectedIndex: 0,
       sideMenuOpen: false,
     };
@@ -65,39 +72,79 @@ class MypageScreen extends React.Component {
       ),
   });
 
-  componentDidMount() {
+  componentWillMount() {
     this.props.navigation.setParams({ openSideMenu: this.openSideMenu.bind(this) });
     const { currentUser } = firebase.auth();
     const userId = this.props.navigation.state.params ? this.props.navigation.state.params.user : currentUser.uid;
     const db = firebase.firestore();
     db.collection('users').doc(userId)
       .onSnapshot((querySnapshot)=> {
+        querySnapshot.data().type === 'shop' ?
+        this.setState({
+          userData: querySnapshot.data(),
+          userId,
+          shop: true,
+        }) :
         this.setState({
           userData: querySnapshot.data(),
           userId,
         });
       });
-    const allDataList = [];
-    const dataList = [];
-    db.collection(`users/${userId}/status`).orderBy('createdOnNumber', 'desc')
-      .get()
-      .then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          db.collection('collections').doc(doc.id)
+  }
+
+  componentWillReceiveProps() {
+    let dataList = [];
+    const db = firebase.firestore();
+    if (this.state.shop) {
+      const shopStaff = [];
+      db.collection('collections')
+        .where('user', '==', this.state.userId)
+        .get()
+        .then((__querySnapshot) => {
+          __querySnapshot.forEach((_doc) => {
+            dataList.push(_doc.data());
+          })
+        db.collection('users')
+            .where('shopId', '==', this.state.userId)
             .get()
-            .then((_querySnapshot) => {
-              const combineData = Object.assign(doc.data(), _querySnapshot.data());
-              allDataList.push(combineData);
-              if (combineData.want) {
-                dataList.push(combineData);
-              }
-              this.setState({
-                allDataList,
-                dataList,
-              });
+            .then((___querySnapshot) => {
+              ___querySnapshot.forEach((_doc) => {
+                shopStaff.push({ ..._doc.data(), key: _doc.id });
+              })
             })
+          this.setState({ 
+            dataList,
+            shopStaff
+          });
+          return;
+        })
+    } else {
+      let userId = this.state.userId;
+      if (userId === '') {
+        const { currentUser } = firebase.auth();
+        userId = currentUser.uid
+      }
+      db.collection(`users/${userId}/status`).orderBy('createdOnNumber', 'desc')
+        .onSnapshot((querySnapshot) => {
+          const allDataList = [];
+          dataList = [];
+          querySnapshot.forEach((doc) => {
+            db.collection('collections').doc(doc.id)
+              .get()
+              .then((_querySnapshot) => {
+                const combineData = Object.assign(doc.data(), _querySnapshot.data());
+                allDataList.push(combineData);
+                if (combineData.want) {
+                  dataList.push(combineData);
+                }
+                this.setState({
+                  allDataList,
+                  dataList,
+                });
+              })
+          });
         });
-      });
+    }
   }
 
   handleSubmit() {
@@ -129,6 +176,10 @@ class MypageScreen extends React.Component {
     }
   }
 
+  _updateIndex(selectedIndex) {
+    this.setState({ selectedIndex });
+  }
+
   onLayout = (e) => {
     this.setState({
       topComponentHeight: e.nativeEvent.layout.height
@@ -137,7 +188,22 @@ class MypageScreen extends React.Component {
 
   render() {
     const buttons = ['Want', 'Style', 'Closet'];
-    const { selectedIndex } = this.state;
+    const shopButtons = ['Post', 'Staffs'];
+    const { selectedIndex, shop } = this.state;
+    const userContents = shop && selectedIndex === 0 || !shop ? (
+      <UserLibraryImages
+        navigation={this.props.navigation}
+        dataList={this.state.dataList}
+        topComponentHeight={this.state.topComponentHeight}
+      />) : (
+        <ShopStaff
+          userData={this.state.userData}
+          userId={this.state.userId}
+          shopStaffList={this.state.shopStaff}
+          navigation={this.props.navigation}
+          topComponentHeight={this.state.topComponentHeight}
+        />
+      );
     const menu = (
     <Sidebar
       userData={this.state.userData}
@@ -171,7 +237,7 @@ class MypageScreen extends React.Component {
               />
               <Text
                 style={styles.userName}
-                numberOfLines={2}
+                numberOfLines={1}
                 ellipsizeMode={'tail'}
               >{this.state.userData.userName}</Text>
               <Text
@@ -180,7 +246,22 @@ class MypageScreen extends React.Component {
                 ellipsizeMode={'tail'}
               >{this.state.userData.userText}</Text>
               <View style={styles.statusButtonArea}>
-                <ButtonGroup
+              {
+                this.state.shop ? (
+                  <ButtonGroup
+                    onPress={(selectedIndex) => this.setState({ selectedIndex })}
+                    selectedIndex={selectedIndex}
+                    buttons={shopButtons}
+                    buttonStyle={styles.statusButton}
+                    textStyle={styles.statusButtonText}                
+                    selectedButtonStyle={styles.selectStatusButtons}
+                    containerStyle={styles.statusButtons}
+                    selectedTextStyle={{ color: '#333' }}
+                    underlayColor="transparent"
+                  />
+                ) :
+                (
+                  <ButtonGroup
                   onPress={this.updateIndex}
                   selectedIndex={selectedIndex}
                   buttons={buttons}
@@ -191,15 +272,13 @@ class MypageScreen extends React.Component {
                   selectedTextStyle={{ color: '#333' }}
                   underlayColor="transparent"
                 />
+                )
+              }
               </View>
             </ImageBackground>
           </View>
           <View>
-            <UserLibraryImages
-              navigation={this.props.navigation}
-              dataList={this.state.dataList}
-              topComponentHeight={this.state.topComponentHeight}
-            />
+            { userContents }
           </View>
         </View>
       </SideMenu>
@@ -214,7 +293,7 @@ const styles = StyleSheet.create({
   },
   main: {
     alignItems: 'center',
-    paddingTop: 40,
+    paddingTop: userImagePadding,
     paddingBottom: 10,
     maxHeight: 300,
   },

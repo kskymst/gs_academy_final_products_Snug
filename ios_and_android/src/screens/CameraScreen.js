@@ -55,6 +55,7 @@ class CameraScreen extends React.Component {
       clothete: false,
       userName: '',
       gender: '',
+      shop: false,
       loading: false,
       validation: false,
     };
@@ -69,11 +70,20 @@ class CameraScreen extends React.Component {
     db.collection('users').doc(currentUser.uid)
       .get()
       .then((querySnapshot) => {
-        this.setState({
-          userImage: querySnapshot.data().userImage,
-          userName: querySnapshot.data().userName,
-          gender: querySnapshot.data().gender,
-        });
+        if (querySnapshot.data().type === 'shop') {
+          this.setState({
+            userImage: querySnapshot.data().userImage,
+            userName: querySnapshot.data().userName,
+            gender: querySnapshot.data().gender,
+            shop: true,
+          });
+        } else {
+          this.setState({
+            userImage: querySnapshot.data().userImage,
+            userName: querySnapshot.data().userName,
+            gender: querySnapshot.data().gender,
+          });
+        }
       })
       .catch(() => {
         this.props.navigation.navigate('LoginSignup');
@@ -248,38 +258,43 @@ class CameraScreen extends React.Component {
         <View style={styles.tags}>
           {tagText}
         </View>
-        <View style={styles.statusArea}>
-          <View>
-            <Text style={styles.statusAreaTitle} >Status</Text>
+        { this.state.shop ? (
+          <React.Fragment />
+        ) : (
+          <View style={styles.statusArea}>
+            <View>
+              <Text style={styles.statusAreaTitle} >Status</Text>
+            </View>
+            <CheckBox
+              title="Want"
+              checkedIcon="heart-o"
+              uncheckedIcon="heart"
+              checked={this.state.want}
+              checkedColor="#FF1494"
+              onPress={() => this.setState({ want: !this.state.want })}
+              containerStyle={styles.checkBox}
+            />
+            <CheckBox
+              title="Style"
+              checkedIcon="star-o"
+              uncheckedIcon="star"
+              checked={this.state.favorite}
+              checkedColor="#F3FF14"
+              onPress={() => this.setState({ favorite: !this.state.favorite })}
+              containerStyle={styles.checkBox}
+            />
+            <CheckBox
+              title="My Closet"
+              checkedIcon="plus-square-o"
+              uncheckedIcon="plus-square"
+              checked={this.state.clothete}
+              checkedColor="#16DD6C"
+              onPress={() => this.setState({ clothete: !this.state.clothete })}
+              containerStyle={styles.checkBox}
+            />
           </View>
-          <CheckBox
-            title="Want"
-            checkedIcon="heart-o"
-            uncheckedIcon="heart"
-            checked={this.state.want}
-            checkedColor="#FF1494"
-            onPress={() => this.setState({ want: !this.state.want })}
-            containerStyle={styles.checkBox}
-          />
-          <CheckBox
-            title="Style"
-            checkedIcon="star-o"
-            uncheckedIcon="star"
-            checked={this.state.favorite}
-            checkedColor="#F3FF14"
-            onPress={() => this.setState({ favorite: !this.state.favorite })}
-            containerStyle={styles.checkBox}
-          />
-          <CheckBox
-            title="My Closet"
-            checkedIcon="plus-square-o"
-            uncheckedIcon="plus-square"
-            checked={this.state.clothete}
-            checkedColor="#16DD6C"
-            onPress={() => this.setState({ clothete: !this.state.clothete })}
-            containerStyle={styles.checkBox}
-          />
-        </View>
+        )}
+
         <Button
           text="登録"
           loading={this.state.loading}
