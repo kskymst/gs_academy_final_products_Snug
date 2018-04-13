@@ -79,10 +79,10 @@ class MessageScreen extends React.Component {
             className="message-person"
             onClick={() => this.props.openMessageBox(userId)}
           >
-            <div className="user-image">
-              <img
-                src={data.userImage}
-                alt=""
+            <div className="user-image-area">
+              <div
+                style={{ backgroundImage: `url(${data.userImage})` }}
+                className="user-image"
               />
             </div>
             <div className="message-person-center">

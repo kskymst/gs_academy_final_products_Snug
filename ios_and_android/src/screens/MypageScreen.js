@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, Image, ImageBackground } from 'react-native';
+import { StyleSheet, View, Text, Image, ImageBackground, TouchableHighlight } from 'react-native';
 import { ButtonGroup, Icon } from 'react-native-elements';
 import SideMenu from 'react-native-side-menu';
 import firebase from 'firebase';
@@ -240,6 +240,22 @@ class MypageScreen extends React.Component {
                 numberOfLines={1}
                 ellipsizeMode={'tail'}
               >{this.state.userData.userName}</Text>
+              {
+                this.state.userData.type === 'shopStaff' && (
+                  <TouchableHighlight
+                    onPress={() => this.props.navigation.navigate('MypageScreen', { user: this.state.userData.shopId })}
+                    underlayColor="transparent"
+                  >
+                    <Text
+                      style={styles.shopName}
+                      numberOfLines={1}
+                      ellipsizeMode={'tail'}
+                      >
+                      {this.state.userData.shopName} STAFF
+                    </Text>
+                  </TouchableHighlight>
+                )
+              }
               <Text
                 style={styles.userDescription}
                 numberOfLines={5}
@@ -314,7 +330,14 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontWeight: 'bold',
     letterSpacing: 1.5,
-    margin: 8,
+    marginTop: 8,
+    textShadowColor: 'rgba(0, 0, 0, 0.75)',
+    textShadowOffset: {width: 1, height: 1},
+    textShadowRadius: 3,
+  },
+  shopName: {
+    color: '#fff',
+    fontWeight: 'bold',
     textShadowColor: 'rgba(0, 0, 0, 0.75)',
     textShadowOffset: {width: 1, height: 1},
     textShadowRadius: 3,
@@ -324,6 +347,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
     paddingLeft: 10,
     paddingRight: 10,
+    marginTop: 8,
     textAlign: 'center',
     textShadowColor: 'rgba(0, 0, 0, 0.75)',
     textShadowOffset: {width: 1, height: 1},

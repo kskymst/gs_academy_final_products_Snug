@@ -14,9 +14,9 @@ const Visitor = (props) => {
           className="visitor-image"
           to={`/main/${data.userId}`}
         >
-          <img
-            src={data.userImage}
-            alt=""
+          <div
+            style={{ backgroundImage: `url(${data.userImage})` }}
+            className="user-image"
           />
         </Link>
         <p>{visitedTime}</p>

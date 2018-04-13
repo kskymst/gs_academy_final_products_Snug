@@ -1,11 +1,12 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 import firebase from 'firebase';
-import { Button, Popup } from 'semantic-ui-react';
+import { Button, Popup, Loader } from 'semantic-ui-react';
 import Message from 'react-icons/lib/io/ios-chatbubble-outline';
 
 import ImageList from './ImageList';
 import ItemDetail from '../components/ItemDetail';
+import StaffList from '../components/StaffList';
 
 
 class UserPage extends React.Component {
@@ -15,9 +16,12 @@ class UserPage extends React.Component {
       want: true,
       favorite: false,
       clothete: false,
+      post: true,
+      staff: false,
       userData: [],
       allDataList: [],
       dataList: [],
+      staffList: [],
     };
     this.filterDataList = this.filterDataList.bind(this);
     this.loadUserImage = this.loadUserImage.bind(this);
@@ -28,7 +32,6 @@ class UserPage extends React.Component {
       this.loadUserImage(this.props);
     }
   }
-
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.match.params.id !== this.props.match.params.id) {
@@ -42,34 +45,69 @@ class UserPage extends React.Component {
     db.collection('users').doc(userId)
       .get()
       .then((querySnapshot) => {
-        this.setState({
-          userData: querySnapshot.data(),
-        });
+        const staffList = [];
+        if (querySnapshot.data().type === 'shop') {
+          db.collection('users')
+            .where('shopId', '==', userId)
+            .get()
+            .then((_querySnapshot) => {
+              _querySnapshot.forEach((_doc) => {
+                staffList.push(Object.assign(_doc.data(), { key: _doc.id }));
+              });
+              this.setState({
+                userData: querySnapshot.data(),
+                staffList,
+              });
+            });
+        } else {
+          this.setState({
+            userData: querySnapshot.data(),
+          });
+        }
+        const allDataList = [];
+        const dataList = [];
+        if (querySnapshot.data().type === 'shop') {
+          db.collection('collections')
+            .where('user', '==', userId)
+            .get()
+            .then((_querySnapshot) => {
+              _querySnapshot.forEach((doc) => {
+                dataList.push(doc.data());
+              });
+              this.setState({ dataList });
+            });
+        } else {
+          db.collection(`users/${userId}/status`).orderBy('createdOnNumber', 'desc')
+            .get()
+            .then((_querySnapshot) => {
+              if (_querySnapshot.docs.length === 0) {
+                this.setState({
+                  allDataList,
+                  dataList,
+                });
+                return;
+              }
+              _querySnapshot.forEach((doc) => {
+                db.collection('collections').doc(doc.id)
+                  .get()
+                  .then((__querySnapshot) => {
+                    const combineData = Object.assign(doc.data(), __querySnapshot.data());
+                    allDataList.push(combineData);
+                    if (combineData.want) {
+                      dataList.push(combineData);
+                    }
+                    this.setState({
+                      allDataList,
+                      dataList,
+                    });
+                  });
+              });
+            });
+        }
       })
       .catch(() => {
         const { history } = props;
         history.push('/404');
-      });
-    const allDataList = [];
-    const dataList = [];
-    db.collection(`users/${userId}/status`).orderBy('createdOnNumber', 'desc')
-      .get()
-      .then((_querySnapshot) => {
-        _querySnapshot.forEach((doc) => {
-          db.collection('collections').doc(doc.id)
-            .get()
-            .then((__querySnapshot) => {
-              const combineData = Object.assign(doc.data(), __querySnapshot.data());
-              allDataList.push(combineData);
-              if (combineData.want) {
-                dataList.push(combineData);
-              }
-              this.setState({
-                allDataList,
-                dataList,
-              });
-            });
-        });
       });
   }
 
@@ -107,6 +145,15 @@ class UserPage extends React.Component {
   }
 
   render() {
+    if (this.state.userData.length === 0) {
+      return (
+        <Loader
+          active
+          inline="centered"
+          style={{ marginTop: '30vh' }}
+        />
+      );
+    }
     const userId = this.props.match.params.id;
     let message = '';
     if (userId !== this.props.myId) {
@@ -124,6 +171,61 @@ class UserPage extends React.Component {
         />
       );
     }
+
+    let buttonGroup = '';
+    if (this.state.userData.type === 'shop') {
+      buttonGroup = (
+        <Button.Group>
+          <Button
+            active={this.state.post}
+            className="shop-status-button"
+            onClick={() => this.setState({
+              post: true,
+              staff: false,
+            })}
+          >
+            Post
+          </Button>
+          <Button
+            active={this.state.staff}
+            className="shop-status-button"
+            onClick={() => this.setState({
+              post: false,
+              staff: true,
+            })}
+          >
+            Staff
+          </Button>
+        </Button.Group>
+      );
+    } else {
+      buttonGroup = (
+        <Button.Group>
+          <Button
+            active={this.state.want}
+            className="status-button"
+            onClick={() => this.filterDataList('want')}
+          >
+            Want
+          </Button>
+          <Button
+            active={this.state.favorite}
+            className="status-button"
+            onClick={() => this.filterDataList('favorite')}
+          >
+            Style
+          </Button>
+          <Button
+            active={this.state.clothete}
+            className="status-button"
+            onClick={() => this.filterDataList('clothete')}
+          >
+            Closet
+          </Button>
+        </Button.Group>
+      );
+    }
+
     return (
       <div className="user-page-wrapper" >
         <div
@@ -131,37 +233,27 @@ class UserPage extends React.Component {
           style={{ backgroundImage: `url(${this.state.userData.backgroundImage})` }}
         >
           { message }
-          <img src={this.state.userData.userImage} alt="" />
+          <div
+            style={{ backgroundImage: `url(${this.state.userData.userImage})` }}
+            className="user-image"
+          />
+          {/* <img src={this.state.userData.userImage} alt="" /> */}
           <h2>{this.state.userData.userName}</h2>
           <p>{this.state.userData.userText}</p>
-          <Button.Group>
-            <Button
-              active={this.state.want}
-              className="status-button"
-              onClick={() => this.filterDataList('want')}
-            >
-              Want
-            </Button>
-            <Button
-              active={this.state.favorite}
-              className="status-button"
-              onClick={() => this.filterDataList('favorite')}
-            >
-              Style
-            </Button>
-            <Button
-              active={this.state.clothete}
-              className="status-button"
-              onClick={() => this.filterDataList('clothete')}
-            >
-              Closet
-            </Button>
-          </Button.Group>
+          { buttonGroup }
         </div>
-        <ImageList
-          dataList={this.state.dataList}
-          query={this.props.match.url}
-        />
+        { this.state.staff ? (
+          <StaffList
+            staffList={this.state.staffList}
+            query={this.props.match.url}
+          />
+        ) : (
+          <ImageList
+            dataList={this.state.dataList}
+            query={this.props.match.url}
+          />
+        )
+        }
         <Route
           exact
           path="/main/:id/:query"

@@ -1,0 +1,51 @@
+.add-staff-wrapper {
+  width: 45vw;
+  margin: 16px auto 0;
+  padding: 8px 16px;
+  min-height: 88vh;
+  border-radius: 10px;
+  background-color: white;
+
+  h2 {
+    text-align: center;
+    margin: 8px;
+  }
+  .input-outer {
+    text-align: center;
+    .search-input {
+      width: 95%;
+    }
+    .ui.input input:focus {
+      border-color: #6551B1,
+    }
+  }
+
+  .group-buttons {
+      width: 95%;
+      margin: 16px auto 0;
+      display: flex;
+      justify-content: center;
+      text-align: center;
+      font-size: 18px;
+
+        .group-button-true {
+          color: #6551B1;
+          border: none;
+          width: 49%;
+          border-bottom: 2px solid #6551B1;
+          margin: 4px;
+          padding-bottom: 6px;
+        }
+        .group-button-false {
+          color: #666;
+          border: none;
+          width: 49%;
+          border-bottom: 2px solid #666;
+          margin: 4px;
+          padding-bottom: 6px;
+        }
+        .group-button-true:hover, .group-button-false:hover  {
+          background: none;
+        }
+  }
+}

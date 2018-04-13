@@ -194,7 +194,6 @@ const region = {
 };
 
 
-// eslint-disable-next-line
 export default class App extends React.Component {
   constructor() {
     super();
@@ -205,18 +204,12 @@ export default class App extends React.Component {
     FCM.requestPermissions(); // for iOS
     FCM.getFCMToken()
       .then((token) => {
-        console.log('get_token =>', token);
         firebase.auth().onAuthStateChanged((user) => {
           if (user) {
             this.beaconMonitoring(token);
           }
         });
       });
-  }
-  componentWillUnmount() {
-    // prevent leaking
-    // this.refreshUnsubscribe();
-    // this.notificationUnsubscribe();
   }
 
   beaconMonitoring(token) {
@@ -229,16 +222,22 @@ export default class App extends React.Component {
     const subscription = DeviceEventEmitter.addListener(
       'beaconsDidRange',
       (data) => {
-        if (data.beacons.length !== 0 && data.beacons[0].uuid === region.uuid) {
+        if (
+          data.beacons.length !== 0 &&
+          data.beacons[0].uuid === region.uuid &&
+          data.beacons[0].rssi !== 0 &&
+          data.beacons[0].rssi > -78
+        ) {
           Beacons.stopRangingBeaconsInRegion(region);
           Beacons.stopMonitoringForRegion(region);
           Beacons.stopUpdatingLocation();
-          console.log('stop');
+          // console.log('stop');
           this.triggerPushNotification(region.uuid, token);
         }
-        console.log('run');
-        console.log('data_uuid', data.beacons[0].uuid);
-        console.log('region.uuid', region.uuid);
+        // console.log('run');
+        // console.log('data_uuid', data.beacons[0]);
+        // console.log('data_uuid', data.beacons[0].uuid);
+        // console.log('region.uuid', region.uuid);
       },
     );
   }

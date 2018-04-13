@@ -25,19 +25,20 @@
     margin-bottom: 8px;
     overflow: hidden;
     cursor: pointer;
-    .user-image {
+    .user-image-area {
       height: 87px;
       width: 24%;
       display: flex;
       justify-content: center;
       align-items: center;
       margin: auto 0;
-      padding: 0 1vw;
       background-color: rgba(0,0,0,0.7);
-      img {
+      .user-image {
         width: 4.5vw;
         height: 4.5vw;
-        border-radius: 100px;
+        background-position: center;
+        background-size: cover;
+        border-radius: 300px;
       }
     }
     .message-person-center {

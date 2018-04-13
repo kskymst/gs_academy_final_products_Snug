@@ -18,9 +18,8 @@ class VisitorScreen extends React.Component {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         db.collection(`users/${user.uid}/visitor`)
-          .orderBy('visitedOn', 'desc').limit(10)
-          .get()
-          .then((querySnapshot) => {
+          .orderBy('visitedOn', 'desc').limit(20)
+          .onSnapshot((querySnapshot) => {
             const allVisitorList = [];
             querySnapshot.forEach((doc) => {
               const data = doc.data();
@@ -61,11 +60,10 @@ class VisitorScreen extends React.Component {
 
   render() {
     return (
-      <div className="coming-customer-wrapper" >
+      <div className="visitor-wrapper" >
         <div className="visitor-inner" >
           <div className="visitor-title">
             <VisitorIcon
-              size={32}
               className="icon"
             />
             <p>来店ユーザー</p>

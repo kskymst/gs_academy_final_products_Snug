@@ -1,20 +1,18 @@
 .image-lists {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-  padding: 1vw 0.8vw;
+  padding: 1vw 0.2vw;
 
   .image-lists-outer {
     width: 32%;
-    margin-bottom: 0.5vw;
     cursor: pointer;
+    margin: 0.2vw;
 
     div {
-      height: 12.65vw;
+      height: 12vw;
       background-position: center;
       background-size: cover;
       border-radius: 5px;
-      margin-bottom: 0.5vw;
     }
     }
   }

@@ -1,0 +1,62 @@
+.add-staff-list-area {
+  margin-top: 16px;
+  .staff-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #aaa;
+    padding: 8px;
+
+    .staff-info {
+      display: flex;
+      align-items: center;
+      .user-image {
+        width: 4vw;
+        height: 4vw;
+        background-position: center;
+        background-size: cover;
+        border-radius: 100px;
+      }
+      .staff-description {
+        width: 80%;
+        padding: 8px;
+        margin-left: 10px;
+        overflow: hidden;
+        p:nth-child(1){
+          font-size: 1.2vw;
+          font-weight: bold;
+        }
+        p:nth-child(2){
+          font-size: 0.8vw;
+          height: 1.6vw;
+          color: #666;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 2;
+        }
+      }
+    }
+    .add-button {
+      color: white;
+      font-size: 1vw;
+      background-color: #6551B1;
+      color: #fff;
+      height: 3vw;
+      width: 7vw;
+      border: none;
+      letter-spacing: 1.5px;
+      border-radius: 5px;
+    }
+    .added-button {
+      color: white;
+      font-size: 1vw;
+      background-color: white;
+      color: #6551B1;
+      border: 1px solid #6551B1;
+      height: 3vw;
+      width: 7vw;
+      letter-spacing: 1.5px;
+      border-radius: 5px;
+    }
+  }
+}

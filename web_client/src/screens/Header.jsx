@@ -94,6 +94,15 @@ class Header extends React.Component {
                   />
                 </Link>
                 <Link
+                  to="/main/addstaff"
+                >
+                  <Dropdown.Item
+                    text="  スタッフを追加"
+                    icon="add user"
+                    className="link-text"
+                  />
+                </Link>
+                <Link
                   to="/main/setting"
                 >
                   <Dropdown.Item

@@ -1,11 +1,11 @@
-.coming-customer-wrapper {
-  height: 92vh;
+.visitor-wrapper {
   width: 25vw;
-  overflow: scroll;
+  height: 92vh;
   background-color:whitesmoke;
   .visitor-inner{
     width: 60%;
     height: 92vh;
+    overflow-y: scroll;
     background-color: rgba(0,0,0,0.7);
   }
 
@@ -13,22 +13,18 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 1.2vw;
     color: white;
-    padding-top: 10px;
+    padding: 10px 0 6px;
     margin-bottom: 16px;
     border-bottom: 1px solid white;
     .icon {
-      padding: -2vw;
+      font-size: 2.4vw;
+      padding-bottom: 0.3vw; 
     }
     p {
       display: inline;
-      margin-top: 8px;
-      padding: 8px;
+      font-size: 1.2vw;
     }
   }
 }
 
-.coming-customer-wrapper::-webkit-scrollbar {
-  display:none;
-}
