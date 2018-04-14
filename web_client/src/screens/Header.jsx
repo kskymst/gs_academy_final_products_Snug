@@ -56,8 +56,7 @@ class Header extends React.Component {
           <div className="header-left" />
           <div className="header-logos">
             <Link to="/main" className="header-logos-inner">
-              <img src="/img/icon.png" alt="bland-logo" />
-              <p>Snug</p>
+              <img src="/img/header_logo.png" alt="bland-logo" />
             </Link>
           </div>
 
@@ -126,8 +125,7 @@ class Header extends React.Component {
     return (
       <div className="header-wrapper">
         <div className="header-logos">
-          <img src="/img/icon.png" alt="bland-logo" />
-          <p>Snug</p>
+          <img src="/img/header_logo.png" alt="bland-logo" />
         </div>
       </div>
     );
