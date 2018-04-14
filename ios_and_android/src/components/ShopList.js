@@ -8,7 +8,6 @@ const { width } = Dimensions.get('window');
 // eslint-disable-next-line
 export default class ShopList extends React.Component {
   render() {
-    console.log(this.props.shopDataList)
     const shopList = this.props.shopDataList.length !== 0 ? (
       this.props.shopDataList.map (data => (
         <Card

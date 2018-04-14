@@ -1,15 +1,15 @@
 import React from 'react';
-import { StyleSheet, ScrollView } from 'react-native';
+import { StyleSheet, View, ScrollView, ActivityIndicator } from 'react-native';
 import firebase from 'firebase';
 
 import ShopList from '../components/ShopList';
 
-// eslint-disable-next-line
 class ShopListScreen extends React.Component {
   constructor() {
     super();
     this.state = {
       shopDataList: [],
+      loading: true,
     };
   }
 
@@ -37,16 +37,35 @@ class ShopListScreen extends React.Component {
                 __querySnapshot.forEach((_doc) => {
                   shopDataList.push({ ..._doc.data(), key: _doc.id });
                 });
-                shopDataList.sort((a, b) => (
+                const adjustList = [];
+                const shopDataLists =[];
+                for (let i = 0; i < shopDataList.length; i++) {
+                  adjustList[shopDataList[i]['key']] = shopDataList[i];
+                }
+                // eslint-disable-next-line
+                for (let key in adjustList) {
+                  shopDataLists.push(adjustList[key]);
+                }
+                shopDataLists.sort((a, b) => (
                   a.datetime < b.datetime ? 1 : -1
                 ));
-                this.setState({ shopDataList });
+                this.setState({
+                  shopDataList: shopDataLists,
+                  loading: false,
+                });
               });
           });
       });
   }
 
   render() {
+    if (this.state.loading) {
+      return (
+        <View style={{ flex: 1, justifyContent: 'center' }}>
+          <ActivityIndicator size="large" color="#777" />
+        </View>
+      );
+    }
     return (
       <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
         <ShopList navigation={this.props.navigation} shopDataList={this.state.shopDataList} />

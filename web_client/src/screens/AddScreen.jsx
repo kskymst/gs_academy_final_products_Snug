@@ -121,7 +121,6 @@ class AddScreen extends React.Component {
   }
 
   render() {
-    console.log(this.state.imageFile.size > 1000000);
     if (this.state.redirect) {
       return <Redirect to="/main" />;
     }
@@ -216,56 +215,63 @@ class AddScreen extends React.Component {
         <div className="created-tag-area" >
           { tagText }
         </div>
-        <div className="status-area">
-          <div className="status-title">
-            <HeartOutline style={{ fontSize: 24, marginRight: 5 }} />
-            <p>
-              Status
-            </p>
-          </div>
-          <div
-            className="icons"
-            role="button"
-            tabIndex={0}
-            onClick={() => this.setState({ want: !this.state.want })}
-            onKeyPress={() => this.setState({ want: !this.state.want })}
-          >
-            {
-              this.state.want ?
-                <Heart size={56} style={{ color: 'rgb(255, 0, 34)' }} /> :
-                <HeartOutline size={56} />
-            }
-            <p>Want</p>
-          </div>
-          <div
-            className="icons"
-            role="button"
-            tabIndex={0}
-            onClick={() => this.setState({ favorite: !this.state.favorite })}
-            onKeyPress={() => this.setState({ favorite: !this.state.favorite })}
-          >
-            {
-              this.state.favorite ?
-                <Star size={56} style={{ color: 'rgb(204, 238, 14)' }} /> :
-                <StarOutline size={56} />
-            }
-            <p>Style</p>
-          </div>
-          <div
-            className="icons"
-            role="button"
-            tabIndex={0}
-            onClick={() => this.setState({ clothete: !this.state.clothete })}
-            onKeyPress={() => this.setState({ clothete: !this.state.clothete })}
-          >
-            {
-              this.state.clothete ?
-                <Plus size={56} style={{ color: '#44B26B' }} /> :
-                <PlusOutline size={56} />
-            }
-            <p>Closet</p>
-          </div>
-        </div>
+        {
+          this.props.myData.type !== 'shop' ? (
+            <div className="status-area">
+              <div className="status-title">
+                <HeartOutline style={{ fontSize: 24, marginRight: 5 }} />
+                <p>
+                  Status
+                </p>
+              </div>
+              <div
+                className="icons"
+                role="button"
+                tabIndex={0}
+                onClick={() => this.setState({ want: !this.state.want })}
+                onKeyPress={() => this.setState({ want: !this.state.want })}
+              >
+                {
+                  this.state.want ?
+                    <Heart size={56} style={{ color: 'rgb(255, 0, 34)' }} /> :
+                    <HeartOutline size={56} />
+                }
+                <p>Want</p>
+              </div>
+              <div
+                className="icons"
+                role="button"
+                tabIndex={0}
+                onClick={() => this.setState({ favorite: !this.state.favorite })}
+                onKeyPress={() => this.setState({ favorite: !this.state.favorite })}
+              >
+                {
+                  this.state.favorite ?
+                    <Star size={56} style={{ color: 'rgb(204, 238, 14)' }} /> :
+                    <StarOutline size={56} />
+                }
+                <p>Style</p>
+              </div>
+              <div
+                className="icons"
+                role="button"
+                tabIndex={0}
+                onClick={() => this.setState({ clothete: !this.state.clothete })}
+                onKeyPress={() => this.setState({ clothete: !this.state.clothete })}
+              >
+                {
+                  this.state.clothete ?
+                    <Plus size={56} style={{ color: '#44B26B' }} /> :
+                    <PlusOutline size={56} />
+                }
+                <p>Closet</p>
+              </div>
+            </div>
+          ) : (
+            ''
+          )
+        }
+
         <div className="submit-button-area">
           <Button
             positive

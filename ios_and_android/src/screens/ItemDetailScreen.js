@@ -1,6 +1,6 @@
 import React from 'react';
 import { Icon } from 'react-native-elements';
-import { StyleSheet, View, Text, Image, TouchableHighlight, ScrollView, ImageBackground, KeyboardAvoidingView, Dimensions } from 'react-native';
+import { StyleSheet, View, Text, Image, TouchableHighlight, ScrollView, ImageBackground, KeyboardAvoidingView, Dimensions, ActivityIndicator } from 'react-native';
 import firebase from 'firebase';
 
 import ItemComment from '../components/ItemComment';
@@ -12,28 +12,41 @@ class ItemDetailScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      data: [],
       userName: '',
       userImage: 'https://firebasestorage.googleapis.com/v0/b/snug-45a34.appspot.com/o/asset%2FuserImage.png?alt=media&token=9a26dd92-9024-442c-b38d-3b5dabf8e720',
+      loading: true,
     };
   }
 
   componentWillMount() {
     const { data } = this.props.navigation.state.params;
     const db = firebase.firestore();
-    if (data.user === undefined) {
-      data.user = '';
-    }
-    db.collection('users').doc(data.user)
+    db.collection('collections').doc(data.id)
       .get()
       .then((doc) => {
-        this.setState({
-          userImage: doc.data().userImage,
-          userName: doc.data().userName,
-        });
+        const dataList = { ...doc.data(), key: doc.id }
+        db.collection('users').doc(doc.data().user)
+          .get()
+          .then((_doc) => {
+            this.setState({
+              data: dataList,
+              userImage: _doc.data().userImage,
+              userName: _doc.data().userName,
+              loading: false,
+            });
+          });
       });
   }
 
   render() {
+    if (this.state.loading) {
+      return (
+        <View style={{ flex: 1, justifyContent: 'center' }}>
+          <ActivityIndicator size="large" color="#777" />
+        </View>
+      );
+    }
     const { data } = this.props.navigation.state.params;
     const timestamp = data.createdOn.slice(0, -3);
     const tags = Object.keys(data.tags).map(tagName => (
@@ -78,13 +91,13 @@ class ItemDetailScreen extends React.Component {
               <Image source={{ uri: data.imageUrl }} style={styles.itemImage} />
             </View>
           </ImageBackground>
-          <LikeButtons data={data} />
+          <LikeButtons data={this.state.data} />
           <View style={styles.tagArea}>
             <View style={styles.tags}>
               { tags }
             </View>
           </View>
-          <ItemComment data={data} navigation={this.props.navigation} />
+          <ItemComment data={this.state.data} navigation={this.props.navigation} />
         </ScrollView>
       </KeyboardAvoidingView>
     );

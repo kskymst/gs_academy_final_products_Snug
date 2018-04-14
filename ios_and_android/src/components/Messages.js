@@ -1,9 +1,9 @@
 import React from 'react';
 import { StyleSheet, View, Text, Image, Dimensions } from 'react-native';
+import { Avatar } from 'react-native-elements';
 
 const { width } = Dimensions.get('window');
 
-// eslint-disable-next-line
 class Messages extends React.Component {
   shouldComponentUpdate(nextProps) {
     if (nextProps === this.props) {
@@ -13,7 +13,30 @@ class Messages extends React.Component {
   }
 
   render() {
+    if (this.props.messages.length === 0) {
+      return (
+        <View>
+          <Text style={styles.noDataText}>メッセージはありません</Text>
+        </View>
+      );
+    }
     let messageList = <Text />;
+    const myImage = (
+      <Avatar
+        medium
+        rounded
+        source={{ uri: this.props.myImage }}
+        containerStyle={styles.myImage}
+      />
+    );
+    const otherImage = (
+      <Avatar
+        medium
+        rounded
+        source={{ uri: this.props.userData.userImage }}
+        containerStyle={styles.otherImage}
+      />
+    );
     if (this.props.messages !== '' && this.props.myId !== '') {
       messageList = this.props.messages.map((message) => {
         const postedDate = message.createdOn.slice(5, -3).replace('_', '月').replace(' ', '日 ');
@@ -23,10 +46,7 @@ class Messages extends React.Component {
               key={message.createdOn}
               style={styles.myMessage}
             >
-              <Image
-                source={{ uri: this.props.myImage }}
-                style={styles.myImage}
-              />
+              { myImage }
               <View
                 style={styles.myTextOuter}
               >
@@ -49,10 +69,7 @@ class Messages extends React.Component {
             key={message.createdOn}
             style={styles.otherMessage}
           >
-            <Image
-              source={{ uri: this.props.userData.userImage }}
-              style={styles.otherImage}
-            />
+            { otherImage }
             <View
               style={styles.otherTextOuter}
             >
@@ -81,6 +98,13 @@ class Messages extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  noDataText: {
+    color: '#999',
+    fontSize: 24,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginTop: width / 2,
+  },
   inner: {
     flexGrow: 1,
     paddingLeft: 8,
@@ -93,16 +117,12 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   otherImage: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
     marginRight: 8,
   },
   otherTextOuter: {
     marginRight: 'auto',
   },
   otherText: {
-    // maxWidth: '80%',
     backgroundColor: '#fff',
     padding: 8,
     borderRadius: 8,
@@ -113,9 +133,6 @@ const styles = StyleSheet.create({
     marginLeft: 'auto',
   },
   myImage: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
     marginLeft: 8,
   },
   myMessage: {

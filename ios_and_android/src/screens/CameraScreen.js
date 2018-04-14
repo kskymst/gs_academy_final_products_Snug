@@ -1,11 +1,14 @@
 import React from 'react';
-import { StyleSheet, View, Text, TextInput, Image, ScrollView, TouchableHighlight, Platform } from 'react-native';
+import { StyleSheet, View, Text, TextInput, Image, ScrollView, TouchableHighlight, Platform, ActivityIndicator, Dimensions } from 'react-native';
 import { Button, CheckBox, Icon } from 'react-native-elements';
 import { NavigationActions } from 'react-navigation';
 import ImagePicker from 'react-native-image-picker';
 import RNFetchBlob from 'react-native-fetch-blob';
 import firebase from 'firebase';
 import UUID from 'uuid-v4';
+
+const { width } = Dimensions.get('window');
+
 
 const uploadImage = (uri, imageName, mime = 'image/jpg') => {
   const Blob = RNFetchBlob.polyfill.Blob;
@@ -54,10 +57,11 @@ class CameraScreen extends React.Component {
       favorite: false,
       clothete: false,
       userName: '',
-      gender: '',
+      gender: 'men',
       shop: false,
       loading: false,
       validation: false,
+      initialLoading: true,
     };
     this.pickImageHandler = this.pickImageHandler.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -74,14 +78,15 @@ class CameraScreen extends React.Component {
           this.setState({
             userImage: querySnapshot.data().userImage,
             userName: querySnapshot.data().userName,
-            gender: querySnapshot.data().gender,
             shop: true,
+            initialLoading: false,
           });
         } else {
           this.setState({
             userImage: querySnapshot.data().userImage,
             userName: querySnapshot.data().userName,
             gender: querySnapshot.data().gender,
+            initialLoading: false,
           });
         }
       })
@@ -201,6 +206,13 @@ class CameraScreen extends React.Component {
   }
 
   render() {
+    if (this.state.initialLoading) {
+      return (
+        <View style={{ flex: 1, justifyContent: 'center' }}>
+          <ActivityIndicator size="large" color="#777" />
+        </View>
+      );
+    }
     let tagText;
     let tagValidate;
     let validation = <View />;
@@ -227,7 +239,7 @@ class CameraScreen extends React.Component {
     }
     return (
       <ScrollView style={styles.container} >
-       { validation }
+        { validation }
         <View style={styles.topContent} >
           <TextInput
             style={styles.contentInput}
@@ -259,7 +271,26 @@ class CameraScreen extends React.Component {
           {tagText}
         </View>
         { this.state.shop ? (
-          <React.Fragment />
+          <View style={styles.genderCheckBoxOuter}>
+            <CheckBox
+              title="Men"
+              checkedIcon="dot-circle-o"
+              uncheckedIcon="circle-o"
+              checked={this.state.gender === 'men' }
+              checkedColor="#7457A3"
+              onPress={() => this.setState({ gender: 'men' })}
+              containerStyle={this.state.gender === 'men' ? styles.genderChecked : styles.genderUnchecked}
+            />
+            <CheckBox
+              title="Women"
+              checkedIcon="dot-circle-o"
+              uncheckedIcon="circle-o"
+              checked={this.state.gender === 'women'}
+              checkedColor="#7457A3"
+              onPress={() => this.setState({ gender: 'women' })}
+              containerStyle={this.state.gender === 'women' ? styles.genderChecked : styles.genderUnchecked}
+            />
+          </View>
         ) : (
           <View style={styles.statusArea}>
             <View>
@@ -335,7 +366,6 @@ const styles = StyleSheet.create({
     marginTop: 12,
     marginLeft: 3,
   },
-
   titles: {
     fontSize: 16,
     marginTop: 7,
@@ -366,6 +396,22 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginLeft: 4,
     paddingBottom: 3,
+  },
+  genderCheckBoxOuter: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  genderChecked: {
+    width: width / 2.3,
+    borderRadius: 8,
+    borderColor: '#7457A3',
+    backgroundColor: '#fff',
+  },
+  genderUnchecked: {
+    width: width / 2.3,
+    borderRadius: 8,
+    borderColor: '#aaa',
+    backgroundColor: '#fff',
   },
   statusAreaTitle: {
     fontSize: 16,

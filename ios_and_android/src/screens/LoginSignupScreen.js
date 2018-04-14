@@ -8,7 +8,6 @@ import InputForm from '../components/InputForm';
 const { height } = Dimensions.get('window');
 
 
-// eslint-disable-next-line
 export default class LoginSignupScreen extends React.Component {
   constructor(props) {
     super(props);
@@ -41,7 +40,7 @@ export default class LoginSignupScreen extends React.Component {
 
   render() {
     const contents = this.state.login ? (
-      <View style={styles.loadingIcon}>
+      <View style={{ flex: 1, justifyContent: 'center' }}>
         <ActivityIndicator size="large" color="#777" />
       </View>
     ) : (
@@ -76,10 +75,6 @@ export default class LoginSignupScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  loadingIcon: {
-    alignItems: 'center',
-    marginTop: height / 2.2,
   },
   icon: {
     height: 80,

@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, Image, ImageBackground, TouchableHighlight } from 'react-native';
+import { StyleSheet, View, Text, Image, ImageBackground, TouchableHighlight, ActivityIndicator } from 'react-native';
 import { ButtonGroup, Icon } from 'react-native-elements';
 import SideMenu from 'react-native-side-menu';
 import firebase from 'firebase';
@@ -28,6 +28,7 @@ class MypageScreen extends React.Component {
       userId: '',
       shop: false,
       shopStaff: [],
+      loading: true,
       selectedIndex: 0,
       sideMenuOpen: false,
     };
@@ -114,7 +115,8 @@ class MypageScreen extends React.Component {
             })
           this.setState({ 
             dataList,
-            shopStaff
+            shopStaff,
+            loading: false,
           });
           return;
         })
@@ -128,6 +130,14 @@ class MypageScreen extends React.Component {
         .onSnapshot((querySnapshot) => {
           const allDataList = [];
           dataList = [];
+          if(querySnapshot.docs.length === 0) {
+            this.setState({
+              allDataList,
+              dataList,
+              loading: false,
+            });
+            return;
+          }
           querySnapshot.forEach((doc) => {
             db.collection('collections').doc(doc.id)
               .get()
@@ -140,6 +150,7 @@ class MypageScreen extends React.Component {
                 this.setState({
                   allDataList,
                   dataList,
+                  loading: false,
                 });
               })
           });
@@ -187,6 +198,13 @@ class MypageScreen extends React.Component {
   }
 
   render() {
+    if (this.state.loading) {
+      return (
+        <View style={{ flex: 1, justifyContent: 'center' }}>
+          <ActivityIndicator size="large" color="#777" />
+        </View>
+      );
+    }
     const buttons = ['Want', 'Style', 'Closet'];
     const shopButtons = ['Post', 'Staffs'];
     const { selectedIndex, shop } = this.state;
@@ -194,6 +212,7 @@ class MypageScreen extends React.Component {
       <UserLibraryImages
         navigation={this.props.navigation}
         dataList={this.state.dataList}
+        selectedIndex={this.state.selectedIndex}
         topComponentHeight={this.state.topComponentHeight}
       />) : (
         <ShopStaff

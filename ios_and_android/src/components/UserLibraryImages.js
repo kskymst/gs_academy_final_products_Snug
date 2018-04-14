@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { StyleSheet, View, Image, TouchableHighlight, Dimensions, FlatList, ActivityIndicator } from 'react-native';
+import { StyleSheet, View, Text, Image, TouchableHighlight, Dimensions, FlatList } from 'react-native';
 
 let { width, height } = Dimensions.get('window');
 let minusMargin = 49.5;
@@ -60,12 +60,19 @@ class UserLibraryImages extends React.Component {
   }
 
   render() {
+    if (this.state.data.length === 0) {
+      return (
+        <View>
+          <Text style={styles.noDataText}>登録がありません</Text>
+        </View>
+      );
+    }
     return (
       <View>
         <FlatList
           data={this.state.data}
           renderItem={this.renderItem}
-          keyExtractor={item => item.id}
+          keyExtractor={item => item.id + this.props.selectedIndex}
           onViewableItemsChanged={this.handleLazyLoad}
           showsHorizontalScrollIndicator={false}
           numColumns={3}
@@ -81,6 +88,13 @@ class UserLibraryImages extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  noDataText: {
+    color: '#999',
+    fontSize: 24,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginTop: width / 4,
+  },
   imageOuter: {
     width: width / 3,
     height: width / 3,

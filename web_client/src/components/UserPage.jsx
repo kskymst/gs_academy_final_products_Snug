@@ -35,6 +35,7 @@ class UserPage extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.match.params.id !== this.props.match.params.id) {
+      this.setState({ staff: false });
       this.loadUserImage(nextProps);
     }
   }
@@ -74,6 +75,9 @@ class UserPage extends React.Component {
               _querySnapshot.forEach((doc) => {
                 dataList.push(doc.data());
               });
+              dataList.sort((a, b) => (
+                a.createdOnNumber < b.createdOnNumber ? 1 : -1
+              ));
               this.setState({ dataList });
             });
         } else {

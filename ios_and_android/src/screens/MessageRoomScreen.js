@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, ScrollView, Image, TextInput, TouchableHighlight, KeyboardAvoidingView, Dimensions } from 'react-native';
+import { StyleSheet, View, Text, ScrollView, Image, TextInput, TouchableHighlight, KeyboardAvoidingView, Dimensions, ActivityIndicator } from 'react-native';
 import { Icon } from 'react-native-elements';
 import firebase from 'firebase';
 
@@ -20,6 +20,7 @@ class MessageRoomScreen extends React.Component {
       text: '',
       messages: [],
       contentHeight: 0,
+      loading: true,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -28,10 +29,6 @@ class MessageRoomScreen extends React.Component {
         headerTitle: `${navigation.state.params.userData.userName}`,
       }
     }
-
-  // componentWillReceiveProps(nextProps) {
-  //   console.log(nextProps)
-  // }
 
   componentWillMount() {
     const { userId, userData } = this.props.navigation.state.params;
@@ -75,6 +72,7 @@ class MessageRoomScreen extends React.Component {
             this.setState({
               messages: _messages,
               otherImage: userData.userImage,
+              loading: false,
             });
           });
       });
@@ -103,6 +101,13 @@ class MessageRoomScreen extends React.Component {
   }
 
   render() {
+    if (this.state.loading) {
+      return (
+        <View style={{ flex: 1, justifyContent: 'center' }}>
+          <ActivityIndicator size="large" color="#777" />
+        </View>
+      );
+    }
     const { userData } = this.props.navigation.state.params;
     return (
       <View style={styles.docs}>

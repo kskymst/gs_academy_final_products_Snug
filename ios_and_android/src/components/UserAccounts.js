@@ -5,7 +5,6 @@ import firebase from 'firebase';
 const { width } = Dimensions.get('window');
 
 
-// eslint-disable-next-line
 class UserAccounts extends React.Component {
   constructor(props) {
     super(props);
@@ -22,6 +21,13 @@ class UserAccounts extends React.Component {
   }
 
   render() {
+    if (this.props.data.length === 0) {
+      return (
+        <View>
+          <Text style={styles.noDataText}>メッセージはありません</Text>
+        </View>
+      );
+    }
     const { currentUser } = firebase.auth();
     const roomData = this.props.data.map((data) => {
       const userId = (
@@ -61,6 +67,13 @@ class UserAccounts extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  noDataText: {
+    color: '#999',
+    fontSize: 24,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginTop: width / 4,
   },
   userImage: {
     width: 50,

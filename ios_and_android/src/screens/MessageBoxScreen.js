@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, TextInput, ScrollView, Dimensions } from 'react-native';
+import { StyleSheet, View, ScrollView, Dimensions, ActivityIndicator } from 'react-native';
 import firebase from 'firebase';
 
 import UserAccounts from '../components/UserAccounts';
@@ -11,6 +11,7 @@ class MessageBoxScreen extends React.Component {
     super();
     this.state = {
       messageRooms: [],
+      loading: true,
     };
   }
 
@@ -32,6 +33,12 @@ class MessageBoxScreen extends React.Component {
             _querySnapshot.forEach((_doc) => {
               messageList.push(_doc.data());
             });
+            if (messageList.length === 0) {
+              this.setState({
+                loading: false,
+              });
+              return;
+            }
             const adjustList = {};
             const messageRoom = [];
             messageList.sort((a, b) => (
@@ -56,8 +63,12 @@ class MessageBoxScreen extends React.Component {
               db.collection('users/').doc(userId)
                 .get()
                 .then((__querySnapshot) => {
+                  console.log('きてます2')
                   messageRooms.push(Object.assign(data, __querySnapshot.data()));
-                  this.setState({ messageRooms });
+                  this.setState({
+                    messageRooms,
+                    loading: false,
+                  });
                 });
             });
           });
@@ -65,6 +76,13 @@ class MessageBoxScreen extends React.Component {
   }
 
   render() {
+    if (this.state.loading) {
+      return (
+        <View style={{ flex: 1, justifyContent: 'center' }}>
+          <ActivityIndicator size="large" color="#777" />
+        </View>
+      );
+    }
     return (
       <View style={styles.container}>
         <ScrollView showsVerticalScrollIndicator={false}>
