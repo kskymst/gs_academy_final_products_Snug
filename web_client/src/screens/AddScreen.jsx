@@ -13,6 +13,9 @@ import PlusOutline from 'react-icons/lib/fa/plus-square-o';
 import Tag from 'react-icons/lib/fa/tag';
 import Photo from 'react-icons/lib/ti/image';
 import Text from 'react-icons/lib/fa/file-text-o';
+import Gender from 'react-icons/lib/io/transgender';
+import RadioChecked from 'react-icons/lib/md/radio-button-checked';
+import RadioUnchecked from 'react-icons/lib/md/radio-button-unchecked';
 
 const createObjectURL = (window.URL || window.webkitURL).createObjectURL || window.createObjectURL;
 
@@ -25,6 +28,7 @@ class AddScreen extends React.Component {
       imageFile: '',
       tags: [],
       tag: '',
+      gender: 'men',
       want: false,
       favorite: false,
       clothete: false,
@@ -94,7 +98,7 @@ class AddScreen extends React.Component {
           tags,
           userName: this.props.myData.userName,
           userImage: this.props.myData.userImage,
-          gender: this.props.myData.gender,
+          gender: this.state.gender,
           wantQuantity,
           favoriteQuantity,
           clotheteQuantity,
@@ -268,7 +272,42 @@ class AddScreen extends React.Component {
               </div>
             </div>
           ) : (
-            ''
+            <div className="gender-area" >
+              <div className="gender-title">
+                <p>
+                  <Gender style={{ marginRight: 8 }} />
+                  Gender
+                </p>
+              </div>
+              <div>
+                <button
+                  className={this.state.gender === 'men' ? 'checked-button' : 'unchecked-button'}
+                  onClick={() => this.setState({ gender: 'men' })}
+                >
+                  <p>
+                    {
+                      this.state.gender === 'men' ?
+                        <RadioChecked size={28} style={{ paddingBottom: 4, marginRight: 5 }} /> :
+                        <RadioUnchecked size={28} style={{ paddingBottom: 4, marginRight: 5 }} />
+                    }
+                    Men
+                  </p>
+                </button>
+                <button
+                  className={this.state.gender === 'women' ? 'checked-button' : 'unchecked-button'}
+                  onClick={() => this.setState({ gender: 'women' })}
+                >
+                  <p>
+                    {
+                      this.state.gender === 'women' ?
+                        <RadioChecked size={28} style={{ paddingBottom: 4, marginRight: 5 }} /> :
+                        <RadioUnchecked size={28} style={{ paddingBottom: 4, marginRight: 5 }} />
+                    }
+                    Women
+                  </p>
+                </button>
+              </div>
+            </div>
           )
         }
 

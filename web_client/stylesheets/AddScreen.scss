@@ -78,6 +78,45 @@
   }
 }
 
+.gender-area {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin-top: 28px; 
+  .gender-title {
+    font-size: 20px;
+    margin-right: 16px;
+  }
+  .checked-button {
+    font-size: 20vw;
+    background-color: #fff;
+    color: #6551B1;
+    height: 45px;
+    width: 180px;
+    border: 1px solid #6551B1;
+    letter-spacing: 1.5px;
+    border-radius: 5px;
+    font-size: 20px;
+    margin: 0 16px;
+  }
+
+  .unchecked-button {
+    color: #666;
+    font-size: 1vw;
+    background-color: #fff;
+    height: 45px;
+    width: 180px;
+    border: 1px solid #666;
+    letter-spacing: 1.5px;
+    border-radius: 5px;
+    font-size: 20px;
+    margin: 0 16px;
+  }
+  .checked-button:hover, .unchecked-button:hover  {
+    background-image: none;
+  }
+}
+
 
 .status-area {
   display: flex;
