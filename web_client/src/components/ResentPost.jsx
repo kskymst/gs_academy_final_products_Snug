@@ -24,7 +24,10 @@ const ResentPost = (props) => {
       <div className="resent-post-outer" key={data.id}>
         <div className="post-top-content" >
           <Link to={`/main/${data.user}`} className="post-user" >
-            <img src={data.userImage} alt="user_image" />
+            <div
+              className="avater"
+              style={{ backgroundImage: `url(${data.userImage})` }}
+            />
             <h4>{data.userName}</h4>
           </Link>
           <p>{ timestamp }</p>

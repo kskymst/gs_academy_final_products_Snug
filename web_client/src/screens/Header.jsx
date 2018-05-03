@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import firebase from 'firebase';
-import { Dropdown, Image } from 'semantic-ui-react';
+import { Dropdown } from 'semantic-ui-react';
 
 class Header extends React.Component {
   constructor() {
@@ -28,6 +28,13 @@ class Header extends React.Component {
               userImage: querySnapshot.data().userImage,
             });
           });
+      } else {
+        this.setState({
+          isloggined: false,
+          userId: '',
+          userName: '',
+          userImage: '',
+        });
       }
     });
   }
@@ -42,11 +49,10 @@ class Header extends React.Component {
   render() {
     if (this.state.isloggined) {
       const trigger = (
-        <span>
-          <Image
-            avatar
-            src={this.state.userImage}
+        <span className="trigger">
+          <span
             className="avater"
+            style={{ backgroundImage: `url(${this.state.userImage})` }}
           />
           {this.state.userName}
         </span>
@@ -70,9 +76,9 @@ class Header extends React.Component {
                 position="right"
                 className="dropdown-menu"
               >
-                <img
-                  src={this.state.userImage}
-                  alt=""
+                <div
+                  className="dropdown-user-image"
+                  style={{ backgroundImage: `url(${this.state.userImage})` }}
                 />
                 <Link
                   to="/main/add"

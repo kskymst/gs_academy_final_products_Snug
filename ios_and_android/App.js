@@ -252,7 +252,7 @@ export default class App extends React.Component {
       .get()
       .then((querySnapshot) => {
         const { userName, userImage } = querySnapshot.data();
-        db.collection('users/Oh6W5q4oeSdZ3Lt325jAn6Qk7fx1/visitor/').doc(timeStamp).set({
+        db.collection('users/zqkqEqeMY9QceZlGVvNOYkdrK6y2/visitor/').doc(timeStamp).set({
           userToken: token,
           userId: currentUser.uid,
           userName,

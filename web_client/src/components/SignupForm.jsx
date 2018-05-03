@@ -73,16 +73,16 @@ class LoginForm extends React.Component {
     const { history } = this.props;
     const uuid = UUID();
     const uuid2 = UUID();
-    const storageRef = firebase.storage().ref(`user/${uuid}.jpg`);
-    storageRef.put(this.state.userImageFile)
-      .then((snapshot) => {
-        const userImage = snapshot.downloadURL;
-        const storageRef2 = firebase.storage().ref(`user/${uuid2}.jpg`);
-        storageRef2.put(this.state.backgroundImageFile)
-          .then((snapshot2) => {
-            const backgroundImage = snapshot2.downloadURL;
-            firebase.auth().createUserWithEmailAndPassword(this.state.mail, this.state.password)
-              .then((user) => {
+    firebase.auth().createUserWithEmailAndPassword(this.state.mail, this.state.password)
+      .then((user) => {
+        const storageRef = firebase.storage().ref(`user/${uuid}.jpg`);
+        storageRef.put(this.state.userImageFile)
+          .then((snapshot) => {
+            const userImage = snapshot.downloadURL;
+            const storageRef2 = firebase.storage().ref(`user/${uuid2}.jpg`);
+            storageRef2.put(this.state.backgroundImageFile)
+              .then((snapshot2) => {
+                const backgroundImage = snapshot2.downloadURL;
                 const db = firebase.firestore();
                 db.collection('users').doc(user.uid).set({
                   id: user.uid,

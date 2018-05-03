@@ -102,7 +102,7 @@ class CameraScreen extends React.Component {
         takePhotoButtonTitle: '写真を撮る',
         chooseFromLibraryButtonTitle: 'カメラロールから選択',
         cancelButtonTitle: 'キャンセル',
-        quality: 0.2,
+        quality: 0.4,
       },
       (res) => {
         if (res.didCancel) {
@@ -315,7 +315,7 @@ class CameraScreen extends React.Component {
               containerStyle={styles.checkBox}
             />
             <CheckBox
-              title="My Closet"
+              title="Closet"
               checkedIcon="plus-square-o"
               uncheckedIcon="plus-square"
               checked={this.state.clothete}

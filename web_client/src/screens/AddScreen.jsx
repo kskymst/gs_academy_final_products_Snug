@@ -43,7 +43,7 @@ class AddScreen extends React.Component {
   }
 
   handleChange(tag) {
-    const tagStr = tag.split(' ' || '　');
+    const tagStr = tag.split(/\s+/g);
     this.setState({ tag, tags: tagStr });
   }
 

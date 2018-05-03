@@ -37,7 +37,6 @@
     user-select: none;
     .dropdown-menu {
       margin-top: 16px;
-
       .link-text{
         font-size: 1rem;
         padding: 10px 10px 10px 16px;
@@ -47,11 +46,24 @@
         color: rgba(0,0,0,.95);
       }
     }
+
     .avater{
+      height: 3vw;
+      width: 3vw;
+      display: inline-block;
+      background-position: center;
+      background-size: cover;
+      border-radius: 120px;
       margin-right: 8px;
+      vertical-align: middle;
     }
-    img {
-      height: 36px;
+    .dropdown-user-image {
+      height: 12vw;
+      background-position: center;
+      background-size: cover;
     }
+  }
+  .trigger {
+    display: inline-block;
   }
 };
