@@ -14,7 +14,7 @@ ReactとBeaconを使って何か作りたく、
 WEB × iOS × Beacon で実装しました。  
 
 Web & Beacon → お店側  
-iOS → お客さん側  
+iOS → お客さん側  
 の設定  
 
 お客さんはiosアプリにほしい洋服を貯め、お店に行くとお店に設置しているBeaconが感知し、お客さんのユーザー情報がお店側のWebページに即座に反映される仕組みです。  
@@ -24,14 +24,22 @@ iOS → お客さん側  
 
 ## Demo  
  
-[動画 (Youtube)](https://youtu.be/eVvmQLQ9EVk)
+[動画 (Youtube)](https://youtu.be/eVvmQLQ9EVk)  
 
-**[ios]** TestFlightのみです。。
+**[ios]** TestFlightのみです。。  
 <img src="https://user-images.githubusercontent.com/33841025/39591883-1761d7ae-4f40-11e8-89d4-8e3a31f55916.gif" width="400">
 
-**[Web]** [リンク](https://snug-45a34.firebaseapp.com/) 
+**[Web]** [こちらで見れます](https://snug-45a34.firebaseapp.com/)  
 <img src="https://user-images.githubusercontent.com/33841025/39591890-1a5d514a-4f40-11e8-88b8-881424f4593b.gif" width="400">
 
+## Functions  
+[ios]  
+- カメラ & カメラロールから追加
+- lazyload
+- push通知  
+
+[Web]
+- SPA
 
 ## Language
 
