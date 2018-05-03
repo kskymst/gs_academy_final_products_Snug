@@ -1,29 +1,30 @@
 # Snug
-## G's Academy Final Product
+**G's Academy Final Product**
 
-![audio_analyzer](https://user-images.githubusercontent.com/33841025/39551087-98dd15de-4e9e-11e8-8e18-60e4f7b0b3b6.gif)
-
+<img src="https://user-images.githubusercontent.com/33841025/39571988-6c6fd7c4-4f08-11e8-9d12-6240c9775308.png" width="500">
 
 
 ## Description
 
-音楽の音量、周波数帯域を可視化できます
+G's Academyの最終プロダクトで作りました。  
+[詳細のPDFはこちら。DEMOもあります](https://drive.google.com/file/d/1HaX3-t_pCsD5DXL_bGY9SeP-dmuMVWBc/view?usp=sharing)
 
 
 ## Demo
 
-[DEMO](http://yamashita-ksk.sakura.ne.jp/canvas/AudioAnalyzer.html)
+**[ios]**  
+![snug_1](https://user-images.githubusercontent.com/33841025/39591883-1761d7ae-4f40-11e8-89d4-8e3a31f55916.gif)  
 
+**[Web]**  
+![![snug_2](https://user-images.githubusercontent.com/33841025/39591890-1a5d514a-4f40-11e8-88b8-881424f4593b.gif)]
 
+[DEMO (Youtube)](https://youtu.be/eVvmQLQ9EVk)
 
-## Usage
-
-音楽ファイル(mp3 or wav)をインポート後、画面下部のスライダーでフォーカス幅を調整できます。  
 
 ## Language
 
-HTML(CANVAS), CSS, Javascript(Web Audio API)
+**[Web]** React.js 
 
 ## Created date
 
-2017/11/19
+2018/2/10 〜 2018/4/19 
