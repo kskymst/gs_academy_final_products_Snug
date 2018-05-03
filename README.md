@@ -26,14 +26,14 @@ iOS → お客さん側
  
 [動画 (Youtube)](https://youtu.be/eVvmQLQ9EVk)  
 
-**[ios]** TestFlightのみです。。  
+**[iOS]** TestFlightのみです。。  
 <img src="https://user-images.githubusercontent.com/33841025/39591883-1761d7ae-4f40-11e8-89d4-8e3a31f55916.gif" width="400">
 
-**[Web]** [こちらで見れます](https://snug-45a34.firebaseapp.com/)  
+**[Web]** [こちらで見れます](https://snug-45a34.firebaseapp.com/)  
 <img src="https://user-images.githubusercontent.com/33841025/39591890-1a5d514a-4f40-11e8-88b8-881424f4593b.gif" width="400">
 
 ## Functions  
-[ios]  
+[iOS]  
 - カメラ & カメラロールから追加
 - lazyload
 - push通知  
