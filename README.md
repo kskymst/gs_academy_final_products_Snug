@@ -6,7 +6,6 @@
 
 ## Description
 
-G's Academyの最終プロダクトで作りました。  
 [詳細のPDFはこちら。DEMOもあります](https://drive.google.com/file/d/1HaX3-t_pCsD5DXL_bGY9SeP-dmuMVWBc/view?usp=sharing)  
 
 
@@ -45,6 +44,3 @@ iOS → お客さん側
 
 <img src="https://user-images.githubusercontent.com/33841025/39595203-c5ab38ba-4f49-11e8-9537-1b590b8afa5e.png" width="400">
 
-## Created date
-
-2018/2/10 〜 2018/4/19 
