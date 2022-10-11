@@ -26,7 +26,7 @@
     "firebase": "^4.11.0",
     "prop-types": "^15.6.1",
     "react": "16.2.0",
-    "react-native": "0.52.0",
+    "react-native": "0.70.2",
     "react-native-beacons-manager": "^1.0.7",
     "react-native-elements": "^1.0.0-beta2",
     "react-native-fcm": "^14.1.3",
